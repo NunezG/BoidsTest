@@ -1,0 +1,6 @@
+﻿  playstate.cpp
+Release\D2DHelper.obj : warning LNK4042: objeto especificado más de una vez; omitidos los sobrantes
+  SimpleDirect2dApplication.vcxproj -> D:\Direct2D\SimpleDirect2DApplication\Release\SimpleDirect2dApplication.exe
+  SimpleDirect2dApplication.vcxproj -> Release\SimpleDirect2dApplication.pdb (Full PDB)
+  sampleImage.jpg
+          1 archivo(s) copiado(s).
