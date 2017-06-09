@@ -1,7 +1,6 @@
 // Windows Header Files:
 #include <windows.h>
-#include "FSM\introstate.h"
-#include "FSM\playstate.h"
+#include "gameManager.h"
 
 //
 // Provides the entry point to the application.
@@ -19,29 +18,16 @@ int WINAPI WinMain(
 
 	if (SUCCEEDED(CoInitialize(NULL)))
 	{
-		{
-			DemoApp app;
+				
+		// initialize the test		
+		if (GameManager::Init("Ivory Tower Test v1.0")) 
+			GameManager::RunMessageLoop();
 
-			if (SUCCEEDED(app.Initialize()))
-			{
-				// initialize the engine
-				GameManager::Init("Engine Test v1.0");
-
-				// load the intro
-				GameManager::ChangeState(CPlayState::Instance());
-
-				app.RunMessageLoop();
-			}
-		}
 		CoUninitialize();
 	}
 
 
-
-
-
-
-
-
 	return 0;
 }
+
+

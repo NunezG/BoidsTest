@@ -1,14 +1,10 @@
 ﻿H:\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (SimpleDirect2dApplication.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
-  SimpleDirect2dApplication.cpp
-  Main.cpp
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  playstate.cpp
-  menustate.cpp
-  introstate.cpp
   GameManager.cpp
-  D2DHelper.cpp
-D2DHelper.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/SAFESEH'
+h:\ittest\src\gamemanager.cpp(15): warning C4100: 'bpp': parámetro formal sin referencia
+h:\ittest\src\gamemanager.cpp(14): warning C4100: 'width': parámetro formal sin referencia
+h:\ittest\src\gamemanager.cpp(14): warning C4100: 'title': parámetro formal sin referencia
+h:\ittest\src\gamemanager.cpp(41): warning C4189: 'hr': la variable local se ha inicializado pero no se hace referencia a ella
+h:\ittest\src\gamemanager.cpp(17): warning C4189: 'flags': la variable local se ha inicializado pero no se hace referencia a ella
   SimpleDirect2dApplication.vcxproj -> H:\ITtest\Debug\ITTest.exe
   SimpleDirect2dApplication.vcxproj -> Debug\ITTest.pdb (Full PDB)
   sampleImage.jpg
