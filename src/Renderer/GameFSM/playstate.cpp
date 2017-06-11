@@ -12,6 +12,8 @@ CPlayState CPlayState::m_PlayState;
 void CPlayState::Init()
 {
 	resourcesCreated = false;
+
+	CreateFlag();
 	//SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 
 //	bg = SDL_DisplayFormat(temp);
@@ -115,11 +117,28 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 		if (CObjectManager::m_oCharacters[i]->isAlive())
 		{
 			point2F poisiton = CObjectManager::m_oCharacters[i]->GetLocation();
-			CD2DHelper::Rectange(200, m_pLionTeamColor, poisiton.X, poisiton.Y);
+			ID2D1SolidColorBrush*	characterColor;
+
+
+			if (CObjectManager::m_oCharacters[i]->GetTeam() == antelopesTeam)
+				characterColor = m_pAntelopeTeamColor;
+			else
+				characterColor = m_pLionTeamColor;
+
+			CD2DHelper::Rectange(200, characterColor, poisiton.X, poisiton.Y);
+
 
 			if (CObjectManager::m_oCharacters[i]->HasFlag())
-				CD2DHelper::Rectange(100, m_pLionTeamColor, CObjectManager::m_oCharacters[i]->GetLocation().X, CObjectManager::m_oCharacters[i]->GetLocation().Y);
+			{
+				ID2D1SolidColorBrush*	flagColor;
 
+				if (CObjectManager::m_oCharacters[i]->GetTeam() == antelopesTeam)
+					flagColor = m_pAntelopeFlagColor;
+				else
+					flagColor = m_pLionFlagColor;
+
+				CD2DHelper::Rectange(100, flagColor, CObjectManager::m_oCharacters[i]->GetLocation().X, CObjectManager::m_oCharacters[i]->GetLocation().Y);
+			}
 		}
 	}
 
@@ -134,21 +153,47 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	//CObjectManager::stands[0]->GetLocation().X = 120.0f;
 
-	CD2DHelper::Rectange(50, m_pTestBrush, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
+	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 //	CD2DHelper::Rectange(200, m_pTestBrush, 120.0f , 60.0f);
 
 
-	CD2DHelper::Rectange(50, m_pTestBrush, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
+	CD2DHelper::Rectange(50, m_pLionTeamColor, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
 //	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
 
 
+
+	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
+
+
+//
+// Reset back to the identity transform
+//
+/*	m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	m_pRenderTarget->SetTransform(
+		D2D1::Matrix3x2F::Translation(0, renderTargetSize.height - 200)
+	);
+
+	// Fill the hour glass geometry with a gradient.
+	m_pRenderTarget->FillGeometry(m_pPathGeometry, m_pAntelopeFlagColor);
+
+	m_pRenderTarget->SetTransform(
+		D2D1::Matrix3x2F::Translation(renderTargetSize.width - 200, 0)
+	);
+
+	// Fill the hour glass geometry with a gradient.
+	m_pRenderTarget->FillGeometry(m_pPathGeometry, m_pLionFlagColor);
+
+*/
+
+
 	if (CObjectManager::stands[0]->HasFlag())
-		CD2DHelper::Rectange(100, m_pLionTeamColor, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
+		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
 
 	if (CObjectManager::stands[1]->HasFlag())
-		CD2DHelper::Rectange(100, m_pLionTeamColor, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
+		CD2DHelper::Rectange(100, m_pLionFlagColor, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
 
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
@@ -229,7 +274,7 @@ void CPlayState::CreateDeviceResources(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	hr = m_pRenderTarget->CreateSolidColorBrush(
 
-		D2D1::ColorF(D2D1::ColorF::Cyan),
+		D2D1::ColorF(D2D1::ColorF::Gray),
 
 		&m_pLightSlateGrayBrush
 
@@ -237,7 +282,7 @@ void CPlayState::CreateDeviceResources(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	hr = m_pRenderTarget->CreateSolidColorBrush(
 
-		D2D1::ColorF(D2D1::ColorF::Green),
+		D2D1::ColorF(D2D1::ColorF::YellowGreen),
 
 		&m_pLionTeamColor
 
@@ -245,12 +290,83 @@ void CPlayState::CreateDeviceResources(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	hr = m_pRenderTarget->CreateSolidColorBrush(
 
-		D2D1::ColorF(D2D1::ColorF::Red),
+		D2D1::ColorF(D2D1::ColorF::Maroon),
 
-		&m_pTestBrush
+		&m_pAntelopeTeamColor
 
 	);
 
+	hr = m_pRenderTarget->CreateSolidColorBrush(
+
+		D2D1::ColorF(D2D1::ColorF::Yellow),
+
+		&m_pLionFlagColor
+
+	);
+
+
+	hr = m_pRenderTarget->CreateSolidColorBrush(
+
+		D2D1::ColorF(D2D1::ColorF::Red),
+
+		&m_pAntelopeFlagColor
+
+	);
+
+
+
 	resourcesCreated = true;
+
+}
+
+
+void CPlayState::CreateFlag()
+{
+	HRESULT hr;
+	ID2D1GeometrySink *pSink = NULL;
+
+	// Create a path geometry.
+	hr = CD2DHelper::m_pD2DFactory->CreatePathGeometry(&m_pPathGeometry);
+
+	if (SUCCEEDED(hr))
+	{
+		// Use the geometry sink to write to the path geometry.
+		hr = m_pPathGeometry->Open(&pSink);
+	}
+	if (SUCCEEDED(hr))
+	{
+		pSink->SetFillMode(D2D1_FILL_MODE_ALTERNATE);
+
+		pSink->BeginFigure(
+			D2D1::Point2F(0, 0),
+			D2D1_FIGURE_BEGIN_FILLED
+		);
+
+		pSink->AddLine(D2D1::Point2F(20, 0));
+
+		pSink->AddBezier(
+			D2D1::BezierSegment(
+				D2D1::Point2F(15, 5),
+				D2D1::Point2F(15, 15),
+				D2D1::Point2F(20, 20))
+		);
+
+		pSink->AddLine(D2D1::Point2F(0, 20));
+
+		pSink->AddBezier(
+			D2D1::BezierSegment(
+				D2D1::Point2F(5, 15),
+				D2D1::Point2F(5, 5),
+				D2D1::Point2F(0, 0))
+		);
+
+		pSink->EndFigure(D2D1_FIGURE_END_CLOSED);
+
+		hr = pSink->Close();
+	}
+
+	SafeRelease(&pSink);
+
+
 
 }

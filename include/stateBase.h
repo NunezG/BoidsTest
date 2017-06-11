@@ -4,6 +4,8 @@
 
 #include "gameManager.h"
 
+class CCharacter;
+
 class CStateBase
 {
 public:

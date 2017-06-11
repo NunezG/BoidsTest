@@ -8,7 +8,7 @@
 class CAttackState : public CCharacterState
 {
 public:
-	void Init();
+	void Init(CCharacter* owner);
 	void Cleanup();
 
 	void Pause();
@@ -17,15 +17,10 @@ public:
 	void Update();
 	//void Draw(ID2D1HwndRenderTarget* renderTarget);
 
-	static CAttackState* Instance() {
-		return &m_IdleState;
-	}
 
-protected:
 	CAttackState() { }
 
 private:
-	static CAttackState m_IdleState;
 
 };
 

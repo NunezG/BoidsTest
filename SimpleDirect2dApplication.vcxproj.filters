@@ -70,9 +70,6 @@
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\Brain.cpp">
       <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\IdleState.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp">
       <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
     </ClCompile>
     <ClCompile Include="src\Viewmodel\GameViewModel.cpp">
       <Filter>Source Files\ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.cpp">
+      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +192,6 @@
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\characterState.h">
       <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\IdleState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\StackFSM.h">
       <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClInclude>
@@ -209,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="include\Viewmodel\GameViewModel.h">
       <Filter>Header Files\ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h">
+      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

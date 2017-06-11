@@ -29,6 +29,7 @@ public:
 		ID2D1BitmapBrush **ppBitmapBrush
 	);
 
+
 protected:
 	CIntroState() { }
 
@@ -43,8 +44,6 @@ private:
 	ID2D1Bitmap *m_pBitmap;
 	ID2D1Bitmap *m_pAnotherBitmap;
 	ID2D1SolidColorBrush *m_pBlackBrush;
-	ID2D1PathGeometry *m_pPathGeometry;
-	ID2D1LinearGradientBrush *m_pLinearGradientBrush;
 
 	float i = 0;
 

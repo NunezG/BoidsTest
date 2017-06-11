@@ -197,6 +197,7 @@ void GameManager::Tick()
 
 	myApplication->OnRender();
 
+	CObjectManager::Update();
 	//TestWindow->OnRender();
 }
 

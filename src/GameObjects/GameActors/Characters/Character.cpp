@@ -1,27 +1,29 @@
 #include "GameObjects\GameActors\Characters\Character.h"
 
 #include "GameObjects\Flag.h"
-#include "GameObjects\GameActors\Characters\CharacterFSM\characterState.h"
+#include "GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h"
 #include "GameObjects\GameActors\Characters\Boid.h"
 #include "GameObjects\GameActors\Characters\CharacterFSM\Brain.h"
+#include "GameWorld.h"
 
 
 
 
 
-CCharacter::CCharacter(CFlagStand* TeamStand) : CGameObject(TeamStand->GetLocation(), TeamStand->GetTeam())
+CCharacter::CCharacter(CFlagStand* TeamStand, CFlag* enemyFlag) :
+	m_pFlagStand(TeamStand)
+	, CGameObject(TeamStand->GetLocation()
+	, TeamStand->GetTeam())
+	, brain(CBrain())
+	, boid(CBoid())
 {
-	m_pFlagStand = TeamStand;
+	m_TargetFlag = enemyFlag;
+
+	CFlagSeekState* state =  new CFlagSeekState(this, m_TargetFlag);
+	PushState(state);
+
 
 };
-
-CCharacter::CCharacter() {
-
-	// Tell the brain to start looking for the leaf.
-	//	brain->pushState(findLeaf);
-
-}
-
 
 void CCharacter::ChangeState(CCharacterState* state)
 {
@@ -62,28 +64,6 @@ void CCharacter::PopState()
 	}
 }
 
-/*
-void CCharacter::findLeaf() {
-	// Move the ant towards the leaf.
-	velocity = D2D1::Point2F();
-		new Vector3D(Game.instance.leaf.x - position.x, Game.instance.leaf.y - position.y);
-
-	if (distance(Game.instance.leaf, this) <= 10) {
-		// The ant is extremelly close to the leaf, it's time
-		// to go home.
-		brain.popState(); // removes "findLeaf" from the stack.
-		brain.pushState(goHome); // push "goHome" state, making it the active state.
-	}
-
-	if (distance(Game.mouse, this) <= MOUSE_THREAT_RADIUS) {
-		// Mouse cursor is threatening us. Let's run away!
-		// The "runAway" state is pushed on top of "findLeaf", which means
-		// the "findLeaf" state will be active again when "runAway" ends.
-		brain.pushState(runAway);
-	}
-}*/
-
-
 
 void CCharacter::Update()
 {
@@ -96,19 +76,32 @@ void CCharacter::Update()
 		if (respawnTimer <= 0)
 			Spawn();
 	}
+	else
+	{
+		CStateBase* currentStateFunction = getCurrentState();
+
+		if (currentStateFunction != nullptr) {
+			currentStateFunction->Update();
+		}
+
+
+	}
 	//framesLeft_--;
 
 	//m_fCurrentLocation.X += m_fVelocity->X;
 	//m_fCurrentLocation.Y += m_fVelocity->Y;
 
 	// Update the brain. It will run the current state function.
-//	brain->update();
+	brain.update();
 
 	// Update the steering behaviors
-//	boid->update();
+	boid.update();
 }
 
-
+CStateBase* CCharacter::getCurrentState()
+{
+	return states.size() > 0 ? states[states.size() - 1] : nullptr;
+}
 
 void CCharacter::Spawn()
 {

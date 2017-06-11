@@ -21,7 +21,7 @@ class CBoid;
 class CCharacterState;
 class CBrain;
 class CFlagStand;
-
+class CStateBase;
 
 class CCharacter : public CGameObject
 {
@@ -31,9 +31,8 @@ private:
 
 public:
 	
-	CCharacter(CFlagStand* TeamStand);
+	CCharacter(CFlagStand* TeamStand, CFlag* enemyFlag);
 	
-	CCharacter();
 
 //	bool DropFlag(point2F fCurrentLocation);
 
@@ -43,7 +42,7 @@ public:
 	void ChangeState(CCharacterState* state);
 	void PushState(CCharacterState* state);
 	void PopState();
-
+	CStateBase* getCurrentState();
 	//static void Update();
 
 //	void findLeaf();
@@ -67,7 +66,8 @@ public:
 
 	void Spawn();
 
-	
+	CFlag* m_TargetFlag;
+
 
 
 private:
@@ -79,12 +79,12 @@ private:
 
 
 	// the stack of states
-	std::vector<CCharacterState*> states;
+	std::vector<CStateBase*> states;
 
 	//point2F m_fVelocity;
 
-	CBoid* boid;
-	CBrain* brain;
+	CBoid& boid;
+	CBrain& brain;
 
 	//union
 //	{
@@ -117,6 +117,8 @@ private:
 	//} state_;
 
 			CFlagStand* m_pFlagStand;
+
+		
 
 };
 

@@ -329,8 +329,10 @@ D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float 
 		rtSize.width /  size,
 		- rtSize.width / size);
 
+
+
 // Draw a filled rectangle.
 		m_pRenderTarget->FillRectangle(&rectangle1, color);
-
+	//	m_pRenderTarget->draw   FillGeometry(&rectangle1, color);
 		return rectangle1;
 }

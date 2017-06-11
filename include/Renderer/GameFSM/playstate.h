@@ -27,6 +27,7 @@ public:
 	static CPlayState* Instance() {
 		return &m_PlayState;
 	}
+	void CreateFlag();
 
 protected:
 	CPlayState() { }
@@ -35,8 +36,13 @@ private:
 	static CPlayState m_PlayState;
 
 	ID2D1SolidColorBrush*	m_pLightSlateGrayBrush;
-	ID2D1SolidColorBrush*	m_pTestBrush;
+	ID2D1SolidColorBrush*	m_pAntelopeTeamColor;
 	ID2D1SolidColorBrush*	m_pLionTeamColor;
+
+	ID2D1SolidColorBrush*	m_pAntelopeFlagColor;
+	ID2D1SolidColorBrush*	m_pLionFlagColor;
+	ID2D1PathGeometry *m_pPathGeometry;
+
 
 //	SDL_Surface* bg;
 };

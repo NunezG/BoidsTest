@@ -2,7 +2,7 @@
 //#include <stdio.h>
 
 #include "GameObjects\ObjectManager.h"
-//#include "../FSM/Game/gamestate.h"
+#include "GameObjects\GameActors\Characters\Character.h"
 
 #include <cassert>
 
@@ -27,9 +27,6 @@ void CObjectManager::Init()
 	int flags = 0;
 	// initialize SDL
 //	SDL_Init(SDL_INIT_VIDEO);
-
-
-	
 
 	stands[0] = new CFlagStand(point2F(120.0f, 130.0f), antelopesTeam);
 	stands[1] = new CFlagStand(point2F(500, 160.0f), lionsTeam);
@@ -57,8 +54,7 @@ void CObjectManager::Init()
 	for (i = 0; i < ANTELOPES_NUMBER; i++)
 	{
 		 
-		m_oCharacters[i] = new CCharacter(stands[0]);
-
+		m_oCharacters[i] = new CCharacter(stands[0], m_pFlags[1]);
 	
 		m_oCharacters[i]->Spawn();
 	}
@@ -66,7 +62,9 @@ void CObjectManager::Init()
 	for (; i < POOL_NUMBER; i++)
 	{
 
-		m_oCharacters[i] = new CCharacter(stands[1]);
+		m_oCharacters[i] = new CCharacter(stands[1], m_pFlags[0]);
+
+		m_oCharacters[i]->m_TargetFlag = m_pFlags[0];
 
 		m_oCharacters[i]->Spawn();
 	}
@@ -154,13 +152,58 @@ void CObjectManager::spawnFixedObject(double x, double y, ETeam team)
 
 
 
+bool CObjectManager::CheckIfDead(static CCharacter* character)
+{
+	int enemiesSurrounding = 0;
+
+	CCharacter* nearEnemy;
+
+	for (int i = 0; i < POOL_NUMBER; i++)
+	{
+		 		
+		if (m_oCharacters[i]->GetTeam() != character->GetTeam())
+		{
+			float deltaX = (character->GetLocation().X - m_oCharacters[i]->GetLocation().X);
+			float deltaY = (character->GetLocation().Y - m_oCharacters[i]->GetLocation().Y);
+
+
+			double distance = sqrt((deltaX * deltaX) - (deltaY * deltaY));
+
+			if (distance < 100) {
+
+				enemiesSurrounding++;
+
+				nearEnemy = m_oCharacters[i];
+			}
+		}
+
+	}
+
+	if (enemiesSurrounding >= 3)
+	{
+		nearEnemy->ReceiveFlag(character->getFlag());
+
+		character->Die();
+
+		return true;
+
+	}
+		
+	return false;
+	
+}
 
 
 void CObjectManager::Update()
 {
 	for (int i = 0; i < POOL_NUMBER; i++)
 	{
+		if (m_oCharacters[i]->isAlive())
+			CheckIfDead(m_oCharacters[i]);
+			
 		m_oCharacters[i]->Update();
+
+
 	//	if ()
 	//	{
 			// Add this particle to the front of the list.

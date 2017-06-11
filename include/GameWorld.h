@@ -38,6 +38,9 @@ public:
 	//SDL_Surface* screen;
 	//static CObjectManager* m_objectManager;
 
+	
+
+
 private:
 
 

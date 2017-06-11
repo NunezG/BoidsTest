@@ -1,9 +1,7 @@
 
 #include "GameObjects\GameActors\Characters\CharacterFSM\AttackState.h"
 
-CAttackState CAttackState::m_IdleState;
-
-void CAttackState::Init()
+void CAttackState::Init(CCharacter* owner)
 {
 	
 

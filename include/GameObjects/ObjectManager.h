@@ -42,6 +42,8 @@ public:
 
 //	static void HandleEvents(UINT message);
 	static void Update();
+
+
 //	static void Draw(ID2D1HwndRenderTarget* renderTarget);
 //	static void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
 
@@ -64,6 +66,7 @@ public:
 	static CFlagStand* stands[2];
 
 	static CFlag* m_pFlags[2];
+	static bool CheckIfDead(CCharacter* character);
 
 private:
 

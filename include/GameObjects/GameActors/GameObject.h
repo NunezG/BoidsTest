@@ -42,12 +42,15 @@ public:
 	
 	CGameObject(point2F position, ETeam team) :
 		CTeamObject(team),
-		m_fCurrentLocation(position)
+		m_fCurrentLocation(position),
+		m_pFlag(nullptr)
 	{
 		
 	}
 
-	CGameObject() : m_fCurrentLocation(point2F())
+	CGameObject() : m_fCurrentLocation(point2F()),
+		m_pFlag(nullptr)
+
 	{
 
 	}
@@ -56,6 +59,13 @@ public:
 	{
 		return m_fCurrentLocation;
 	}
+
+	void SetLocation(float x, float y) 
+	{
+		m_fCurrentLocation.X = x;
+		m_fCurrentLocation.Y = y;
+	}
+
 //	bool IsAtStartLocation() const;
 	
 	bool HasFlag() const

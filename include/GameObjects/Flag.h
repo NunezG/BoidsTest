@@ -9,8 +9,6 @@
 //#include "../SimpleDirect2dApplication.h"
 
 //using namespace std;
-
-
 class CGameObject;
 
 class CFlag : public CTeamObject
@@ -21,8 +19,7 @@ public:
 
 	//bool IsAtenemyHome() const;
 
-	//CCharacter OwnedBy() const;
-
+	CGameObject* getOwner() const;
 	//bool setOwner(CCharacter owner);
 
 

@@ -5,6 +5,8 @@
 
 #include "GameObjects/GameActors/GameObject.h"
 #include "StackFSM.h"
+#include "GameObjects\GameActors\Characters\CharacterFSM\characterState.h"
+
 //FSM
 
 
@@ -18,6 +20,9 @@ public:
 	point2F flee(point2F position);
 
 	void update();
+
+
+
 
 };
 

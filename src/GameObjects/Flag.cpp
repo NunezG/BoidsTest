@@ -8,3 +8,9 @@ CFlag::CFlag(ETeam team, CGameObject* owner) : CTeamObject(team)
 
 }
 
+
+CGameObject* CFlag::getOwner() const
+{
+	return m_currentOwner;
+}
+
