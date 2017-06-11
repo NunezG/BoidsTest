@@ -1,6 +1,6 @@
-#include "Window.h"
-#include "D2DHelper.h"
-#include "D2DRenderer.h"
+#include "Renderer\Window.h"
+#include "Renderer\D2DHelper.h"
+#include "Renderer\D2DRenderer.h"
 
 HRESULT CITWindow::CreateGameWindow(WNDPROC messageReceiver)
 {

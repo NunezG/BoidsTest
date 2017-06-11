@@ -74,6 +74,8 @@
     <OutDir>Release\</OutDir>
     <IntDir>Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <SourcePath>H:\ITtest\src;$(SourcePath)</SourcePath>
+    <IncludePath>H:\ITtest\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(Platform)\$(Configuration)\</OutDir>
@@ -144,11 +146,12 @@
     </PreBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>H:\ITtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreLinkEvent>
       <Command>echo IDR_PIXEL_SHADER RCDATA $(OutDir)SimpleDirect2dApplication.fxo &gt; $(OutDir)SimpleDirect2dApplication.resinclude</Command>
@@ -198,54 +201,55 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\FSM\Characters\AttackState.cpp" />
-    <ClCompile Include="src\FSM\Characters\Brain.cpp" />
-    <ClCompile Include="src\FSM\Characters\IdleState.cpp" />
-    <ClCompile Include="src\FSM\Game\GameStatesManager.cpp" />
-    <ClCompile Include="src\FSM\Game\introstate.cpp" />
-    <ClCompile Include="src\FSM\Game\menustate.cpp" />
-    <ClCompile Include="src\FSM\Game\playstate.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
-    <ClCompile Include="src\GameObjects\Characters\Antelope.cpp" />
-    <ClCompile Include="src\GameObjects\Characters\Boid.cpp" />
-    <ClCompile Include="src\GameObjects\Characters\Character.cpp" />
-    <ClCompile Include="src\GameObjects\Characters\Lion.cpp" />
     <ClCompile Include="src\GameObjects\Flag.cpp" />
-    <ClCompile Include="src\GameObjects\GameObject.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Boid.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Character.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\Brain.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\IdleState.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\GameObject.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\StartPosition.cpp" />
     <ClCompile Include="src\GameObjects\ObjectManager.cpp" />
-    <ClCompile Include="src\GameObjects\StartPosition.cpp" />
+    <ClCompile Include="src\GameObjects\TeamObject.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Renderer\D2DHelper.cpp" />
     <ClCompile Include="src\Renderer\D2DRenderer.cpp" />
+    <ClCompile Include="src\Renderer\GameFSM\GameStatesManager.cpp" />
+    <ClCompile Include="src\Renderer\GameFSM\introstate.cpp" />
+    <ClCompile Include="src\Renderer\GameFSM\menustate.cpp" />
+    <ClCompile Include="src\Renderer\GameFSM\playstate.cpp" />
     <ClCompile Include="src\Renderer\Window.cpp" />
+    <ClCompile Include="src\Viewmodel\GameViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FSM\Characters\AttackState.h" />
-    <ClInclude Include="src\FSM\Characters\Brain.h" />
-    <ClInclude Include="src\FSM\Characters\CharacterFSM.h" />
-    <ClInclude Include="src\FSM\Characters\characterState.h" />
-    <ClInclude Include="src\FSM\Characters\IdleState.h" />
-    <ClInclude Include="src\FSM\Game\gamestate.h" />
-    <ClInclude Include="src\FSM\Game\GameStatesManager.h" />
-    <ClInclude Include="src\FSM\Game\introstate.h" />
-    <ClInclude Include="src\FSM\Game\menustate.h" />
-    <ClInclude Include="src\FSM\Game\playstate.h" />
-    <ClInclude Include="src\FSM\StackFSM.h" />
-    <ClInclude Include="src\FSM\stateBase.h" />
-    <ClInclude Include="src\gameManager.h" />
-    <ClInclude Include="src\GameObjects\Characters\Antelope.h" />
-    <ClInclude Include="src\GameObjects\Characters\Boid.h" />
-    <ClInclude Include="src\GameObjects\Characters\Character.h" />
-    <ClInclude Include="src\GameObjects\Characters\Lion.h" />
-    <ClInclude Include="src\GameObjects\Flag.h" />
-    <ClInclude Include="src\GameObjects\GameObject.h" />
-    <ClInclude Include="src\GameObjects\ObjectManager.h" />
-    <ClInclude Include="src\GameObjects\StartPosition.h" />
-    <ClInclude Include="src\GameWorld.h" />
-    <ClInclude Include="src\Renderer\D2DHelper.h" />
-    <ClInclude Include="src\Renderer\D2DRenderer.h" />
-    <ClInclude Include="src\Renderer\Window.h" />
+    <ClInclude Include="include\gameManager.h" />
+    <ClInclude Include="include\GameObjects\Flag.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Boid.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Character.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\AttackState.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\Brain.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\CharacterFSM.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\characterState.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\IdleState.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\StackFSM.h" />
+    <ClInclude Include="include\GameObjects\GameActors\GameObject.h" />
+    <ClInclude Include="include\GameObjects\GameActors\StartPosition.h" />
+    <ClInclude Include="include\GameObjects\ObjectManager.h" />
+    <ClInclude Include="include\GameObjects\TeamObject.h" />
+    <ClInclude Include="include\GameWorld.h" />
+    <ClInclude Include="include\Renderer\D2DHelper.h" />
+    <ClInclude Include="include\Renderer\D2DRenderer.h" />
+    <ClInclude Include="include\Renderer\GameFSM\gameManager.h" />
+    <ClInclude Include="include\Renderer\GameFSM\gamestate.h" />
+    <ClInclude Include="include\Renderer\GameFSM\GameStatesManager.h" />
+    <ClInclude Include="include\Renderer\GameFSM\introstate.h" />
+    <ClInclude Include="include\Renderer\GameFSM\menustate.h" />
+    <ClInclude Include="include\Renderer\GameFSM\playstate.h" />
+    <ClInclude Include="include\Renderer\Window.h" />
+    <ClInclude Include="include\stateBase.h" />
+    <ClInclude Include="include\Viewmodel\GameViewModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

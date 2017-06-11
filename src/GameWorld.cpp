@@ -9,11 +9,15 @@
 
 //vector<CGameState*> CGameWorld::states;
 bool CGameWorld::m_running;
+//CObjectManager* CGameWorld::m_objectManager;
+
 //bool CGameWorld::m_fullscreen;
 
 bool CGameWorld::Init(const char* title, int width, int height, 
 						 int bpp, bool fullscreen)
 {
+
+
 	int flags = 0;
 	height;
 	// initialize SDL

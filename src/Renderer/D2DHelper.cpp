@@ -1,4 +1,4 @@
-#include "D2DHelper.h"
+#include "Renderer\D2DHelper.h"
 #include <wincodec.h>
 
  IDWriteTextFormat * CD2DHelper::m_pTextFormat;
@@ -279,4 +279,58 @@ HRESULT CD2DHelper::LoadBitmapFromFile(
 	SafeRelease(&pScaler);
 
 	return hr;
+}
+
+
+D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float x, float y)
+{
+	D2D1_SIZE_F rtSize = m_pRenderTarget->GetSize();
+
+	m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	//m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+
+
+
+/*	const D2D1::Matrix3x2F rot = D2D1::Matrix3x2F::Rotation(
+		i * 10,
+		D2D1::Point2F(
+			renderTargetSize.width / 2,
+			renderTargetSize.height / 2));
+
+	*/
+	const D2D1::Matrix3x2F trans = D2D1::Matrix3x2F::Translation(x, y);
+
+	m_pRenderTarget->SetTransform(trans);
+
+/*
+	renderTarget->
+		DrawText(
+		sc_helloWorld,
+		ARRAYSIZE(sc_helloWorld) - 1,
+		CD2DHelper::m_pTextFormat,
+		D2D1::RectF(0, 0, renderTargetSize.width, renderTargetSize.height),
+		m_pBlackBrush
+	);
+
+	*/
+
+	// Draw two rectangles.
+/*	D2D1_RECT_F rectangle1 = D2D1::RectF(
+		x - rtSize.width * size /100,
+		y + rtSize.width * size / 100,
+		x + rtSize.width *  size / 100,
+		y- rtSize.width * size / 100);
+		*/
+
+	D2D1_RECT_F rectangle1 = D2D1::RectF(
+		- rtSize.width / size,
+		rtSize.width / size,
+		rtSize.width /  size,
+		- rtSize.width / size);
+
+// Draw a filled rectangle.
+		m_pRenderTarget->FillRectangle(&rectangle1, color);
+
+		return rectangle1;
 }

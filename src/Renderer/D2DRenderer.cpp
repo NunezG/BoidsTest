@@ -6,10 +6,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved
 
 
-#include "D2DRenderer.h"
+#include "Renderer\D2DRenderer.h"
 
-#include "Window.h"
-#include "../FSM/Game/GameStatesManager.h"
+#include "Renderer\Window.h"
+#include "Renderer\GameFSM\GameStatesManager.h"
 
 
 //

@@ -1,7 +1,12 @@
 #include "gameManager.h"
 
-#include "FSM\Game\GameStatesManager.h"
-#include "FSM\Game\playstate.h"
+#include "Renderer\GameFSM\GameStatesManager.h"
+#include "Renderer\GameFSM\playstate.h"
+#include <ctime>
+#include <iostream>
+
+#include "GameObjects\ObjectManager.h"
+
 
 ///////////////////////////////////////////////////////////////////
 
@@ -9,11 +14,17 @@ bool GameManager::m_running;
 bool GameManager::m_fullscreen;
 DemoApp* GameManager::myApplication;
 CITWindow* GameManager::TestWindow;
-
+double GameManager::m_dDeltaTime;
+double GameManager::m_dStartTime = clock();
 
 bool GameManager::Init(const char* title, int width, int height, 
 						 int bpp, bool fullscreen)
 {
+
+
+	CObjectManager::Init();
+
+	//m_objectManager = new CObjectManager();
 	int flags = 0;
 	height;
 	// initialize SDL
@@ -33,6 +44,7 @@ bool GameManager::Init(const char* title, int width, int height,
 	m_running = true;
 
 	printf("GameManager Init\n");
+
 
 	TestWindow = new CITWindow();
 
@@ -141,16 +153,36 @@ void GameManager::RunMessageLoop()
 {
 	MSG msg = { 0 };
 
+	setvbuf(stdout, NULL, _IONBF, 0);
+	setvbuf(stderr, NULL, _IONBF, 0);
 
 	while (GameManager::Running() && WM_QUIT != msg.message)
 	{
+		std::cout << "FUCKKKKKKKKKKKKKKKKKKKKKKK \n" << std::endl;
+
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+
+			/*
+
+				double now = clock();
+				m_dDeltaTime = now - m_dStartTime;
+				cout <<"LOOSOSOSOSOOLOLOOLO: "<< (m_dDeltaTime / CLOCKS_PER_SEC) << endl;
+				m_dStartTime = now;
+			*/
 		}
 		else
 		{
+			double olddelta = 0;
+
+				olddelta = m_dDeltaTime;
+				m_dDeltaTime = clock() - olddelta;
+				std::cout <<"CLOCKS_PER_SECCLOCKS_PER_SEC\n: "   << (m_dDeltaTime / CLOCKS_PER_SEC) << std::endl;
+			
+
 			Tick();
 		}
 	}
