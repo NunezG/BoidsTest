@@ -98,39 +98,11 @@ void CIntroState::Update()
 //	SDL_SetAlpha(fader, SDL_SRCALPHA, alpha);
 }
 
-void CIntroState::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
+void CIntroState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 {
 	HRESULT hr = S_OK;
 
-	// Create a black brush.
-	hr = renderTarget->CreateSolidColorBrush(
-			D2D1::ColorF(D2D1::ColorF::Black),
-			&m_pBlackBrush
-	);
 	
-	
-	// Create a bitmap from an application resource.
-	hr = CD2DHelper::LoadResourceBitmap(
-		renderTarget,
-		CD2DHelper::m_pWICFactory,
-		L"SampleImage",
-		L"Image",
-		100,
-		0,
-		&m_pBitmap
-	);
-	if (SUCCEEDED(hr))
-	{
-		// Create a bitmap by loading it from a file.
-		hr = CD2DHelper::LoadBitmapFromFile(
-			renderTarget,
-			CD2DHelper::m_pWICFactory,
-			L".\\sampleImage.jpg",
-			100,
-			0,
-			&m_pAnotherBitmap
-		);
-	}
 	if (SUCCEEDED(hr))
 	{
 		hr = CreateGridPatternBrush(renderTarget, &m_pGridPatternBitmapBrush);
@@ -153,7 +125,7 @@ void CIntroState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 //	SDL_UpdateRect(game->screen, 0, 0, 0, 0);
 
-	static const WCHAR sc_helloWorld[] = L"Hello, World!";
+	static const char sc_helloWorld[] = "LIONS VS ANTELOPES";
 
 
 // Retrieve the size of the render target.
@@ -174,29 +146,16 @@ void CIntroState::Draw(ID2D1HwndRenderTarget* renderTarget)
 		m_pGridPatternBitmapBrush
 	);
 
-	D2D1_SIZE_F size = m_pBitmap->GetSize();
-
-	// Draw a bitmap in the upper-left corner of the window.
-	renderTarget->DrawBitmap(
-		m_pBitmap,
-		D2D1::RectF(0.0f, 0.0f, size.width, size.height)
-	);
+	//D2D1_SIZE_F size = m_pBitmap->GetSize();
 
 
-	// Draw a bitmap at the lower-right corner of the window.
-	size = m_pAnotherBitmap->GetSize();
-	renderTarget->DrawBitmap(
-		m_pAnotherBitmap,
-		D2D1::RectF(
-			renderTargetSize.width - size.width,
-			renderTargetSize.height - size.height,
-			renderTargetSize.width,
-			renderTargetSize.height)
-	);
+
+	CD2DHelper::outText(0, -300, sc_helloWorld);
+
 
 	// Set the world transform to a 45 degree rotation at the center of the render target
 	// and write "Hello, World".           
-
+/*
 	const D2D1::Matrix3x2F rot = D2D1::Matrix3x2F::Rotation(
 		i * 10,
 		D2D1::Point2F(
@@ -206,8 +165,7 @@ void CIntroState::Draw(ID2D1HwndRenderTarget* renderTarget)
 	const D2D1::Matrix3x2F trans = D2D1::Matrix3x2F::Translation(-200, 3);
 
 	renderTarget->SetTransform(rot * trans);
-
-
+	
 	renderTarget->DrawText(
 		sc_helloWorld,
 		ARRAYSIZE(sc_helloWorld) - 1,
@@ -221,7 +179,7 @@ void CIntroState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 
 
-
+	*/
 
 
 

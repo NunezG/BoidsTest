@@ -10,7 +10,9 @@
 
 //CCharacter CObjectManager::m_aCharacters[LIONS_NUMBER + ANTELOPES_NUMBER];
 //CCharacter* CObjectManager::m_pFirstDeadCharacter;
-CCharacter* CObjectManager::m_oCharacters[POOL_NUMBER];
+//CCharacter* CObjectManager::m_oCharacters[POOL_NUMBER];
+std::list<CAgent*> CObjectManager::m_agents;
+
 CFlagStand* CObjectManager:: stands[2];
 CFlag* CObjectManager::m_pFlags[2];
 
@@ -28,8 +30,8 @@ void CObjectManager::Init()
 	// initialize SDL
 //	SDL_Init(SDL_INIT_VIDEO);
 
-	stands[0] = new CFlagStand(point2F(120.0f, 130.0f), antelopesTeam);
-	stands[1] = new CFlagStand(point2F(500, 160.0f), lionsTeam);
+	stands[0] = new CFlagStand(Vector2d(120.0f, 130.0f), antelopesTeam);
+	stands[1] = new CFlagStand(Vector2d(500.0f, 160.0f), lionsTeam);
 
 	//initialize flag
 	m_pFlags[0] = new CFlag(antelopesTeam, stands[0]);
@@ -53,20 +55,18 @@ void CObjectManager::Init()
 	int i;
 	for (i = 0; i < ANTELOPES_NUMBER; i++)
 	{
+
+		registerAgent(new CCharacter(stands[0], m_pFlags[1]));
+
 		 
-		m_oCharacters[i] = new CCharacter(stands[0], m_pFlags[1]);
+	//	m_oCharacters[i] = new CCharacter(stands[0], m_pFlags[1]);
 	
-		m_oCharacters[i]->Spawn();
 	}
 
 	for (; i < POOL_NUMBER; i++)
 	{
+		registerAgent(new CCharacter(stands[1], m_pFlags[0]));
 
-		m_oCharacters[i] = new CCharacter(stands[1], m_pFlags[0]);
-
-		m_oCharacters[i]->m_TargetFlag = m_pFlags[0];
-
-		m_oCharacters[i]->Spawn();
 	}
 
 	printf("CObjectManager Init\n");
@@ -158,26 +158,31 @@ bool CObjectManager::CheckIfDead(static CCharacter* character)
 
 	CCharacter* nearEnemy;
 
-	for (int i = 0; i < POOL_NUMBER; i++)
-	{
-		 		
-		if (m_oCharacters[i]->GetTeam() != character->GetTeam())
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++) {
+		CAgent *_agent = *agent;
+
+		if (_agent->m_active &&_agent->GetTeam() != character->GetTeam())
 		{
-			float deltaX = (character->GetLocation().X - m_oCharacters[i]->GetLocation().X);
-			float deltaY = (character->GetLocation().Y - m_oCharacters[i]->GetLocation().Y);
+
+			float deltaX = (character->getPosX() - _agent->getPosX());
+			float deltaY = (character->getPosY() - _agent->getPosY());
 
 
 			double distance = sqrt((deltaX * deltaX) - (deltaY * deltaY));
 
-			if (distance < 100) {
+			if (distance < 10) {
 
 				enemiesSurrounding++;
 
-				nearEnemy = m_oCharacters[i];
+				nearEnemy = (CCharacter*)_agent;
 			}
 		}
 
+
+
 	}
+	
+		
 
 	if (enemiesSurrounding >= 3)
 	{
@@ -196,14 +201,18 @@ bool CObjectManager::CheckIfDead(static CCharacter* character)
 
 void CObjectManager::Update()
 {
-	for (int i = 0; i < POOL_NUMBER; i++)
-	{
-		if (m_oCharacters[i]->isAlive())
-			CheckIfDead(m_oCharacters[i]);
-			
-		m_oCharacters[i]->Update();
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++) {
+		CAgent *_agent = *agent;
 
+		if (_agent->m_active)
+		{
+			if (((CCharacter*)_agent)->isAlive())
+				CheckIfDead((CCharacter*)_agent);
 
+			//update  even if dead
+			((CCharacter*)_agent)->Update();
+
+		}
 	//	if ()
 	//	{
 			// Add this particle to the front of the list.
@@ -211,4 +220,46 @@ void CObjectManager::Update()
 			//m_pFirstDeadCharacter = m_oCharacters[i];
 //}
 	}
+}
+
+
+///////////////////////////////////////////////////////////////////
+// CGame::registerAgent
+// register agent for the simulation
+///////////////////////////////////////////////////////////////////
+int CObjectManager::registerAgent(CAgent *agent) {
+	m_agents.push_back(agent);
+	((CCharacter*)agent)->Spawn();
+	return 0;
+}
+/*
+CObjectManager::~CObjectManager() {
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++)
+		delete (*agent);
+	m_agents.clear();
+}
+
+*/
+
+///////////////////////////////////////////////////////////////////
+// CGame::updateAI
+// register agent for the simulation
+///////////////////////////////////////////////////////////////////
+int CObjectManager::updateAI(TRealTime maxTime) {
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++) {
+		if ((*agent)->m_active)
+			(*agent)->processAgentPeriodic();
+	}
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////////
+// CGame::buildFrameConstant
+// things that must be every frame
+///////////////////////////////////////////////////////////////////
+int CObjectManager::buildFrameConstant() {
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++)
+		if ((*agent)->m_active)
+			(*agent)->processAgentConstant();
+	return 0;
 }

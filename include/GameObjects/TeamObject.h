@@ -54,6 +54,8 @@ private:
 
 	ETeam m_eObjectTeam;
 
+
+
 };
 
 #endif

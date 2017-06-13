@@ -22,7 +22,7 @@ public:
 	void HandleEvents(UINT message);
 	void Update();
 	void Draw(ID2D1HwndRenderTarget* renderTarget);
-	void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
+	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
 
 	static CPlayState* Instance() {
 		return &m_PlayState;

@@ -68,7 +68,7 @@ void CMenuState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 
 
-void CMenuState::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
+void CMenuState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 {
 
 

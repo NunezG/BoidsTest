@@ -32,7 +32,7 @@ public:
     DemoApp();
    // ~DemoApp();
 
-    HRESULT Initialize(CITWindow* window);
+    HRESULT Initialize(WNDPROC messageReceiver);
 
 	HRESULT OnRender();
 
@@ -43,7 +43,7 @@ public:
 
 private:
     HRESULT CreateDeviceIndependentResources();
-    HRESULT CreateDeviceResources();
+    HRESULT CreateRenderTarget();
 
     void DiscardDeviceResources();
 

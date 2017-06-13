@@ -55,30 +55,15 @@ public:
 	static IDWriteFactory *m_pDWriteFactory;
 	static ID2D1HwndRenderTarget *m_pRenderTarget;
 
-	static HRESULT LoadResourceBitmap(
-		ID2D1RenderTarget *pRenderTarget,
-		IWICImagingFactory *pIWICFactory,
-		PCWSTR resourceName,
-		PCWSTR resourceType,
-		UINT destinationWidth,
-		UINT destinationHeight,
-		ID2D1Bitmap **ppBitmap
-	);
+	static void ShowNum(int num, int size);
 
-	//
-	// Creates a Direct2D bitmap from the specified
-	// file name.
-	//
-	static HRESULT LoadBitmapFromFile(
-		ID2D1RenderTarget *pRenderTarget,
-		IWICImagingFactory *pIWICFactory,
-		PCWSTR uri,
-		UINT destinationWidth,
-		UINT destinationHeight,
-		ID2D1Bitmap **ppBitmap
-	);
 
 	static D2D1_RECT_F Rectange(float size, ID2D1SolidColorBrush* color, float x, float y);
+
+	static void outText(int x, int y, const char * text);
+
+
+	//static void Showtext(const wchar_t* textToShow, int size);
 
 private:
 	

@@ -75,6 +75,7 @@ void CGameStatesManager::ChangeState(CGameState* state)
 
 	// store and init the new state
 	states.push_back(state);
+	CreateDeviceResources(CD2DHelper::m_pRenderTarget);
 	states.back()->Init();
 }
 
@@ -121,14 +122,20 @@ void CGameStatesManager::Update()
 
 void CGameStatesManager::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
+
+
 	// let the state draw the screen
 	if (states.size() > 0)
-		states.back()->Draw(renderTarget);
+		states.back()->Draw(CD2DHelper::m_pRenderTarget);
+
+
+
+	
 }
 
 void CGameStatesManager::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
 {
 	if (states.size() > 0 && !states.back()->resourcesCreated)
-		states.back()->CreateDeviceResources(renderTarget);
+		states.back()->CreateMaterials(renderTarget);
 
 }

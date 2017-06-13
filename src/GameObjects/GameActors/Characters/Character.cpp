@@ -2,7 +2,6 @@
 
 #include "GameObjects\Flag.h"
 #include "GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h"
-#include "GameObjects\GameActors\Characters\Boid.h"
 #include "GameObjects\GameActors\Characters\CharacterFSM\Brain.h"
 #include "GameWorld.h"
 
@@ -11,21 +10,17 @@
 
 
 CCharacter::CCharacter(CFlagStand* TeamStand, CFlag* enemyFlag) :
+	CAgent(TeamStand->initialPosition, TeamStand->GetTeam()),
 	m_pFlagStand(TeamStand)
-	, CGameObject(TeamStand->GetLocation()
-	, TeamStand->GetTeam())
 	, brain(CBrain())
-	, boid(CBoid())
+	, m_TargetFlag(enemyFlag)
 {
-	m_TargetFlag = enemyFlag;
-
-	CFlagSeekState* state =  new CFlagSeekState(this, m_TargetFlag);
-	PushState(state);
-
-
+	m_sight = 0.2f;
+	m_walkSpeed = 0.15f;
+	setMaxSpeed(10000.0f);
 };
 
-void CCharacter::ChangeState(CCharacterState* state)
+void CCharacter::ChangeState(CStateBase* state)
 {
 	// cleanup the current state
 	if (!states.empty()) {
@@ -38,7 +33,7 @@ void CCharacter::ChangeState(CCharacterState* state)
 	states.back()->Init();
 }
 
-void CCharacter::PushState(CCharacterState* state)
+void CCharacter::PushState(CStateBase* state)
 {
 	// pause current state
 	if (!states.empty()) {
@@ -94,8 +89,9 @@ void CCharacter::Update()
 	// Update the brain. It will run the current state function.
 	brain.update();
 
+
 	// Update the steering behaviors
-	boid.update();
+//	boid.update();
 }
 
 CStateBase* CCharacter::getCurrentState()
@@ -106,23 +102,30 @@ CStateBase* CCharacter::getCurrentState()
 void CCharacter::Spawn()
 {
 
-	float randomX = (float)(rand() % (RANDOM_SPAWN * 2 + 1) - RANDOM_SPAWN);
-	float randomY = (float)(rand() % (RANDOM_SPAWN * 2 + 1) - RANDOM_SPAWN);
+
+
 
 	respawnTimer = 0;
-	
-	m_fCurrentLocation.X = m_pFlagStand->GetLocation().X + randomX;
-	m_fCurrentLocation.Y = m_pFlagStand->GetLocation().Y + randomY;
+
+
+	//Vector2d posDiff = Vector2d(m_pFlagStand->GetLocation().X + randomX, m_pFlagStand->GetLocation().Y + randomY); // m / s * s = m
+//	m_position = m_position + posDiff; // m + m
+
+	initialize(m_pFlagStand->initialPosition);
 
 	//Init(m_pFlagStand->GetLocation().X + randomX, m_pFlagStand->GetLocation().Y + randomY);
 	m_bAlive = true;
+
+	CFlagSeekState* state = new CFlagSeekState(this, m_TargetFlag);
+
+	PushState(state);
 
 }
 
 
 void CCharacter::Die()
 {
-	LooseFlag();
+	//LooseFlag();
 	m_bAlive = false;
 	respawnTimer = RESPAWN_SECONDS;
 }

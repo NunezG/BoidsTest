@@ -23,14 +23,14 @@ class CObjectManager
 
 public:
 	// the stack of states
-	static const int LIONS_NUMBER = 10;
-	static const int ANTELOPES_NUMBER = 100;
+	static const int LIONS_NUMBER = 0;
+	static const int ANTELOPES_NUMBER = 30;
 	static const int POOL_NUMBER = LIONS_NUMBER + ANTELOPES_NUMBER;
 
 
 public:
 
-//	static CObjectManager();
+//	static ~CObjectManager();
 
 	static void Init();
 
@@ -59,7 +59,7 @@ public:
 	static void spawnFixedObject(double x, double y, ETeam team);
 
 	//static CCharacter m_aCharacters[LIONS_NUMBER + ANTELOPES_NUMBER];
-	static CCharacter* m_oCharacters[ANTELOPES_NUMBER + LIONS_NUMBER];
+	//static CCharacter* m_oCharacters[ANTELOPES_NUMBER + LIONS_NUMBER];
 	//static Lion m_oLions[LIONS_NUMBER];
 
 
@@ -68,14 +68,20 @@ public:
 	static CFlag* m_pFlags[2];
 	static bool CheckIfDead(CCharacter* character);
 
+	static int registerAgent(CAgent *);
+	static int updateAI(TRealTime maxTime);
+	static int buildFrameConstant();
+	static std::list <CAgent *> m_agents;
+
 private:
+
 
 	
 
 	//static CCharacter* m_pFirstDeadCharacter;
 
 	//non-charqcter objects (flags and stands)
-	static CGameObject* m_OObjects[4];
+//	static CGameObject* m_OObjects[4];
 
 	static bool m_fullscreen;
 

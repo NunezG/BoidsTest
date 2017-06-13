@@ -151,13 +151,13 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>H:\ITtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\ITtest\include;H:\ITtest\PredatorPrey;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreLinkEvent>
       <Command>echo IDR_PIXEL_SHADER RCDATA $(OutDir)SimpleDirect2dApplication.fxo &gt; $(OutDir)SimpleDirect2dApplication.resinclude</Command>
     </PreLinkEvent>
     <Link>
-      <AdditionalDependencies>d2d1.lib;dwrite.lib;windowscodecs.lib;dxgi.lib;d3d10_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d2d1.lib;dwrite.lib;windowscodecs.lib;dxgi.lib;d3d10_1.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -201,9 +201,19 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PredatorPrey\agent.cpp" />
+    <ClCompile Include="PredatorPrey\chase.cpp" />
+    <ClCompile Include="PredatorPrey\flee.cpp" />
+    <ClCompile Include="PredatorPrey\game.cpp" />
+    <ClCompile Include="PredatorPrey\gfx.cpp" />
+    <ClCompile Include="PredatorPrey\graze.cpp" />
+    <ClCompile Include="PredatorPrey\ieexec.cpp" />
+    <ClCompile Include="PredatorPrey\predator.cpp" />
+    <ClCompile Include="PredatorPrey\prey.cpp" />
+    <ClCompile Include="PredatorPrey\seesenemy.cpp" />
+    <ClCompile Include="PredatorPrey\virtualtime.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\GameObjects\Flag.cpp" />
-    <ClCompile Include="src\GameObjects\GameActors\Characters\Boid.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\Character.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\Brain.cpp" />
@@ -213,7 +223,6 @@
     <ClCompile Include="src\GameObjects\ObjectManager.cpp" />
     <ClCompile Include="src\GameObjects\TeamObject.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
-    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Renderer\D2DHelper.cpp" />
     <ClCompile Include="src\Renderer\D2DRenderer.cpp" />
     <ClCompile Include="src\Renderer\GameFSM\GameStatesManager.cpp" />
@@ -226,7 +235,6 @@
   <ItemGroup>
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\GameObjects\Flag.h" />
-    <ClInclude Include="include\GameObjects\GameActors\Characters\Boid.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\Character.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\AttackState.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\Brain.h" />
@@ -250,6 +258,17 @@
     <ClInclude Include="include\Renderer\Window.h" />
     <ClInclude Include="include\stateBase.h" />
     <ClInclude Include="include\Viewmodel\GameViewModel.h" />
+    <ClInclude Include="PredatorPrey\agent.h" />
+    <ClInclude Include="PredatorPrey\agentbrainlib.h" />
+    <ClInclude Include="PredatorPrey\chase.h" />
+    <ClInclude Include="PredatorPrey\flee.h" />
+    <ClInclude Include="PredatorPrey\game.h" />
+    <ClInclude Include="PredatorPrey\graze.h" />
+    <ClInclude Include="PredatorPrey\ieexec.h" />
+    <ClInclude Include="PredatorPrey\predator.h" />
+    <ClInclude Include="PredatorPrey\prey.h" />
+    <ClInclude Include="PredatorPrey\seesenemy.h" />
+    <ClInclude Include="PredatorPrey\virtualtime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,15 +13,15 @@ class CFlag;
 //using namespace std;
 
 //class CGameState;
+#include "gameManager.h"
 
 class CFlagStand : public CGameObject
 {
 public:
 
-	CFlagStand(point2F position, ETeam team);
+	CFlagStand(Vector2d position, ETeam team);
 
 	
-
 
 private:
 

@@ -52,27 +52,57 @@ DemoApp::DemoApp()// :
 	*/
 //}
 
+
+void gfxInit(WNDPROC messageReceiver) {
+
+	CITWindow* ownerWindow = new CITWindow();
+
+	if (SUCCEEDED(ownerWindow->CreateGameWindow(messageReceiver)))
+	{
+		HRESULT hr;
+
+		// Initialize device-indpendent resources, such
+		// as the Direct2D factory.
+	//	hr = CreateDeviceIndependentResources();
+
+		if (SUCCEEDED(hr))
+		{
+
+			//	return CreateGameWindow();
+		}
+
+		//return hr;
+	}
+}
 //
 // Creates the application window and initializes
 // device-independent resources.
 //
-HRESULT DemoApp::Initialize(CITWindow* window)
+HRESULT DemoApp::Initialize(WNDPROC messageReceiver)
 {
-	ownerWindow = window;
 
-    HRESULT hr;
+	
+		HRESULT hr;
 
-    // Initialize device-indpendent resources, such
-    // as the Direct2D factory.
-    hr = CreateDeviceIndependentResources();
-   
-	if (SUCCEEDED(hr))
-    {
+		// Initialize device-indpendent resources, such
+		// as the Direct2D factory.
+		hr = CreateDeviceIndependentResources();
 
-	//	return CreateGameWindow();
-    }
+		if (SUCCEEDED(hr))
+		{
+			ownerWindow = new CITWindow();
 
-	return hr;
+			if (SUCCEEDED(ownerWindow->CreateGameWindow(messageReceiver)))
+			{
+
+				hr = CreateRenderTarget();
+
+			}
+			//	return CreateGameWindow();
+		}
+
+		return hr;
+	
 }
 
 
@@ -144,7 +174,7 @@ HRESULT DemoApp::CreateDeviceIndependentResources()
 //  need to be recreated in case of Direct3D device loss (eg. display
 //  change, remoting, removal of video card, etc).
 //
-HRESULT DemoApp::CreateDeviceResources()
+HRESULT DemoApp::CreateRenderTarget()
 {
     HRESULT hr = S_OK;
 
@@ -166,8 +196,6 @@ HRESULT DemoApp::CreateDeviceResources()
             );
     }
 
-	CGameStatesManager::CreateDeviceResources(CD2DHelper::m_pRenderTarget);
-
     return hr;
 }
 
@@ -187,42 +215,6 @@ void DemoApp::DiscardDeviceResources()
 	*/
 }
 
-//
-//  Called whenever the application needs to display the client
-//  window. This method draws a bitmap a couple times, draws some
-//  geometries, and writes "Hello, World"
-//
-//  Note that this function will not render anything if the window
-//  is occluded (e.g. when the screen is locked).
-//  Also, this function will automatically discard device-specific
-//  resources if the Direct3D device disappears during function
-//  invocation, and will recreate the resources the next time it's
-//  invoked.
-//
-HRESULT DemoApp::OnRender()
-{
-    HRESULT hr;
-
-    hr = CreateDeviceResources();
-
-    if (SUCCEEDED(hr) && !(CD2DHelper::m_pRenderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
-    {
-    
-		CD2DHelper::m_pRenderTarget->BeginDraw();
-
-		CGameStatesManager::Draw(CD2DHelper::m_pRenderTarget);
-
-        hr = CD2DHelper::m_pRenderTarget->EndDraw();
-
-        if (hr == D2DERR_RECREATE_TARGET)
-        {
-            hr = S_OK;
-            DiscardDeviceResources();
-        }
-    }
-
-    return hr;
-}
 
 //
 //  If the application receives a WM_SIZE message, this method

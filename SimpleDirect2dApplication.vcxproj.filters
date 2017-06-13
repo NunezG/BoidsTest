@@ -55,6 +55,9 @@
     <Filter Include="Header Files\ViewModel">
       <UniqueIdentifier>{9fd36244-7d41-473b-a801-9e866e09a33d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PredatorPrey">
+      <UniqueIdentifier>{199549af-f6d5-4234-89e3-c3b9f160525a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimpleDirect2dApplication.rc">
@@ -72,9 +75,6 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp">
       <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\Boid.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\GameActors\Characters\Character.cpp">
       <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
@@ -95,9 +95,6 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="src\GameWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameManager.cpp">
@@ -129,6 +126,39 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.cpp">
       <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\agent.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\chase.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\flee.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\game.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\gfx.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\graze.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\ieexec.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\predator.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\prey.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\seesenemy.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClCompile>
+    <ClCompile Include="PredatorPrey\virtualtime.cpp">
+      <Filter>Source Files\PredatorPrey</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +213,6 @@
     <ClInclude Include="include\GameObjects\GameActors\StartPosition.h">
       <Filter>Header Files\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\Boid.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameObjects\GameActors\Characters\Character.h">
       <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
     </ClInclude>
@@ -209,6 +236,39 @@
     </ClInclude>
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h">
       <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\agent.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\agentbrainlib.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\chase.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\flee.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\game.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\graze.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\ieexec.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\predator.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\prey.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\seesenemy.h">
+      <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="PredatorPrey\virtualtime.h">
+      <Filter>Source Files\PredatorPrey</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

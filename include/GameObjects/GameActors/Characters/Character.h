@@ -17,13 +17,23 @@
 
 //using namespace std;
 
-class CBoid;
-class CCharacterState;
+#include "agent.h"
+
+//class CBoid;
+//class CCharacterState;
 class CBrain;
 class CFlagStand;
 class CStateBase;
 
-class CCharacter : public CGameObject
+struct characterStats
+{
+	float speed;
+	float respawnTime;
+	float cohesion;
+
+};
+
+class CCharacter : public CAgent
 {
 
 private:
@@ -39,8 +49,8 @@ public:
 //	bool getFlag(Flag flag);
 
 	//FSM
-	void ChangeState(CCharacterState* state);
-	void PushState(CCharacterState* state);
+	void ChangeState(CStateBase* state);
+	void PushState(CStateBase* state);
 	void PopState();
 	CStateBase* getCurrentState();
 	//static void Update();
@@ -69,12 +79,14 @@ public:
 	CFlag* m_TargetFlag;
 
 
+	int processAgentConstant() { return 0; }
+	 int processAgentPeriodic() { return 0; }
+	 void drawAgent() const{}
 
 private:
-	const int RANDOM_SPAWN = 60;
 
 	const float DETECTION_RADIUS = 5.0f;
-	const float RESPAWN_SECONDS = 5;
+	const float RESPAWN_SECONDS = 5000;
 	float respawnTimer;
 
 
@@ -83,7 +95,7 @@ private:
 
 	//point2F m_fVelocity;
 
-	CBoid& boid;
+	//CBoid& boid;
 	CBrain& brain;
 
 	//union
@@ -96,7 +108,6 @@ private:
 
 
 			//double x, y;
-			point2F* m_fVelocity;
 			//point2F m_fAcceleration;
 
 

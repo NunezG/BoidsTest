@@ -8,12 +8,13 @@
 
 #include "GameObjects\Flag.h"
 
-class CFlagSeekState : public CCharacterState
+class CFlagSeekState : public CStateBase
 {
 public:
 
 	CFlagSeekState(CCharacter* owner, CFlag* flag) :
-		m_Owner(owner)
+		CStateBase()
+		,m_Owner(owner)
 		, m_pTargetFlag(flag)
 	{ }
 
@@ -29,12 +30,12 @@ public:
 /*	static CFlagSeekState* Instance() {
 		return &m_IdleState;
 	}*/
+	CCharacter* m_Owner;
 
 
 private:
 
 	CFlag* m_pTargetFlag;
-	CCharacter* m_Owner;
 
 
 };

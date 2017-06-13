@@ -18,7 +18,7 @@ public:
 	void HandleEvents(UINT message);
 	void Update();
 	void Draw(ID2D1HwndRenderTarget* renderTarget);
-	void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
+	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
 
 	static CIntroState* Instance() {
 		return &m_IntroState;
@@ -41,9 +41,8 @@ private:
 	int alpha;
 
 	ID2D1BitmapBrush *m_pGridPatternBitmapBrush;
-	ID2D1Bitmap *m_pBitmap;
-	ID2D1Bitmap *m_pAnotherBitmap;
-	ID2D1SolidColorBrush *m_pBlackBrush;
+//	ID2D1Bitmap *m_pBitmap;
+//	ID2D1Bitmap *m_pAnotherBitmap;
 
 	float i = 0;
 

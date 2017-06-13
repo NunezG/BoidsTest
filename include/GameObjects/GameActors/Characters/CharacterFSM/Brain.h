@@ -15,9 +15,9 @@ class CBrain : public StackFSM
 
 public:
 
-	point2F seek(point2F target, float slowingRadius);
+	Vector2d seek(Vector2d target, float slowingRadius);
 
-	point2F flee(point2F position);
+	Vector2d flee(Vector2d position);
 
 	void update();
 

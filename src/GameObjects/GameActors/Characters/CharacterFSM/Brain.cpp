@@ -1,14 +1,14 @@
 #include "GameObjects\GameActors\Characters\CharacterFSM\Brain.h"
 
 
-point2F CBrain::seek(point2F target, float slowingRadius)
+Vector2d CBrain::seek(Vector2d target, float slowingRadius)
 {
-	return point2F(1, 2);
+	return Vector2d(1, 2);
 }
 
-point2F CBrain::flee(point2F position)
+Vector2d CBrain::flee(Vector2d position)
 {
-	return point2F(1, 2);
+	return Vector2d(1, 2);
 
 }
 

@@ -76,7 +76,8 @@ void CPlayState::HandleEvents(UINT message)
 
 void CPlayState::Update()
 {
-
+	CObjectManager::Update();
+	//TestWindow->OnRender();
 }
 
 void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
@@ -111,22 +112,21 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 		);
 	}
 
-	for (int i = 0; i < CObjectManager::POOL_NUMBER -1; ++i)
-	{
+	for (std::list <CAgent *>::iterator _agent = CObjectManager::m_agents.begin(); _agent != CObjectManager::m_agents.end(); _agent++) {
+		CAgent *agent = *_agent;
+		if (agent->m_active && ((CCharacter*)agent)->isAlive()) {
 
-		if (CObjectManager::m_oCharacters[i]->isAlive())
-		{
-			point2F poisiton = CObjectManager::m_oCharacters[i]->GetLocation();
+			Vector2d poisiton = agent->getPosition();
 			ID2D1SolidColorBrush*	characterColor;
 
 
-			if (CObjectManager::m_oCharacters[i]->GetTeam() == antelopesTeam)
+			if (agent->GetTeam() == antelopesTeam)
 				characterColor = m_pAntelopeTeamColor;
 			else
 				characterColor = m_pLionTeamColor;
 
-			CD2DHelper::Rectange(200, characterColor, poisiton.X, poisiton.Y);
-
+			CD2DHelper::Rectange(200, characterColor, poisiton.m_x, poisiton.m_y);
+			/*
 
 			if (CObjectManager::m_oCharacters[i]->HasFlag())
 			{
@@ -137,8 +137,9 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 				else
 					flagColor = m_pLionFlagColor;
 
-				CD2DHelper::Rectange(100, flagColor, CObjectManager::m_oCharacters[i]->GetLocation().X, CObjectManager::m_oCharacters[i]->GetLocation().Y);
+				CD2DHelper::Rectange(100, flagColor, CObjectManager::m_oCharacters[i]->getPosition().m_x, CObjectManager::m_oCharacters[i]->getPosition().m_y);
 			}
+			*/
 		}
 	}
 
@@ -153,13 +154,13 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	//CObjectManager::stands[0]->GetLocation().X = 120.0f;
 
-	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
+	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, CObjectManager::stands[0]->initialPosition.m_x, CObjectManager::stands[0]->initialPosition.m_y);
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 //	CD2DHelper::Rectange(200, m_pTestBrush, 120.0f , 60.0f);
 
 
-	CD2DHelper::Rectange(50, m_pLionTeamColor, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
+	CD2DHelper::Rectange(50, m_pLionTeamColor, CObjectManager::stands[1]->initialPosition.m_x, CObjectManager::stands[1]->initialPosition.m_y);
 //	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
 
 
@@ -187,13 +188,15 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 	m_pRenderTarget->FillGeometry(m_pPathGeometry, m_pLionFlagColor);
 
 */
+	//CD2DHelper::Showtext(L"TEXT!", 5);
 
 
-	if (CObjectManager::stands[0]->HasFlag())
-		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, CObjectManager::stands[0]->GetLocation().X, CObjectManager::stands[0]->GetLocation().Y);
 
-	if (CObjectManager::stands[1]->HasFlag())
-		CD2DHelper::Rectange(100, m_pLionFlagColor, CObjectManager::stands[1]->GetLocation().X, CObjectManager::stands[1]->GetLocation().Y);
+	if (CObjectManager::m_pFlags[0])
+		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, CObjectManager::m_pFlags[0]->getOwner()->initialPosition.m_x, CObjectManager::m_pFlags[0]->getOwner()->initialPosition.m_y);
+
+	if (CObjectManager::m_pFlags[1])
+		CD2DHelper::Rectange(100, m_pLionFlagColor, CObjectManager::m_pFlags[1]->getOwner()->initialPosition.m_x, CObjectManager::m_pFlags[1]->getOwner()->initialPosition.m_y);
 
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
@@ -211,12 +214,12 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 //	std::string s;
 
 	//s.c_str();
-	std::wstring num = 	std::to_wstring((int)CObjectManager::stands[1]->GetLocation().X);
+	std::wstring num = 	std::to_wstring((int)CObjectManager::stands[1]->initialPosition.m_x);
 	;
 
-	wchar_t number = (int)CObjectManager::stands[1]->GetLocation().X;
-	wchar_t number2 = (int)CObjectManager::stands[0]->GetLocation().X;
-	wchar_t number3 = (int)CObjectManager::stands[0]->GetLocation().Y;
+	wchar_t number = (int)CObjectManager::stands[1]->initialPosition.m_x;
+	wchar_t number2 = (int)CObjectManager::stands[0]->initialPosition.m_x;
+	wchar_t number3 = (int)CObjectManager::stands[0]->initialPosition.m_y;
 
 	
 	 WCHAR sc_helloWorld[] = L"sfdsdsNUM:cccfhgs ";
@@ -265,7 +268,7 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 }
 
 
-void CPlayState::CreateDeviceResources(ID2D1HwndRenderTarget* m_pRenderTarget)
+void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* m_pRenderTarget)
 {
 	HRESULT hr = S_OK;
 

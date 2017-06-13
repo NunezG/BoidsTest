@@ -25,11 +25,12 @@ public:
 	virtual void HandleEvents(UINT message) = 0;
 	virtual void Update() = 0;
 	virtual void Draw(ID2D1HwndRenderTarget* renderTarget) = 0;
-	virtual void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) = 0;
+	virtual void CreateMaterials(ID2D1HwndRenderTarget* renderTarget) = 0;
 	bool resourcesCreated;
 
 	void ChangeState(CGameState* state) {
 		CGameStatesManager::ChangeState(state);
+
 	}
 
 protected:

@@ -44,7 +44,7 @@ public:
 private:
 
 
-	static vector<CCharacter*> m_characters;
+	//static vector<CCharacter*> m_characters;
 	static vector<CFlag*> m_teamFlags;
 
 	static bool m_running;
