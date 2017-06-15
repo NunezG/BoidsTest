@@ -9,11 +9,10 @@
 
 #include <assert.h>
 #include "predator.h"
-#include "agent.h"
-#include "game.h"
+#include "Model\GameObjects\GameActors\agent.h"
+#include "Model\game.h"
 
-#include "agent.h"
-#include "agentbrainlib.h"
+#include "Model\agentbrainlib.h"
 #include "prey.h"
 #include "predator.h"
 
@@ -45,7 +44,7 @@ int CPredator::processAgentConstant() {
 ///////////////////////////////////////////////////////////////////
 int CPredator::processAgentPeriodic() {
   //  think();
-    m_lastUpdate = g_game->m_time->tickNow();
+//    m_lastUpdate = g_game->m_time->tickNow();
     return 0;
 }
 

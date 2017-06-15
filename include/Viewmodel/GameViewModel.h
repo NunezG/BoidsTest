@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "Renderer\D2DHelper.h"
+#include "View\D2DHelper.h"
 
 // red rectangle = lions
 // green rectangle = antelopes

@@ -1,7 +1,7 @@
 #ifndef _prey_h_
 #define _prey_h_
 
-#include "agent.h"
+#include "Model\GameObjects\GameActors\agent.h"
 
 class CPrey : public CAgent {
 protected:

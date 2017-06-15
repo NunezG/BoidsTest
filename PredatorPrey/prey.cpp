@@ -11,8 +11,8 @@
 #include <cassert>
 
 #include "prey.h"
-#include "agent.h"
-#include "game.h"
+#include "Model\GameObjects\GameActors\agent.h"
+#include "Model\game.h"
 /*
 ///////////////////////////////////////////////////////////////////
 // CPrey::CPrey
@@ -43,7 +43,7 @@ int CPrey::processAgentConstant() {
 ///////////////////////////////////////////////////////////////////
 int CPrey::processAgentPeriodic() {
   //  think();
-    m_lastUpdate = g_game->m_time->tickNow();
+//    m_lastUpdate = g_game->m_time->tickNow();
     return 0;
 }
 

@@ -6,7 +6,7 @@
 // chase event - set steer in the direction of enemy, with possible anticipation
 //////////////////////////////////////////////////////////////////////////////////
 
-#include "agent.h"
+#include "Model\GameObjects\GameActors\agent.h"
 #include "chase.h"
 #include "assert.h"
 
@@ -30,7 +30,7 @@ bool Chase::update () {
 		CAgent *nmy = m_owner->getEnemy();
 
 		assert(nmy != NULL);
-		nmy->m_marked = true;
+	//	nmy->m_marked = true;
 		if (!nmy->m_active || !m_owner->canSee(nmy))  // target got away
 			return false;
 		Vector2d desiredVel = nmy->getPosition() - m_owner->getPosition();

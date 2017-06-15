@@ -1,11 +1,10 @@
 
 #include <assert.h>
-#include "game.h"
+#include "Model\game.h"
 
-#include "agent.h"
+#include "Model\GameObjects\GameActors\agent.h"
 #include "flee.h"
 //#include "virtualtime.h"
-#include "gameManager.h"
 
 Flee::Flee() {
 	m_name      = "Flee"; // must match class name

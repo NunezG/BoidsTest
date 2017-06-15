@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "Model\virtualtime.h"
+
 class CAgent;
 
 class IEExec

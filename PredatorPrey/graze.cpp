@@ -10,8 +10,7 @@
 
 #include "graze.h"
 #include "prey.h"
-#include "virtualtime.h"
-#include "gameManager.h"
+#include "Model\virtualtime.h"
 
 Graze::Graze() {
     m_name      = "Graze"; // must match class name
@@ -19,7 +18,7 @@ Graze::Graze() {
 }
 
 void Graze::init ( CAgent * owner ) {
-    m_owner = dynamic_cast<CPrey *> (owner);
+    m_owner = (CPrey *)(owner);
 }
 
 bool Graze::start () {

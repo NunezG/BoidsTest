@@ -6,10 +6,10 @@
 // sees enemy event
 //////////////////////////////////////////////////////////////////////////////////
 
-#include "agent.h"
+#include "Model\GameObjects\GameActors\agent.h"
 #include "seesenemy.h"
-#include "game.h"
-#include "GameObjects\ObjectManager.h"
+#include "Model\game.h"
+#include "Model\GameObjects\ObjectManager.h"
 
 SeesEnemy::SeesEnemy() {
     m_name      = "SeesEnemy";
@@ -32,7 +32,7 @@ bool SeesEnemy::update () {
 CAgent * SeesEnemy::findNearestVisibleEnemy() {
 	CAgent *bestAgent = NULL;
 	float bestDist = 1E10;
-	for (std::list <CAgent* >::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+	for (std::list <CAgent* >::iterator agent = g_model->m_agents.begin(); agent != g_model->m_agents.end(); agent++) {
 		CAgent* _agent = *agent;
 		if (_agent->GetTeam() != m_owner->GetTeam() && _agent->m_active && _agent != m_owner) {
 			float dist = m_owner->distanceTo(_agent);

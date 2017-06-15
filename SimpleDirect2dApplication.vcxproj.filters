@@ -13,50 +13,41 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{cdd13176-dd54-48f4-86c2-7c5134455486}</UniqueIdentifier>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{79d1fdee-168c-425d-9d2f-584382a85fec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Renderer">
-      <UniqueIdentifier>{464ec624-8dec-4f9b-8c95-14fcff4497d9}</UniqueIdentifier>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{bd15b45e-3584-44e2-b960-d95512e7e942}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Renderer">
-      <UniqueIdentifier>{b3c60b6e-2180-4128-bf74-2ac92382e30f}</UniqueIdentifier>
+    <Filter Include="Source Files\Viewmodel">
+      <UniqueIdentifier>{76049c65-9ec7-4066-9635-815d0bbe24e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{ec3731eb-e0da-4d2b-9e08-367e0c88882a}</UniqueIdentifier>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{80db3bfa-9cac-4422-b2df-c464b66b77c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Renderer\GameFSM">
-      <UniqueIdentifier>{2908b248-e6ef-4365-a5bb-78ed067d73f5}</UniqueIdentifier>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{df5a1573-5339-4908-9ea1-7654335d3bf8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Renderer\GameFSM">
-      <UniqueIdentifier>{866d78f4-f91d-4e28-843f-887f19cd38b3}</UniqueIdentifier>
+    <Filter Include="Header Files\Viewmodel">
+      <UniqueIdentifier>{7171263d-67dc-4bbd-9074-9534d9fbb19f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects\GameActors">
-      <UniqueIdentifier>{3864ddf9-695c-4884-ac58-b4c9fa41e27a}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\GameObjects">
+      <UniqueIdentifier>{6db7d281-9c62-4f81-b6e2-a39e4797fa59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\GameActors">
-      <UniqueIdentifier>{e7fd9732-ae08-40ce-a0f5-a6b3faaf19b7}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\GameObjects\GameActors">
+      <UniqueIdentifier>{b2510e93-fca3-4270-b568-a42942528815}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\GameActors\Characters">
-      <UniqueIdentifier>{e8a34527-73d7-4396-994a-3db56c45f3d5}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\GameObjects\GameActors\ActorFSM">
+      <UniqueIdentifier>{bb3241b2-a18c-40ff-93ff-b95e5a62c07a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects\GameActors\Characters">
-      <UniqueIdentifier>{e037537d-dc0e-4508-ba61-6ed59cb3172b}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\GameObjects">
+      <UniqueIdentifier>{e912c360-a2a7-434f-8d48-755ca84587dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects\GameActors\Characters\CharacterFSM">
-      <UniqueIdentifier>{40519aec-38ac-4ea8-9fdb-5bfc0634a922}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\GameObjects\GameActors">
+      <UniqueIdentifier>{26cfaa73-3769-47e6-9673-845ee31f585f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\GameActors\Characters\CharacterFSM">
-      <UniqueIdentifier>{f1cfd008-1d70-4220-aa17-c2bd369e7b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ViewModel">
-      <UniqueIdentifier>{f6712f77-a311-44fb-b346-dd137f144ff0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\ViewModel">
-      <UniqueIdentifier>{9fd36244-7d41-473b-a801-9e866e09a33d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\PredatorPrey">
-      <UniqueIdentifier>{199549af-f6d5-4234-89e3-c3b9f160525a}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\GameObjects\GameActors\ActorFSM">
+      <UniqueIdentifier>{0103c044-b680-4857-9811-f977baf72c8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,229 +61,211 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\Brain.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\Character.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\GameObject.cpp">
-      <Filter>Source Files\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\StartPosition.cpp">
-      <Filter>Source Files\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\ObjectManager.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\Flag.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\TeamObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameWorld.cpp">
+    <ClCompile Include="src\GameStart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\View\D2DHelper.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\D2DHelper.cpp">
-      <Filter>Source Files\Renderer</Filter>
+    <ClCompile Include="src\View\D2DRenderer.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\D2DRenderer.cpp">
-      <Filter>Source Files\Renderer</Filter>
+    <ClCompile Include="src\View\Window.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Window.cpp">
-      <Filter>Source Files\Renderer</Filter>
+    <ClCompile Include="src\Model\virtualtime.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\GameFSM\introstate.cpp">
-      <Filter>Source Files\Renderer\GameFSM</Filter>
+    <ClCompile Include="src\Model\game.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\GameFSM\menustate.cpp">
-      <Filter>Source Files\Renderer\GameFSM</Filter>
+    <ClCompile Include="src\Model\GameObjects\ObjectManager.cpp">
+      <Filter>Source Files\Model\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\GameFSM\playstate.cpp">
-      <Filter>Source Files\Renderer\GameFSM</Filter>
+    <ClCompile Include="src\Model\GameObjects\TeamObject.cpp">
+      <Filter>Source Files\Model\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\GameFSM\GameStatesManager.cpp">
-      <Filter>Source Files\Renderer\GameFSM</Filter>
+    <ClCompile Include="src\Model\GameObjects\Flag.cpp">
+      <Filter>Source Files\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\Character.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\GameObject.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\Lion.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\StartPosition.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\agent.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\Antelope.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\EscapeState.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\AttackState.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewmodel\GameStatesManager.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
     <ClCompile Include="src\Viewmodel\GameViewModel.cpp">
-      <Filter>Source Files\ViewModel</Filter>
+      <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClCompile Include="src\Viewmodel\introstate.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
-    <ClCompile Include="PredatorPrey\agent.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+    <ClCompile Include="src\Viewmodel\menustate.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewmodel\playstate.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewmodel\endGameState.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\View\gfx.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\chase.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\flee.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\game.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\gfx.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\graze.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\ieexec.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\predator.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\prey.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\seesenemy.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\virtualtime.cpp">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Renderer\GameFSM\endGameState.cpp">
-      <Filter>Source Files\Renderer\GameFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\Lion.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\GameActors\Characters\Antelope.cpp">
-      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\gameManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\View\D2DHelper.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameWorld.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\View\D2DRenderer.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="include\stateBase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\View\Window.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\D2DRenderer.h">
-      <Filter>Header Files\Renderer</Filter>
+    <ClInclude Include="include\Model\game.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\Window.h">
-      <Filter>Header Files\Renderer</Filter>
+    <ClInclude Include="include\Model\virtualtime.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\D2DHelper.h">
-      <Filter>Header Files\Renderer</Filter>
+    <ClInclude Include="include\Model\agentbrainlib.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\GameStatesManager.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\ObjectManager.h">
+      <Filter>Header Files\Model\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\introstate.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\TeamObject.h">
+      <Filter>Header Files\Model\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\menustate.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\Flag.h">
+      <Filter>Header Files\Model\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\playstate.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\agent.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\gameManager.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\Antelope.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\gamestate.h">
-      <Filter>Header Files\Renderer\GameFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\Character.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\ObjectManager.h">
-      <Filter>Header Files\GameObjects</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\GameObject.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\TeamObject.h">
-      <Filter>Header Files\GameObjects</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\Lion.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\Flag.h">
-      <Filter>Header Files\GameObjects</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\StartPosition.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\GameObject.h">
-      <Filter>Header Files\GameObjects\GameActors</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\CharacterFSM.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\StartPosition.h">
-      <Filter>Header Files\GameObjects\GameActors</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\characterState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\Character.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\EscapeState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\characterState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\StackFSM.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\stateBase.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\AttackState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\AttackState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\Brain.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\CharacterFSM.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClInclude Include="include\Viewmodel\GameStatesManager.h">
+      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
     <ClInclude Include="include\Viewmodel\GameViewModel.h">
-      <Filter>Header Files\ViewModel</Filter>
+      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    <ClInclude Include="include\Viewmodel\introstate.h">
+      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\agent.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+    <ClInclude Include="include\Viewmodel\menustate.h">
+      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\agentbrainlib.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+    <ClInclude Include="include\Viewmodel\playstate.h">
+      <Filter>Header Files\Viewmodel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewmodel\endGameState.h">
+      <Filter>Header Files\Viewmodel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewmodel\gameManager.h">
+      <Filter>Header Files\Viewmodel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewmodel\gamestate.h">
+      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\chase.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\flee.h">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClInclude>
-    <ClInclude Include="PredatorPrey\game.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\graze.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\ieexec.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\predator.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\prey.h">
-      <Filter>Source Files\PredatorPrey</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\seesenemy.h">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClInclude>
-    <ClInclude Include="PredatorPrey\virtualtime.h">
-      <Filter>Source Files\PredatorPrey</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Renderer\GameFSM\endGameState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\Lion.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObjects\GameActors\Characters\Antelope.h">
-      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #ifndef _predator_h_
 #define _predator_h_
 
-#include "agent.h"
+#include "Model\GameObjects\GameActors\agent.h"
 
 class CPredator : public CAgent {
 public:
