@@ -9,8 +9,9 @@
 enum EGameState
 {
 	Intro,
-	Menu,
-	Play
+	Play,
+	Pause,
+	End
 };
 
 class CGameState

@@ -2,9 +2,14 @@
 
 #include "Renderer\GameFSM\playstate.h"
 #include "Renderer\GameFSM\introstate.h"
+
+#include "Renderer\GameFSM\endGameState.h"
 //#include "GameObjects\ObjectManager.h"
 #include "GameWorld.h"
 #include <string>
+#include <cmath>
+#include "game.h"
+#include "agent.h"
 
 
 CPlayState CPlayState::m_PlayState;
@@ -76,12 +81,46 @@ void CPlayState::HandleEvents(UINT message)
 
 void CPlayState::Update()
 {
+
 	CObjectManager::Update();
+
+
+	//Point conditions
+	if ((g_game->m_pFlags[0]->getOwner()->getPosition() - g_game->stands[1].getPosition()).length() < 50)
+	{
+		counter[0]++;
+		g_game->m_pFlags[0]->setOwner(&g_game->stands[0]);
+		printf("Antelopes COUNTER: \n");
+		printf((char*)counter[0]);
+
+		printf(" \n");
+
+
+	}
+
+	if ((g_game->m_pFlags[1]->getOwner()->getPosition() - g_game->stands[0].getPosition()).length() < 50)
+	{
+		counter[1]++;
+		g_game->m_pFlags[1]->setOwner(&g_game->stands[1]);
+		printf("Lions COUNTER: \n");
+		printf((char*)counter[0]);
+
+		printf(" \n");
+
+
+	}
+
+
+	//End Game rule
+	if (counter[0] >= 5 && counter[1] >= 5)
+		CGameStatesManager::ChangeState(CEndGameState::Instance());
+
 	//TestWindow->OnRender();
 }
 
 void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 {
+
 	m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 	m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
@@ -112,9 +151,9 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 		);
 	}
 
-	for (std::list <CAgent *>::iterator _agent = CObjectManager::m_agents.begin(); _agent != CObjectManager::m_agents.end(); _agent++) {
-		CAgent *agent = *_agent;
-		if (agent->m_active && ((CCharacter*)agent)->isAlive()) {
+	for (std::list <CAgent *>::iterator _agent = g_game->m_agents.begin(); _agent != g_game->m_agents.end(); _agent++) {
+		CAgent *agent = (*_agent);
+		if (agent->m_active) {
 
 			Vector2d poisiton = agent->getPosition();
 			ID2D1SolidColorBrush*	characterColor;
@@ -125,7 +164,9 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 			else
 				characterColor = m_pLionTeamColor;
 
-			CD2DHelper::Rectange(200, characterColor, poisiton.m_x, poisiton.m_y);
+
+
+			CD2DHelper::Rectange(200, characterColor, poisiton.m_x, poisiton.m_y, std::atan2(agent->getVelocity().m_x, agent->getVelocity().m_y));
 			/*
 
 			if (CObjectManager::m_oCharacters[i]->HasFlag())
@@ -154,13 +195,13 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 	//CObjectManager::stands[0]->GetLocation().X = 120.0f;
 
-	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, CObjectManager::stands[0]->initialPosition.m_x, CObjectManager::stands[0]->initialPosition.m_y);
+	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, g_game->stands[0].getPosX(), g_game->stands[0].getPosY());
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 //	CD2DHelper::Rectange(200, m_pTestBrush, 120.0f , 60.0f);
 
 
-	CD2DHelper::Rectange(50, m_pLionTeamColor, CObjectManager::stands[1]->initialPosition.m_x, CObjectManager::stands[1]->initialPosition.m_y);
+	CD2DHelper::Rectange(50, m_pLionTeamColor, g_game->stands[1].getPosX(), g_game->stands[1].getPosY());
 //	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
 
 
@@ -192,11 +233,11 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 
 
-	if (CObjectManager::m_pFlags[0])
-		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, CObjectManager::m_pFlags[0]->getOwner()->initialPosition.m_x, CObjectManager::m_pFlags[0]->getOwner()->initialPosition.m_y);
+	if (g_game->m_pFlags[0])
+		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, g_game->m_pFlags[0]->getOwner()->getPosX(), g_game->m_pFlags[0]->getOwner()->getPosY());
 
-	if (CObjectManager::m_pFlags[1])
-		CD2DHelper::Rectange(100, m_pLionFlagColor, CObjectManager::m_pFlags[1]->getOwner()->initialPosition.m_x, CObjectManager::m_pFlags[1]->getOwner()->initialPosition.m_y);
+	if (g_game->m_pFlags[1])
+		CD2DHelper::Rectange(100, m_pLionFlagColor, g_game->m_pFlags[1]->getOwner()->getPosX(), g_game->m_pFlags[1]->getOwner()->getPosY());
 
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
@@ -214,54 +255,8 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 //	std::string s;
 
 	//s.c_str();
-	std::wstring num = 	std::to_wstring((int)CObjectManager::stands[1]->initialPosition.m_x);
-	;
 
-	wchar_t number = (int)CObjectManager::stands[1]->initialPosition.m_x;
-	wchar_t number2 = (int)CObjectManager::stands[0]->initialPosition.m_x;
-	wchar_t number3 = (int)CObjectManager::stands[0]->initialPosition.m_y;
 
-	
-	 WCHAR sc_helloWorld[] = L"sfdsdsNUM:cccfhgs ";
-
-	sc_helloWorld[1] = number;
-	sc_helloWorld[2] = number2;
-	sc_helloWorld[3] = number3;
-
-	/*
-	m_pRenderTarget->DrawText(
-		sc_helloWorld,
-		ARRAYSIZE(sc_helloWorld) -1,
-		CD2DHelper::m_pTextFormat,
-		D2D1::RectF(0, 0, renderTargetSize.width, renderTargetSize.height),
-		m_pTestBrush
-	);
-
-	*/
-
-	//CD2DHelper::Rectange(m_pLightSlateGrayBrush, 100, -50);
-
-	// Draw two rectangles.
-/*	D2D1_RECT_F rectangle1 = D2D1::RectF(
-		rtSize.width / 2 - 50.0f,
-		rtSize.height / 2 - 50.0f,
-		rtSize.width / 2 + 50.0f,
-		rtSize.height / 2 + 50.0f
-	);
-	*/
-/*	D2D1_RECT_F rectangle2 = D2D1::RectF(
-		rtSize.width / 2 - 100.0f,
-		rtSize.height / 2 - 100.0f,
-		rtSize.width / 2 + 100.0f,
-		rtSize.height / 2 + 100.0f
-	);
-*/
-
-	// Draw a filled rectangle.
-//	m_pRenderTarget->FillRectangle(&rectangle1, m_pLightSlateGrayBrush);
-
-	// Draw the outline of a rectangle.
-	//m_pRenderTarget->DrawRectangle(&rectangle2, m_pLightSlateGrayBrush);
 
 	//SDL_BlitSurface(bg, NULL, game->screen, NULL);
 	//SDL_UpdateRect(game->screen, 0, 0, 0, 0);

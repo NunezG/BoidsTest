@@ -4,11 +4,20 @@
 
 //#include "SDL.h"
 #include "characterState.h"
+#include "agent.h"
 
-class CAttackState : public CCharacterState
+#include "GameObjects\Flag.h"
+
+
+class CAttackState : public CStateBase
 {
 public:
-	void Init(CCharacter* owner);
+	CAttackState(CAgent* owner, CAgent* targetAgent) :
+		CStateBase(owner )
+		, m_targetAgent(targetAgent)
+	{ }
+
+	void Init();
 	void Cleanup();
 
 	void Pause();
@@ -18,10 +27,10 @@ public:
 	//void Draw(ID2D1HwndRenderTarget* renderTarget);
 
 
-	CAttackState() { }
+	//CAttackState() { }
 
 private:
-
+	CAgent* m_targetAgent;
 };
 
 #endif

@@ -11,6 +11,10 @@
 #include "agent.h"
 #include "virtualtime.h"
 
+#include <iostream>
+#include <string>
+#include <sstream>
+
 ///////////////////////////////////////////////////////////////////
 
 bool GameManager::m_fullscreen;
@@ -20,7 +24,7 @@ bool GameManager::m_fullscreen;
 
 int s_fps = 60; // desired initial frame rate
 int s_bps = 40; // desired initial build rate
-float s_speed = 0.3f; // initial simulation speed
+float s_speed = 1.f; // initial simulation speed
 
 const int WORLD_GRANULARITY = 70;
 const int PREY_NUM = 60;
@@ -273,8 +277,17 @@ bool Init()
 
 	m_running = true;
 
-	printf("GameManager Init\n");
+	std::cout << "FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKK" << std::flush;
 
+
+	std::cerr << "ERRROROROROOER" << std::flush;
+
+
+	std::cerr << "ERRRORORORegrwhgfsgadgdsvOOER" << std::endl;
+
+
+	printf("GameManager Init\n");
+	//std::cout.flush();
 	// load the intro
 	CGameStatesManager::ChangeState(CIntroState::Instance());
 
@@ -290,13 +303,9 @@ bool Init()
 //
 // Provides the entry point to the application.
 //
-int WINAPI WinMain(
-	HINSTANCE /* hInstance */,
-	HINSTANCE /* hPrevInstance */,
-	LPSTR /* lpCmdLine */,
-	int /* nCmdShow */
-)
-{
+
+int main(int argc, char* argv[]) {
+//#endif
 	// Ignore the return value because we want to continue running even in the
 	// unlikely event that HeapSetInformation fails.
 	HeapSetInformation(NULL, HeapEnableTerminationOnCorruption, NULL, 0);

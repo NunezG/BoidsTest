@@ -28,7 +28,7 @@ CVirtualTime::CVirtualTime() {
     if (!m_hwCounterPresent) // hardware counter not available
         timeBeginPeriod(1);
     reset();
-    setSpeed(10.0f); // simulation is initially paused
+    setSpeed(1.0f); // simulation is initially paused
 }
 
 ///////////////////////////////////////////////////////////////////

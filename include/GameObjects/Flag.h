@@ -2,7 +2,7 @@
 #define FLAG_H
 
 #include "GameObjects\TeamObject.h"
-//#include "Characters\Character.h"
+//#include "GameObjects\GameActors\GameObject.h"
 //#include <vector>
 //#include "introstate.h"
 //#include "menustate.h"
@@ -20,7 +20,11 @@ public:
 	//bool IsAtenemyHome() const;
 
 	CGameObject* getOwner() const;
-	//bool setOwner(CCharacter owner);
+	void setOwner(CGameObject* owner)
+	{
+		//owner->ReceiveFlag(this);
+		m_currentOwner = owner;
+	}
 
 
 private:

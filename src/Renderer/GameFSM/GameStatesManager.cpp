@@ -67,6 +67,7 @@ void CGameStatesManager::Cleanup()
 
 void CGameStatesManager::ChangeState(CGameState* state)
 {
+
 	// cleanup the current state
 	if (!states.empty()) {
 		states.back()->Cleanup();

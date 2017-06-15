@@ -148,7 +148,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>H:\ITtest\include;H:\ITtest\PredatorPrey;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -159,7 +159,7 @@
     <Link>
       <AdditionalDependencies>d2d1.lib;dwrite.lib;windowscodecs.lib;dxgi.lib;d3d10_1.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
@@ -214,10 +214,13 @@
     <ClCompile Include="PredatorPrey\virtualtime.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\GameObjects\Flag.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Antelope.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\Character.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\AttackState.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\Brain.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.cpp" />
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Lion.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\GameObject.cpp" />
     <ClCompile Include="src\GameObjects\GameActors\StartPosition.cpp" />
     <ClCompile Include="src\GameObjects\ObjectManager.cpp" />
@@ -225,6 +228,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
     <ClCompile Include="src\Renderer\D2DHelper.cpp" />
     <ClCompile Include="src\Renderer\D2DRenderer.cpp" />
+    <ClCompile Include="src\Renderer\GameFSM\endGameState.cpp" />
     <ClCompile Include="src\Renderer\GameFSM\GameStatesManager.cpp" />
     <ClCompile Include="src\Renderer\GameFSM\introstate.cpp" />
     <ClCompile Include="src\Renderer\GameFSM\menustate.cpp" />
@@ -235,13 +239,16 @@
   <ItemGroup>
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\GameObjects\Flag.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Antelope.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\Character.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\AttackState.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\Brain.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\CharacterFSM.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\characterState.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\FlagSeekState.h" />
     <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\StackFSM.h" />
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Lion.h" />
     <ClInclude Include="include\GameObjects\GameActors\GameObject.h" />
     <ClInclude Include="include\GameObjects\GameActors\StartPosition.h" />
     <ClInclude Include="include\GameObjects\ObjectManager.h" />
@@ -249,6 +256,7 @@
     <ClInclude Include="include\GameWorld.h" />
     <ClInclude Include="include\Renderer\D2DHelper.h" />
     <ClInclude Include="include\Renderer\D2DRenderer.h" />
+    <ClInclude Include="include\Renderer\GameFSM\endGameState.h" />
     <ClInclude Include="include\Renderer\GameFSM\gameManager.h" />
     <ClInclude Include="include\Renderer\GameFSM\gamestate.h" />
     <ClInclude Include="include\Renderer\GameFSM\GameStatesManager.h" />

@@ -32,11 +32,12 @@ bool SeesEnemy::update () {
 CAgent * SeesEnemy::findNearestVisibleEnemy() {
 	CAgent *bestAgent = NULL;
 	float bestDist = 1E10;
-	for (std::list <CAgent *>::iterator agent = CObjectManager::m_agents.begin(); agent != CObjectManager::m_agents.end(); agent++) {
-		if ((*agent)->GetTeam() != m_owner->GetTeam() && (*agent)->m_active && *agent != m_owner) {
-			float dist = m_owner->distanceTo(*agent);
-			if (dist < bestDist && m_owner->canSee(*agent)) {
-				bestAgent = *agent;
+	for (std::list <CAgent* >::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+		CAgent* _agent = *agent;
+		if (_agent->GetTeam() != m_owner->GetTeam() && _agent->m_active && _agent != m_owner) {
+			float dist = m_owner->distanceTo(_agent);
+			if (dist < bestDist && m_owner->canSee(_agent)) {
+				bestAgent = _agent;
 				bestDist = dist;
 			}
 		}

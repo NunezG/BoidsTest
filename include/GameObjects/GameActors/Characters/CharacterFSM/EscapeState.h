@@ -1,21 +1,20 @@
 
-#ifndef FLAGSEEKSTATE_H
-#define FLAGSEEKSTATE_H
+#ifndef ESCAPESTATE_H
+#define ESCAPESTATE_H
 
 //#include "SDL.h"
 #include "GameObjects\GameActors\Characters\Character.h"
 #include "characterState.h"
 
 #include "GameObjects\Flag.h"
-#include "virtualtime.h"
-class CFlagSeekState : public CStateBase
+
+class CEscapeState : public CStateBase
 {
 public:
 
-	CFlagSeekState(CAgent* owner, CFlag* flag, CFlagStand* stand) :
+	CEscapeState(CAgent* owner) :
 		CStateBase(owner)
-		, m_pTargetFlag(flag)
-		, m_homeStand(stand)
+
 	{ }
 
 	void Init();
@@ -30,16 +29,13 @@ public:
 /*	static CFlagSeekState* Instance() {
 		return &m_IdleState;
 	}*/
+
+	TVirtTime m_dirTick;
+	TVirtTime m_minDirTick;
 	void newDirection(TVirtTime minTick);
-
-
 private:
 
-	CFlag* m_pTargetFlag;
-	CFlagStand* m_homeStand;
-
-	TVirtTime m_minDirTick;
-	TVirtTime m_dirTick;
+	
 
 };
 

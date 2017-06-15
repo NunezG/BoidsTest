@@ -13,11 +13,12 @@
  IDWriteFactory *CD2DHelper::m_pDWriteFactory;
  ID2D1HwndRenderTarget *CD2DHelper::m_pRenderTarget;
 
+#define M_PIf 3.14159265358979323846f
 
 
  void CD2DHelper::ShowNum(int num, int size)
  {
-
+	 m_pRenderTarget->BeginDraw();
 	 m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 	 D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
@@ -42,6 +43,7 @@
 	 CD2DHelper::outText(150,200, (char*)ttt);
 
 
+	 m_pRenderTarget->EndDraw();
 
  }
 
@@ -98,8 +100,9 @@ m_pRenderTarget->DrawText(
 
 }
 
-D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float x, float y)
+D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float x, float y, float angle)
 {
+	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
 
 	D2D1_SIZE_F rtSize = m_pRenderTarget->GetSize();
 
@@ -118,7 +121,17 @@ D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float 
 	*/
 	const D2D1::Matrix3x2F trans = D2D1::Matrix3x2F::Translation(x, y);
 
-	m_pRenderTarget->SetTransform(trans);
+
+	
+	const D2D1::Matrix3x2F rot = D2D1::Matrix3x2F::Rotation(
+	(angle / M_PIf) * 180.0,
+	D2D1::Point2F(
+	0,
+	0));
+	
+
+
+	m_pRenderTarget->SetTransform(rot * trans);
 
 /*
 	renderTarget->
@@ -142,9 +155,9 @@ D2D1_RECT_F CD2DHelper::Rectange(float size, ID2D1SolidColorBrush* color, float 
 
 	D2D1_RECT_F rectangle1 = D2D1::RectF(
 		- rtSize.width / size,
-		rtSize.width / size,
+		rtSize.width / size +5,
 		rtSize.width /  size,
-		- rtSize.width / size);
+		- (rtSize.width / size +5));
 
 
 

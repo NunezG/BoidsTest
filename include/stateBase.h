@@ -4,7 +4,8 @@
 
 #include "gameManager.h"
 
-class CCharacter;
+#include "agent.h"
+//class CCharacter;
 
 class CStateBase
 {
@@ -25,7 +26,9 @@ public:
 		//GameManager::ChangeState();
 	}
 
-	CStateBase() { }
+	CStateBase(CAgent* owner): m_Owner(owner){ }
+
+	CAgent* m_Owner;
 
 protected:
 };

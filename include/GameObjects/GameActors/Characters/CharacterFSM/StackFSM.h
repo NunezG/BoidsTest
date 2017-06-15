@@ -12,6 +12,8 @@ class StackFSM
 private:
 	std::vector<CStateBase*> stack;
 
+	CCharacter* m_Owner;
+
 public:
 
 	StackFSM() : stack()

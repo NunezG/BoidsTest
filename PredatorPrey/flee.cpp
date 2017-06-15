@@ -1,9 +1,10 @@
 
 #include <assert.h>
+#include "game.h"
 
 #include "agent.h"
 #include "flee.h"
-#include "virtualtime.h"
+//#include "virtualtime.h"
 #include "gameManager.h"
 
 Flee::Flee() {

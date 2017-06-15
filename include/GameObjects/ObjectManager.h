@@ -9,9 +9,9 @@
 //#include "../gameManager.h"
 
 #include "GameObjects\GameActors\StartPosition.h"
-#include "GameObjects/GameActors/Characters/Character.h"
+#include "agent.h"
 #include "GameObjects\Flag.h"
-
+#include "virtualtime.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ class CObjectManager
 
 public:
 	// the stack of states
-	static const int LIONS_NUMBER = 0;
+	static const int LIONS_NUMBER = 5;
 	static const int ANTELOPES_NUMBER = 30;
 	static const int POOL_NUMBER = LIONS_NUMBER + ANTELOPES_NUMBER;
 
@@ -63,15 +63,12 @@ public:
 	//static Lion m_oLions[LIONS_NUMBER];
 
 
-	static CFlagStand* stands[2];
+	
+	static bool CheckIfDead(CAgent* character);
 
-	static CFlag* m_pFlags[2];
-	static bool CheckIfDead(CCharacter* character);
-
-	static int registerAgent(CAgent *);
+	
 	static int updateAI(TRealTime maxTime);
 	static int buildFrameConstant();
-	static std::list <CAgent *> m_agents;
 
 private:
 

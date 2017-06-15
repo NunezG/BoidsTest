@@ -1,19 +1,23 @@
-#ifndef _agent_h_
-#define _agent_h_
+#ifndef _myagentw_h_
+#define _myagentw_h_
 
 #include <math.h>
 #include "gameManager.h"
+//#include "game.h"
+#include "virtualtime.h"
+
+#include "GameObjects\GameActors\Characters\Character.h"
+
 #include "game.h"
-#include "GameObjects\GameActors\GameObject.h"
+
 ///////////////////////////////////////////////////////////////////
 // CAgent
 // abstract base class for agents.
 // extends CAgent, meaning each agent can have its own brain
 ///////////////////////////////////////////////////////////////////
-class CAgent : public CGameObject {
+class CAgent :  public CCharacter{
 
 private:
-	Vector2d m_position;
 	Vector2d m_steer;
 	Vector2d m_velocity;
 protected:
@@ -23,9 +27,26 @@ protected:
 	float m_maxSpeed;
 	CAgent *m_enemy;
 public:
-	CAgent(Vector2d position, ETeam team): CGameObject(position, team){}
+	CAgent(CFlagStand* TeamStand, CFlag* enemyFlag): 
+		CCharacter(TeamStand, enemyFlag)
+		, m_active(true) 
+		, m_pFlagStand(TeamStand)
+		//, brain(CBrain())
+		, m_TargetFlag(enemyFlag)
+	
+	{
+	
+	}
 
-	virtual ~CAgent() {}
+
+	CFlagStand* getFlagStand() const {
+		return m_pFlagStand;
+	}
+
+	void Update();
+	void Die();
+
+//	virtual ~CAgent() {}
 	void initialize(Vector2d startPosition);
 
 	// non-physical stats (changeable by user)
@@ -39,17 +60,15 @@ public:
 	// engine routines
 	virtual int processAgentConstant() = 0;
 	virtual int processAgentPeriodic() = 0;
-	virtual void drawAgent() const = 0;
-	virtual void move();
+	//virtual void drawAgent() const = 0;
+	void move();
 
 	// agent status query routines; no changes allowed (consts)
 	float getMaxSpeed() const { return m_maxSpeed; }
 	float getSpeed() const { return m_velocity.length(); }
 	float getWalkSpeed() const { return m_walkSpeed; }
 	Vector2d getSteer() const { return m_steer; }
-	Vector2d getPosition() const { return m_position; }
-	float getPosX() const { return m_position.m_x; }
-	float getPosY() const { return m_position.m_y; }
+	
 	Vector2d getVelocity() const { return m_velocity; }
 	Vector2d getCohesionSteer(float, float) const;
 	Vector2d getSeparationSteer(float, float) const;
@@ -61,9 +80,10 @@ public:
 	bool isNeighbour(const CAgent *other, float radius, float angle) const;
 	CAgent * getEnemy() const { return m_enemy; }
 
-	// static routines
-	static float agentDistance(const CAgent *agent1, const CAgent *agent2) { return (agent1->getPosition() - agent2->getPosition()).length(); }
-	static float sqrAgentDistance(const CAgent *agent1, const CAgent *agent2) { return (agent1->getPosition() - agent2->getPosition()).sqrLength(); }
+	CFlagStand* m_pFlagStand;
+	CFlag* m_TargetFlag;
+
+
 };
 ///////////////////////////////////////////////////////////////////
 

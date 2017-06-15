@@ -91,9 +91,9 @@ void CGame::renderFrame() {
        //     glLoadIdentity();
 
 
-	for (std::list <CAgent *>::iterator agent = CObjectManager::m_agents.begin(); agent != CObjectManager::m_agents.end(); agent++) {
-		(*agent)->drawAgent();
-		(*agent)->m_marked = false;
+	for (std::list <CAgent *>::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+		((*agent))->drawAgent();
+		((*agent))->m_marked = false;
 
 		//m_world->drawWorld();
 

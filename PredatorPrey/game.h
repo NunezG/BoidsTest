@@ -5,6 +5,8 @@
 #include <assert.h>
 #include "gameManager.h"
 #include "virtualtime.h"
+#include "GameObjects\GameActors\StartPosition.h"
+#include "GameObjects\Flag.h"
 
 class CWorld;
 class CVirtualTime;
@@ -77,6 +79,12 @@ public:
 	void renderFrame(); // defined in gfx.cpp
 	int buildFrame();
 	int updateFPS(TRealTime now);
+
+	std::list <CAgent* > m_agents;
+	CFlagStand stands[2];
+	CFlag* m_pFlags[2];
+
+	int registerAgent(ETeam team);
 };
 
 #endif

@@ -21,7 +21,12 @@ public:
 
 	CFlagStand(Vector2d position, ETeam team);
 
-	
+	CFlagStand() : CGameObject(Vector2d(0,0), ETeam::antelopesTeam)
+	{
+
+
+	}
+
 
 private:
 

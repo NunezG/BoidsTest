@@ -58,7 +58,7 @@ public:
 	static void ShowNum(int num, int size);
 
 
-	static D2D1_RECT_F Rectange(float size, ID2D1SolidColorBrush* color, float x, float y);
+	static D2D1_RECT_F Rectange(float size, ID2D1SolidColorBrush* color, float x, float y, float angle = 0);
 
 	static void outText(int x, int y, const char * text);
 

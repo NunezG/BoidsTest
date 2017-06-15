@@ -43,6 +43,7 @@ private:
 	ID2D1SolidColorBrush*	m_pLionFlagColor;
 	ID2D1PathGeometry *m_pPathGeometry;
 
+	int counter[2];
 
 //	SDL_Surface* bg;
 };

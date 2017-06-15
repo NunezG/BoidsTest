@@ -11,7 +11,7 @@ public:
 
 	//void ChangeState(CCharacterState* state);
 
-	CCharacterState() { }
+	CCharacterState(CAgent* owner) :CStateBase(owner){ }
 
 protected:
 };

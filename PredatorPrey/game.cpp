@@ -15,6 +15,8 @@
 #include "game.h"
 #include "gameManager.h"
 #include "GameObjects\ObjectManager.h"
+#include "GameObjects\GameActors\Characters\Antelope.h"
+#include "GameObjects\GameActors\Characters\Lion.h"
 
 CGame * g_game;
 
@@ -77,3 +79,25 @@ int CGame::updateFPS(TRealTime now) {
 	return 0;
 }
 
+
+///////////////////////////////////////////////////////////////////
+// CGame::registerAgent
+// register agent for the simulation
+///////////////////////////////////////////////////////////////////
+int CGame::registerAgent(ETeam team) {
+
+	if (team == antelopesTeam)
+	{
+		
+		m_agents.push_back(new CAntelope(&g_game->stands[0], g_game->m_pFlags[1]));
+	}
+	else
+	{
+
+		m_agents.push_back(new CLion(&g_game->stands[1], g_game->m_pFlags[0]));
+
+	}
+
+	//static_cast<CAgent&>(m_agents.back()).initialize(TeamStand->getPosition());
+	return 0;
+}

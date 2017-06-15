@@ -4,7 +4,7 @@
 CFlag::CFlag(ETeam team, CGameObject* owner) : CTeamObject(team)
 {
 	m_currentOwner = owner;
-	owner->ReceiveFlag(this);
+//	owner->ReceiveFlag(this);
 
 }
 

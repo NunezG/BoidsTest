@@ -160,6 +160,18 @@
     <ClCompile Include="PredatorPrey\virtualtime.cpp">
       <Filter>Source Files\PredatorPrey</Filter>
     </ClCompile>
+    <ClCompile Include="src\Renderer\GameFSM\endGameState.cpp">
+      <Filter>Source Files\Renderer\GameFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.cpp">
+      <Filter>Source Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Lion.cpp">
+      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\GameActors\Characters\Antelope.cpp">
+      <Filter>Source Files\GameObjects\GameActors\Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\gameManager.h">
@@ -269,6 +281,18 @@
     </ClInclude>
     <ClInclude Include="PredatorPrey\virtualtime.h">
       <Filter>Source Files\PredatorPrey</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderer\GameFSM\endGameState.h">
+      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\GameActors\Characters\CharacterFSM\EscapeState.h">
+      <Filter>Header Files\GameObjects\GameActors\Characters\CharacterFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Lion.h">
+      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\GameActors\Characters\Antelope.h">
+      <Filter>Header Files\GameObjects\GameActors\Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

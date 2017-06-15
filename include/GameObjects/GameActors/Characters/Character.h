@@ -17,12 +17,12 @@
 
 //using namespace std;
 
-#include "agent.h"
+//#include "agent.h"
 
 //class CBoid;
 //class CCharacterState;
 class CBrain;
-class CFlagStand;
+//class CFlagStand;
 class CStateBase;
 
 struct characterStats
@@ -33,17 +33,17 @@ struct characterStats
 
 };
 
-class CCharacter : public CAgent
+class CCharacter : public CGameObject
 {
 
 private:
-	bool m_bAlive;
+	//bool m_bAlive;
 
 public:
 	
 	CCharacter(CFlagStand* TeamStand, CFlag* enemyFlag);
 	
-
+	CCharacter() {}
 //	bool DropFlag(point2F fCurrentLocation);
 
 //	bool getFlag(Flag flag);
@@ -52,7 +52,7 @@ public:
 	void ChangeState(CStateBase* state);
 	void PushState(CStateBase* state);
 	void PopState();
-	CStateBase* getCurrentState();
+	CStateBase* getCurrentState() const;
 	//static void Update();
 
 //	void findLeaf();
@@ -61,32 +61,23 @@ public:
 	CCharacter* getNext() const { return /*m_sState.m_sDead.*/nextDeadCharacter; }
 	void setNext(CCharacter* next) { /*m_sState.m_sDead.*/nextDeadCharacter = next; }
 
-	void Update();
 
-	bool isAlive() const { return m_bAlive; }
 
 	void Init(float x, float y)
 	{		
 		//CGameObject::Init(x, y);
-		m_bAlive = true;
-
 	}
 
-	void Die();
-
-	void Spawn();
-
-	CFlag* m_TargetFlag;
 
 
 	int processAgentConstant() { return 0; }
 	 int processAgentPeriodic() { return 0; }
 	 void drawAgent() const{}
 
-private:
+protected:
 
 	const float DETECTION_RADIUS = 5.0f;
-	const float RESPAWN_SECONDS = 5000;
+	const float RESPAWN_SECONDS = 5;
 	float respawnTimer;
 
 
@@ -95,8 +86,8 @@ private:
 
 	//point2F m_fVelocity;
 
-	//CBoid& boid;
-	CBrain& brain;
+//	CBoid& boid;
+	//CBrain& brain;
 
 	//union
 //	{
@@ -127,8 +118,7 @@ private:
 
 	//} state_;
 
-			CFlagStand* m_pFlagStand;
-
+		
 		
 
 };
