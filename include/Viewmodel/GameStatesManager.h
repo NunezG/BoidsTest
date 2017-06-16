@@ -38,12 +38,6 @@ public:
 	static bool Running() { return m_running; }
 	static void Quit() { m_running = false; }
 
-
-
-	static void buildFrameConstant();
-	static void buildFramePeriodic();
-
-
 	//static void RunMessageLoop();
 
 	//SDL_Surface* screen;

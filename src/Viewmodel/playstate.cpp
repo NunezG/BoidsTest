@@ -1,11 +1,9 @@
 
 
 #include "Viewmodel\playstate.h"
-#include "Viewmodel\introstate.h"
+#include "Viewmodel\menustate.h"
 
 #include "Viewmodel\endGameState.h"
-//#include "GameObjects\ObjectManager.h"
-#include "Model\GameObjects\ObjectManager.h"
 #include <string>
 #include <cmath>
 #include "Model\game.h"
@@ -16,13 +14,14 @@ CPlayState CPlayState::m_PlayState;
 
 void CPlayState::Init()
 {
-	g_model = new CObjectManager();
-
-	g_model->Init();
+	g_game = new CGame();
+	//g_game->Init();
+	g_game->m_time->reset();
+	g_game->m_time->setSpeed(s_speed);
 
 	resourcesCreated = false;
 
-	CreateFlag();
+	//CreateFlag();
 	//SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 
 //	bg = SDL_DisplayFormat(temp);
@@ -47,6 +46,7 @@ void CPlayState::Pause()
 void CPlayState::Resume()
 {
 	printf("CPlayState Resume\n");
+	g_game->m_time->reset();
 }
 
 void CPlayState::HandleEvents(UINT message)
@@ -55,7 +55,7 @@ void CPlayState::HandleEvents(UINT message)
 	switch (message)
 	{
 	case WM_KEYDOWN:
-		CGameStatesManager::ChangeState(CIntroState::Instance());
+		CGameStatesManager::PushState(CPauseState::Instance());
 		break;
 
 
@@ -85,39 +85,35 @@ void CPlayState::HandleEvents(UINT message)
 
 void CPlayState::Update()
 {
+	
+	TRealTime now = g_game->m_time->timeNow();
 
-	g_model->Update();
+	if (g_game->getDesiredFramesDone(now, s_fps) >g_game-> getRenderedSinceSecond()) {
+		g_game->m_periodTimer.startPeriod(PERIOD_RENDER);
+		//printf("NEW FRAME!!!");
+		g_game->newFrame();
+		buildFrameConstant();
+		//renderFrame();
 
+		if (!(CD2DHelper::m_pRenderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
+		{
+			CD2DHelper::m_pRenderTarget->BeginDraw();
 
-	//Point conditions
-	if ((g_model->m_pFlags[0]->getOwner()->getPosition() - g_model->stands[1].getPosition()).length() < 50)
-	{
-		counter[0]++;
-		g_model->m_pFlags[0]->setOwner(&g_model->stands[0]);
-		printf("Antelopes COUNTER: \n");
-		printf((char*)counter[0]);
+			Draw(CD2DHelper::m_pRenderTarget);
 
-		printf(" \n");
+			CD2DHelper::DebugFrame();
 
+			CD2DHelper::m_pRenderTarget->EndDraw();
+		}
 
-	}
-
-	if ((g_model->m_pFlags[1]->getOwner()->getPosition() - g_model->stands[0].getPosition()).length() < 50)
-	{
-		counter[1]++;
-		g_model->m_pFlags[1]->setOwner(&g_model->stands[1]);
-		printf("Lions COUNTER: \n");
-		printf((char*)counter[0]);
-
-		printf(" \n");
-
-
+		g_game->m_periodTimer.startPeriod(PERIOD_IDLE);
 	}
 
 
-	//End Game rule
-	if (counter[0] >= 5 && counter[1] >= 5)
-		CGameStatesManager::ChangeState(CEndGameState::Instance());
+	g_game->Tick();
+
+	if (g_game->gammeFinished)
+	CGameStatesManager::ChangeState(CEndGameState::Instance());
 
 	//TestWindow->OnRender();
 }
@@ -155,7 +151,7 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 		);
 	}
 
-	for (std::list <CAgent *>::iterator _agent = g_model->m_agents.begin(); _agent != g_model->m_agents.end(); _agent++) {
+	for (std::list <CAgent *>::iterator _agent = g_game->m_agents.begin(); _agent != g_game->m_agents.end(); _agent++) {
 		CAgent *agent = (*_agent);
 		if (agent->m_active) {
 
@@ -173,16 +169,16 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 			CD2DHelper::Rectange(200, characterColor, poisiton.m_x, poisiton.m_y, std::atan2(agent->getVelocity().m_x, agent->getVelocity().m_y));
 			/*
 
-			if (g_model->m_oCharacters[i]->HasFlag())
+			if (g_game->m_oCharacters[i]->HasFlag())
 			{
 				ID2D1SolidColorBrush*	flagColor;
 
-				if (g_model->m_oCharacters[i]->GetTeam() == antelopesTeam)
+				if (g_game->m_oCharacters[i]->GetTeam() == antelopesTeam)
 					flagColor = m_pAntelopeFlagColor;
 				else
 					flagColor = m_pLionFlagColor;
 
-				CD2DHelper::Rectange(100, flagColor, g_model->m_oCharacters[i]->getPosition().m_x, g_model->m_oCharacters[i]->getPosition().m_y);
+				CD2DHelper::Rectange(100, flagColor, g_game->m_oCharacters[i]->getPosition().m_x, g_game->m_oCharacters[i]->getPosition().m_y);
 			}
 			*/
 		}
@@ -197,15 +193,15 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 //	m_pTestBrush->SetColor(D2D1::ColorF(7, 1));
 
 
-	//g_model->stands[0]->GetLocation().X = 120.0f;
+	//g_game->stands[0]->GetLocation().X = 120.0f;
 
-	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, g_model->stands[0].getPosX(), g_model->stands[0].getPosY());
+	CD2DHelper::Rectange(50, m_pAntelopeTeamColor, g_game->stands[0].getPosX(), g_game->stands[0].getPosY());
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 //	CD2DHelper::Rectange(200, m_pTestBrush, 120.0f , 60.0f);
 
 
-	CD2DHelper::Rectange(50, m_pLionTeamColor, g_model->stands[1].getPosX(), g_model->stands[1].getPosY());
+	CD2DHelper::Rectange(50, m_pLionTeamColor, g_game->stands[1].getPosX(), g_game->stands[1].getPosY());
 //	D2D1_SIZE_F renderTargetSize = m_pRenderTarget->GetSize();
 
 
@@ -237,16 +233,16 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* m_pRenderTarget)
 
 
 
-	if (g_model->m_pFlags[0])
-		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, g_model->m_pFlags[0]->getOwner()->getPosX(), g_model->m_pFlags[0]->getOwner()->getPosY());
+	if (g_game->m_pFlags[0])
+		CD2DHelper::Rectange(100, m_pAntelopeFlagColor, g_game->m_pFlags[0]->getOwner()->getPosX(), g_game->m_pFlags[0]->getOwner()->getPosY());
 
-	if (g_model->m_pFlags[1])
-		CD2DHelper::Rectange(100, m_pLionFlagColor, g_model->m_pFlags[1]->getOwner()->getPosX(), g_model->m_pFlags[1]->getOwner()->getPosY());
+	if (g_game->m_pFlags[1])
+		CD2DHelper::Rectange(100, m_pLionFlagColor, g_game->m_pFlags[1]->getOwner()->getPosX(), g_game->m_pFlags[1]->getOwner()->getPosY());
 
 	//m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 
-//	const D2D1::Matrix3x2F trans = D2D1::Matrix3x2F::Translation(g_model->stands[1]->GetLocation().X, g_model->stands[1]->GetLocation().Y);
+//	const D2D1::Matrix3x2F trans = D2D1::Matrix3x2F::Translation(g_game->stands[1]->GetLocation().X, g_game->stands[1]->GetLocation().Y);
 
 //	m_pRenderTarget->SetTransform(trans);
 	
@@ -322,73 +318,10 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* m_pRenderTarget)
 }
 
 
-void CPlayState::CreateFlag()
-{
-	HRESULT hr;
-	ID2D1GeometrySink *pSink = NULL;
-
-	// Create a path geometry.
-	hr = CD2DHelper::m_pD2DFactory->CreatePathGeometry(&m_pPathGeometry);
-
-	if (SUCCEEDED(hr))
-	{
-		// Use the geometry sink to write to the path geometry.
-		hr = m_pPathGeometry->Open(&pSink);
-	}
-	if (SUCCEEDED(hr))
-	{
-		pSink->SetFillMode(D2D1_FILL_MODE_ALTERNATE);
-
-		pSink->BeginFigure(
-			D2D1::Point2F(0, 0),
-			D2D1_FIGURE_BEGIN_FILLED
-		);
-
-		pSink->AddLine(D2D1::Point2F(20, 0));
-
-		pSink->AddBezier(
-			D2D1::BezierSegment(
-				D2D1::Point2F(15, 5),
-				D2D1::Point2F(15, 15),
-				D2D1::Point2F(20, 20))
-		);
-
-		pSink->AddLine(D2D1::Point2F(0, 20));
-
-		pSink->AddBezier(
-			D2D1::BezierSegment(
-				D2D1::Point2F(5, 15),
-				D2D1::Point2F(5, 5),
-				D2D1::Point2F(0, 0))
-		);
-
-		pSink->EndFigure(D2D1_FIGURE_END_CLOSED);
-
-		hr = pSink->Close();
-	}
-
-	SafeRelease(&pSink);
-
-
-
-}
 
 void CPlayState::buildFrameConstant() {
-	for (std::list <CAgent *>::iterator agent = g_model->m_agents.begin(); agent != g_model->m_agents.end(); agent++)
+	for (std::list <CAgent *>::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++)
 		if ((*agent)->m_active)
 			(*agent)->processAgentConstant();
 }
 
-
-///////////////////////////////////////////////////////////////////
-// CGame::buildFramePeriodic
-// do some not-so-urgent work
-///////////////////////////////////////////////////////////////////
-int CPlayState::buildFramePeriodic() {
-	for (std::list <CAgent*>::iterator agent = g_model->m_agents.begin(); agent != g_model->m_agents.end(); agent++) {
-		if (((*agent))->m_active)
-			((*agent))->processAgentPeriodic();
-	}
-
-	return 0;
-}

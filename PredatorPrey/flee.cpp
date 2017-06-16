@@ -17,7 +17,7 @@ void Flee::init ( CAgent * owner )
 }
 
 bool Flee::start () {
-	m_state = Go;
+//	m_state = Go;
 	m_minDirTick = 0.05f;
 	newDirection(m_minDirTick);
 	m_owner->m_done = false;
@@ -53,8 +53,8 @@ void Flee::newDirection(TVirtTime minTick) {
 bool Flee::update () {
 	CAgent *nmy = m_owner->getEnemy();
 	assert(nmy != NULL);
-	switch ( m_state ) {
-	case Go:
+//	switch ( m_state ) {
+//	case Go:
 		if (g_game->m_time->tickNow() > m_dirTick) {
 			if (nmy->m_active && m_owner->canSee(nmy))
 				newDirection(m_minDirTick);
@@ -63,8 +63,8 @@ bool Flee::update () {
 				m_owner->m_done = true;
 			}
 		}
-		break;
-	}
+//		break;
+//	}
 	return true;
 }
 

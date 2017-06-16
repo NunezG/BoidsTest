@@ -12,7 +12,6 @@
 
 #include "Model\GameObjects\GameActors\agent.h"
 #include "Model\virtualtime.h"
-#include "Model\GameObjects\ObjectManager.h"
 #include "Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h"
 ///////////////////////////////////////////////////////////////////
 // CAgent::move
@@ -48,11 +47,6 @@ void CAgent::initialize(Vector2d startPosition) {
 
 	respawnTimer = 0;
 
-	//Vector2d posDiff = Vector2d(m_pFlagStand->GetLocation().X + randomX, m_pFlagStand->GetLocation().Y + randomY); // m / s * s = m
-	//	m_position = m_position + posDiff; // m + m
-
-
-	//Init(m_pFlagStand->GetLocation().X + randomX, m_pFlagStand->GetLocation().Y + randomY);
 	m_active = true;
 
 	CFlagSeekState* state = new CFlagSeekState(this, m_TargetFlag, m_pFlagStand);
@@ -63,7 +57,6 @@ void CAgent::initialize(Vector2d startPosition) {
 	float randomY = (float)(rand() % (60 * 2 + 1) - 60);
 	
 	m_velocity = Vector2d(0.0f, 0.0f);
-	setMaxSpeed(10000.0f);
 	setSteer(Vector2d(0.0f, 0.0f));
     setEnemy(NULL);
     m_position = Vector2d(startPosition.m_x + randomX, startPosition.m_y + randomY);
@@ -77,7 +70,7 @@ void CAgent::initialize(Vector2d startPosition) {
 ///////////////////////////////////////////////////////////////////
 Vector2d CAgent::getSeparationSteer(float radius, float angle) const {
     Vector2d result(0.0f, 0.0f);
-    for (std::list <CAgent*>::iterator _agent = g_model->m_agents.begin(); _agent != g_model->m_agents.end(); _agent++) {
+    for (std::list <CAgent*>::iterator _agent = g_game->m_agents.begin(); _agent != g_game->m_agents.end(); _agent++) {
             CAgent *agent = (*_agent);
             if (agent->m_active && isNeighbour(agent, radius, angle)) {
                 Vector2d dx = this->getPosition() - agent->getPosition();
@@ -102,7 +95,7 @@ Vector2d CAgent::getSeparationSteer(float radius, float angle) const {
 Vector2d CAgent::getCohesionSteer(float radius, float angle) const {
     Vector2d result(0.0f, 0.0f);
     int cnt = 0;
-    for (std::list <CAgent*>::iterator _agent = g_model->m_agents.begin(); _agent != g_model->m_agents.end(); _agent++) {
+    for (std::list <CAgent*>::iterator _agent = g_game->m_agents.begin(); _agent != g_game->m_agents.end(); _agent++) {
             CAgent *agent = (*_agent);
             if (agent->m_active && isNeighbour(agent, radius, angle)) {
                 result = result + agent->getPosition();
@@ -123,7 +116,7 @@ Vector2d CAgent::getCohesionSteer(float radius, float angle) const {
 Vector2d CAgent::getAlignmentSteer(float radius, float angle) const {
     Vector2d result(0.0f, 0.0f);
     int cnt = 0;
-    for (std::list <CAgent*>::iterator _agent = g_model->m_agents.begin(); _agent != g_model->m_agents.end(); _agent++) {
+    for (std::list <CAgent*>::iterator _agent = g_game->m_agents.begin(); _agent != g_game->m_agents.end(); _agent++) {
             CAgent *agent = (*_agent);
             if (agent->m_active && isNeighbour(agent, radius, angle)) {
                 Vector2d dx(agent->getVelocity());
@@ -160,7 +153,6 @@ Vector2d CAgent::getBordersSteer(int steepness) const {
 ///////////////////////////////////////////////////////////////////
 // CAgent::isNeighbour
 // agent is considered a neighbour if its within radius and inside fov
-// totally naive implementation, major optimizations possible (mipmapping the terrain with respect to agents, caching...)
 ///////////////////////////////////////////////////////////////////
 bool CAgent::isNeighbour(const CAgent *other, float radius, float angle) const {
     if (this == other)
@@ -178,8 +170,23 @@ bool CAgent::isNeighbour(const CAgent *other, float radius, float angle) const {
 ///////////////////////////////////////////////////////////////////
 // CAgent::canSee
 ///////////////////////////////////////////////////////////////////
-bool CAgent::canSee(const CAgent *other) const { // FIXME LOS?
+bool CAgent::canSee(const CAgent *other) const {
     return sqrDistanceTo(other) < m_sight * m_sight;
+}
+
+
+///////////////////////////////////////////////////////////////////
+// CAgent::canKill
+///////////////////////////////////////////////////////////////////
+bool CAgent::canDie() const {
+	return enemiesSurrounding() >= m_enemiesToDie;
+}
+
+///////////////////////////////////////////////////////////////////
+// CAgent::canKill
+///////////////////////////////////////////////////////////////////
+bool CAgent::canKill(const CAgent *other) const { 
+	return (sqrDistanceTo(other) < m_attackZone * m_attackZone) && (enemiesSurrounding() < 2) && other->canDie();
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -193,14 +200,56 @@ void CAgent::setSteer(const Vector2d & steer) {
 }
 
 
+int CAgent::enemiesSurrounding() const
+{
+	int number = 0;
+
+	for (std::list <CAgent* >::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+		CAgent* _agent = *agent;
+
+		if (_agent->GetTeam() != GetTeam() && _agent->m_active) {
+			if (canSee(_agent)) {
+				number++;
+			}
+		}
+	}
+
+
+	return number;
+
+}
+
+int CAgent::enemiesAtAttackDistance() const
+{
+	int number = 0;
+
+	for (std::list <CAgent* >::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+		CAgent* _agent = *agent;
+
+		if (_agent->GetTeam() != GetTeam() && _agent->m_active) {
+			if (_agent->canKill(this)) {
+				number++;
+			}
+		}
+	}
+
+
+	return number;
+
+}
+
 
 void CAgent::Update()
 {
 
 	if (!m_active)
 	{
+		TVirtTime lastFrameTicks = g_game->m_time->lastFrameTicks();
+	//	Vector2d velDiff = this->getSteer()* lastFrameTicks; // m / (s^2) * s = m / s
 
-		respawnTimer--;
+		respawnTimer -= lastFrameTicks;
+
+	//	std::cout
 
 		if (respawnTimer <= 0)
 			initialize(m_pFlagStand->getPosition());
@@ -225,5 +274,22 @@ void CAgent::Die()
 {
 	//LooseFlag();
 	m_active = false;
-	respawnTimer = RESPAWN_SECONDS;
+	respawnTimer = m_respawnSeconds;
+}
+
+
+CAgent * CAgent::findNearestVisibleEnemy() {
+	CAgent *bestAgent = NULL;
+	float bestDist = 1E10;
+	for (std::list <CAgent* >::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
+		CAgent* _agent = *agent;
+		if (_agent->GetTeam() != GetTeam() && _agent->m_active && _agent != this) {
+			float dist = this->distanceTo(_agent);
+			if (dist < bestDist && canSee(_agent)) {
+				bestAgent = _agent;
+				bestDist = dist;
+			}
+		}
+	}
+	return bestAgent;
 }

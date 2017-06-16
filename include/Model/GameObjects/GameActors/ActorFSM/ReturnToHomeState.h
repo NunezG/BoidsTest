@@ -1,6 +1,6 @@
 
-#ifndef FLAGSEEKSTATE_H
-#define FLAGSEEKSTATE_H
+#ifndef RETURNTOHOME_H
+#define RETURNTOHOME_H
 
 //#include "SDL.h"
 #include "Model\GameObjects\GameActors\CharacterFSM.h"
@@ -8,11 +8,11 @@
 
 #include "Model\GameObjects\Flag.h"
 #include "Model\virtualtime.h"
-class CFlagSeekState : public CStateBase
+class CReturnToHomeState : public CStateBase
 {
 public:
 
-	CFlagSeekState(CAgent* owner, CFlag* flag, CFlagStand* stand) :
+	CReturnToHomeState(CAgent* owner, CFlag* flag, CFlagStand* stand) :
 		CStateBase(owner)
 		, m_pTargetFlag(flag)
 		, m_homeStand(stand)

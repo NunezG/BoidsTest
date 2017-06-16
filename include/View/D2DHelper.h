@@ -57,16 +57,15 @@ public:
 
 	static void ShowNum(int num, int size);
 
-
 	static D2D1_RECT_F Rectange(float size, ID2D1SolidColorBrush* color, float x, float y, float angle = 0);
 
 	static void outText(int x, int y, const char * text);
 
-
-	//static void Showtext(const wchar_t* textToShow, int size);
+	static void DebugFrame();
 
 private:
-	
+	static void printText(int x, int y, char *format, ...);
+
 };
 
 

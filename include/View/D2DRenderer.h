@@ -30,7 +30,7 @@ class DemoApp
 {
 public:
     DemoApp();
-   // ~DemoApp();
+   ~DemoApp();
 
     HRESULT Initialize(WNDPROC messageReceiver);
 
@@ -50,8 +50,6 @@ private:
 	CITWindow* ownerWindow;
   
 private:
-   // HWND m_hwnd;
-
 
 };
 

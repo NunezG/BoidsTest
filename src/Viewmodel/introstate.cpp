@@ -95,6 +95,20 @@ void CIntroState::Update()
 	if (alpha < 0)
 		alpha = 0;
 
+	buildFrameConstant();
+	//renderFrame();
+
+	if (!(CD2DHelper::m_pRenderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
+	{
+		CD2DHelper::m_pRenderTarget->BeginDraw();
+
+		Draw(CD2DHelper::m_pRenderTarget);
+
+		//CD2DHelper::DebugFrame();
+
+		CD2DHelper::m_pRenderTarget->EndDraw();
+	}
+
 //	SDL_SetAlpha(fader, SDL_SRCALPHA, alpha);
 }
 

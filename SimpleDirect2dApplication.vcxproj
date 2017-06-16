@@ -202,27 +202,21 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PredatorPrey\chase.cpp" />
     <ClCompile Include="PredatorPrey\flee.cpp" />
     <ClCompile Include="PredatorPrey\graze.cpp" />
-    <ClCompile Include="PredatorPrey\ieexec.cpp" />
-    <ClCompile Include="PredatorPrey\predator.cpp" />
-    <ClCompile Include="PredatorPrey\prey.cpp" />
-    <ClCompile Include="PredatorPrey\seesenemy.cpp" />
     <ClCompile Include="src\GameStart.cpp" />
     <ClCompile Include="src\Model\game.cpp" />
     <ClCompile Include="src\Model\GameObjects\Flag.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\AttackState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\EscapeState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.cpp" />
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\ReturntoHomeState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\agent.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\Antelope.cpp" />
-    <ClCompile Include="src\Model\GameObjects\GameActors\Character.cpp" />
+    <ClCompile Include="src\Model\GameObjects\GameActors\CharacterFSM.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\GameObject.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\Lion.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\StartPosition.cpp" />
-    <ClCompile Include="src\Model\GameObjects\ObjectManager.cpp" />
-    <ClCompile Include="src\Model\GameObjects\TeamObject.cpp" />
     <ClCompile Include="src\Model\virtualtime.cpp" />
     <ClCompile Include="src\Viewmodel\endGameState.cpp" />
     <ClCompile Include="src\Viewmodel\GameStatesManager.cpp" />
@@ -232,7 +226,6 @@
     <ClCompile Include="src\Viewmodel\playstate.cpp" />
     <ClCompile Include="src\View\D2DHelper.cpp" />
     <ClCompile Include="src\View\D2DRenderer.cpp" />
-    <ClCompile Include="src\View\gfx.cpp" />
     <ClCompile Include="src\View\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -240,19 +233,16 @@
     <ClInclude Include="include\Model\game.h" />
     <ClInclude Include="include\Model\GameObjects\Flag.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\AttackState.h" />
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\CharacterFSM.h" />
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\characterState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\EscapeState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h" />
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\ReturnToHomeState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\stateBase.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\agent.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\Antelope.h" />
-    <ClInclude Include="include\Model\GameObjects\GameActors\Character.h" />
+    <ClInclude Include="include\Model\GameObjects\GameActors\CharacterFSM.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\GameObject.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\Lion.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\StartPosition.h" />
-    <ClInclude Include="include\Model\GameObjects\ObjectManager.h" />
-    <ClInclude Include="include\Model\GameObjects\TeamObject.h" />
     <ClInclude Include="include\Model\virtualtime.h" />
     <ClInclude Include="include\Viewmodel\endGameState.h" />
     <ClInclude Include="include\Viewmodel\gameManager.h" />
@@ -265,13 +255,8 @@
     <ClInclude Include="include\View\D2DHelper.h" />
     <ClInclude Include="include\View\D2DRenderer.h" />
     <ClInclude Include="include\View\Window.h" />
-    <ClInclude Include="PredatorPrey\chase.h" />
     <ClInclude Include="PredatorPrey\flee.h" />
     <ClInclude Include="PredatorPrey\graze.h" />
-    <ClInclude Include="PredatorPrey\ieexec.h" />
-    <ClInclude Include="PredatorPrey\predator.h" />
-    <ClInclude Include="PredatorPrey\prey.h" />
-    <ClInclude Include="PredatorPrey\seesenemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

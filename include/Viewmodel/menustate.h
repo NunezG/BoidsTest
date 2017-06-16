@@ -5,7 +5,7 @@
 //#include "SDL.h"
 #include "gamestate.h"
 
-class CMenuState : public CGameState
+class CPauseState : public CGameState
 {
 public:
 	void Init();
@@ -19,7 +19,7 @@ public:
 	void Draw(ID2D1HwndRenderTarget* renderTarget);
 	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
 
-	static CMenuState* Instance() {
+	static CPauseState* Instance() {
 		return &m_MenuState;
 	}
 
@@ -28,10 +28,10 @@ public:
 	int buildFramePeriodic() { return 0; }
 
 protected:
-	CMenuState() { }
+	CPauseState() { }
 
 private:
-	static CMenuState m_MenuState;
+	static CPauseState m_MenuState;
 
 	//SDL_Surface* bg;
 };

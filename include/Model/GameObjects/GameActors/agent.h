@@ -5,7 +5,7 @@
 //#include "game.h"
 #include "Model\virtualtime.h"
 
-#include "Model\GameObjects\GameActors\Character.h"
+#include "Model\GameObjects\GameActors\CharacterFSM.h"
 
 #include "Model\game.h"
 
@@ -17,17 +17,18 @@
 class CAgent : public CGameObject {
 
 private:
-	const float DETECTION_RADIUS = 5.0f;
-	const float RESPAWN_SECONDS = 5;
 	float respawnTimer;
-
 	Vector2d m_steer;
 	Vector2d m_velocity;
 protected:
-	float m_walkSpeed;
 	float m_sight;
+	float m_attackZone;
 	float m_maxSpeed;
+	float m_respawnSeconds;
+	int m_enemiesToDie;
+
 	CAgent *m_enemy;
+
 public:
 	CAgent(CFlagStand* TeamStand, CFlag* enemyFlag) :
 		CGameObject(TeamStand->getPosition(), TeamStand->GetTeam())
@@ -80,7 +81,6 @@ public:
 	// agent status query routines; no changes allowed (consts)
 	float getMaxSpeed() const { return m_maxSpeed; }
 	float getSpeed() const { return m_velocity.length(); }
-	float getWalkSpeed() const { return m_walkSpeed; }
 	Vector2d getSteer() const { return m_steer; }
 	
 	Vector2d getVelocity() const { return m_velocity; }
@@ -88,9 +88,11 @@ public:
 	Vector2d getSeparationSteer(float, float) const;
 	Vector2d getAlignmentSteer(float, float) const;
 	Vector2d getBordersSteer(int) const;
-	float distanceTo(const CAgent *other) const { return agentDistance(this, other); }
-	float sqrDistanceTo(const CAgent *other) const { return sqrAgentDistance(this, other); }
+	
 	bool canSee(const CAgent *other) const;
+	bool canKill(const CAgent *other) const;
+	int enemiesSurrounding() const;
+
 	bool isNeighbour(const CAgent *other, float radius, float angle) const;
 	CAgent * getEnemy() const { return m_enemy; }
 
@@ -98,6 +100,17 @@ public:
 	CFlag* m_TargetFlag;
 
 	CCharacterFSM* m_brain;
+
+	EObjectType objectType()
+	{
+		return EObjectType::Agent;
+	}
+
+	CAgent * findNearestVisibleEnemy();
+
+	bool canDie() const;
+	int enemiesAtAttackDistance() const;
+
 
 };
 ///////////////////////////////////////////////////////////////////

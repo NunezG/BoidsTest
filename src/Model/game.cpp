@@ -10,10 +10,9 @@
 #include <cstdlib>
 
 #include "Model\virtualtime.h"
-#include "prey.h"
-#include "predator.h"
 #include "Model\game.h"
-#include "Model\GameObjects\ObjectManager.h"
+#include "Model\GameObjects\GameActors\Antelope.h"
+#include "Model\GameObjects\GameActors\Lion.h"
 
 #include "Viewmodel\GameStatesManager.h"
 
@@ -27,21 +26,54 @@ CGame * g_game;
 // CGame::CGame
 // initialize everything (timers, speeds) to zero
 ///////////////////////////////////////////////////////////////////
-CGame::CGame(int granularity, int preyNum, int predatorNum) {
+CGame::CGame() : gammeFinished(false) 
+{
+	counter[0] = 0;
+	counter[1] = 0;
+
 	m_time = new CVirtualTime();
 	//m_world = new CWorld(granularity);
 	srand((unsigned int)(m_time->timeNow())); // first world ^ is always identical
-/*
-	for (int i = 0; i < preyNum; i++)
-		registerAgent(new CPrey());
-	for (int i = 0; i < predatorNum; i++)
-		registerAgent(new CPredator());
-*/
+
 	m_framesBuiltPS = m_framesRenderedPS = 0;
 	m_lastFramesRendered = m_framesRendered = 0;
 	m_lastFramesBuilt = m_framesBuilt = 0;
 	m_periodTimer.initialize(m_time);
 	m_lastSec = m_time->timeNow();
+
+	int flags = 0;
+	
+
+	stands[0] = CFlagStand(Vector2d(120.0f, 130.0f), antelopesTeam);
+	stands[1] = CFlagStand(Vector2d(600.0f, 160.0f), lionsTeam);
+
+	//initialize flag
+	m_pFlags[0] = new CFlag(antelopesTeam, &stands[1], &stands[0]);
+
+	m_pFlags[1] = new CFlag(lionsTeam, &stands[0], &stands[1]);
+
+	// Each particle points to the next.
+	int i;
+	for (i = 0; i < ANTELOPES_NUMBER; i++)
+	{
+		printf("Add antelope \n");
+
+
+		registerAgent(ETeam::antelopesTeam);
+
+
+		//	m_oCharacters[i] = new CCharacterFSM(stands[0], m_pFlags[1]);
+
+	}
+
+	for (; i < POOL_NUMBER; i++)
+	{
+		printf("Add lion \n");
+
+		registerAgent(ETeam::lionsTeam);
+
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -50,7 +82,10 @@ CGame::CGame(int granularity, int preyNum, int predatorNum) {
 ///////////////////////////////////////////////////////////////////
 CGame::~CGame() {
 
-	delete m_world;
+	for (std::list <CAgent *>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++)
+		delete (*agent);
+	m_agents.clear();
+
 	delete m_time;
 }
 
@@ -81,48 +116,167 @@ void CGame::Tick()
 
 	TRealTime now = m_time->timeNow();
 
-
-
-	if (getDesiredFramesDone(now, s_fps) > getRenderedSinceSecond()) {
-		m_periodTimer.startPeriod(PERIOD_RENDER);
-		//printf("NEW FRAME!!!");
-		newFrame();
-		CGameStatesManager::buildFrameConstant();
-		//renderFrame();
-
-		if (!(CD2DHelper::m_pRenderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
-		{
-			CD2DHelper::m_pRenderTarget->BeginDraw();
-
-			CGameStatesManager::Draw(CD2DHelper::m_pRenderTarget);
-
-			renderFrame();
-
-			CD2DHelper::m_pRenderTarget->EndDraw();
-		}
-
-		m_periodTimer.startPeriod(PERIOD_IDLE);
-	}
-
-
 	if (getDesiredFramesDone(now, s_bps) > getBuiltSinceSecond()) {
 		//	printf("NEW BUILD!!!");
 
 		m_periodTimer.startPeriod(PERIOD_BUILD);
 		newBuild();
-		CGameStatesManager::buildFramePeriodic();
-
-		CGameStatesManager::Update();
 
 
-		m_periodTimer.startPeriod(PERIOD_IDLE);
+
+		for (std::list <CAgent*>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++) {
+			CAgent *_agent = (*agent);
+
+			if (_agent->m_active)
+			{
+				_agent->processAgentPeriodic();
+
+				if (CheckIfDead(_agent))
+				{
+					//nearEnemy->ReceiveFlag(character->getFlag());
+
+					_agent->Die();
+
+				}
+
+			}else 
+				(_agent)->Update();
+
+
+				
+		}
+
+		
+
+
+	//	CGameStatesManager::Update();
 	}
 
 	updateFPS(now);
 
+	//	g_game->Update();
 
-	//	newFrame();
-	//	CObjectManager::buildFrameConstant();
+
+	if (m_pFlags[0]->pointRule())
+	{
+		counter[0]++;
+		m_pFlags[0]->setOwner(&stands[1]);
+		printf("Antelopes COUNTER: \n");
+
+		//printf((char*)counter[0]);
+
+		//printf(" \n");
+	}
+
+	if (m_pFlags[1]->pointRule())
+	{
+
+		counter[1]++;
+		m_pFlags[1]->setOwner(&stands[0]);
+		printf("Lions COUNTER: \n");
+		//printf((char*)counter[0]);
+		//printf(" \n");
+	}
+
+
+
+	//This manager will check for flag ownership
+
+
+
+
+	//End Game rule
+	if (counter[0] >= 5 || counter[1] >= 5)
+	{
+		gammeFinished = true;
+
+	}
+
 
 
 }
+
+
+
+bool CGame::CheckIfDead(CAgent* character)
+{
+	bool canKill = false;
+	
+	CAgent* nearEnemy;
+
+	for (std::list <CAgent*>::iterator agent = m_agents.begin(); agent != m_agents.end(); agent++) {
+		CAgent *_agent = (*agent);
+
+		if (_agent->m_active &&_agent->GetTeam() != character->GetTeam())
+		{
+
+		//	float deltaX = (character->getPosX() - _agent->getPosX());
+		//	float deltaY = (character->getPosY() - _agent->getPosY());
+
+
+		//	double distance = sqrt((deltaX * deltaX) - (deltaY * deltaY));
+
+			if (_agent->canKill(character)) {
+				
+
+				canKill = true;
+				nearEnemy = _agent;
+			}
+		}
+
+	}
+
+	if (character->IsOfTeam(ETeam::lionsTeam) && canKill)
+	{
+		if (m_pFlags[1]->getOwner() == character)
+		{
+			//drop flag
+			m_pFlags[1]->setOwner(nearEnemy);
+
+		}
+
+
+		return true;
+
+	}
+
+	else if (character->IsOfTeam(ETeam::antelopesTeam) && canKill)
+	{
+		if (m_pFlags[0]->getOwner() == character)
+		{
+			//drop flag
+			m_pFlags[0]->setOwner(nearEnemy);
+		}
+
+		return true;
+	}
+
+	return canKill;
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+// CGame::registerAgent
+// register agent for the simulation
+///////////////////////////////////////////////////////////////////
+int CGame::registerAgent(ETeam team) {
+
+	if (team == antelopesTeam)
+	{
+
+		m_agents.push_back(new CAntelope(&stands[0], m_pFlags[0]));
+	}
+	else
+	{
+
+		m_agents.push_back(new CLion(&stands[1], m_pFlags[1]));
+
+	}
+
+	//static_cast<CAgent&>(m_agents.back()).initialize(TeamStand->getPosition());
+	return 0;
+}
+

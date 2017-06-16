@@ -2,9 +2,6 @@
 #ifndef GAMEOBJECR_H
 #define GAMEOBJECR_H
 
-#include "Model\GameObjects\TeamObject.h"
-#include "Model\GameObjects\Flag.h"
-
 //#include "../Renderer/D2DHelper.h"
 #include "Model\agentbrainlib.h"
 //#include <vector>
@@ -17,8 +14,21 @@
 
 //class CGameState;
 
+enum EObjectType 
+{
+	Flag,
+	Agent,
+	Stand
+};
 
-class CGameObject : public CTeamObject
+enum ETeam
+{
+	lionsTeam,
+	antelopesTeam
+};
+
+
+class CGameObject 
 {
 protected:
 	Vector2d m_position;
@@ -26,8 +36,8 @@ protected:
 public:
 	
 	CGameObject(Vector2d position, ETeam team) :
-		CTeamObject(team),
-		m_position(position)
+		m_eObjectTeam(team)
+	, m_position(position)
 	{
 		
 	}
@@ -39,16 +49,23 @@ public:
 	// static routines
 	static float agentDistance(const CGameObject *agent1, const CGameObject *agent2) { return (agent1->getPosition() - agent2->getPosition()).length(); }
 	static float sqrAgentDistance(const CGameObject *agent1, const CGameObject *agent2) { return (agent1->getPosition() - agent2->getPosition()).sqrLength(); }
-
+	float distanceTo(const CGameObject *other) const { return agentDistance(this, other); }
+	float sqrDistanceTo(const CGameObject *other) const { return sqrAgentDistance(this, other); }
 //	bool IsAtStartLocation() const;
 	
-	
+	virtual EObjectType objectType() = 0;
+
+	void SetTeam(ETeam team) { m_eObjectTeam = team; }
+	ETeam GetTeam() const { return m_eObjectTeam; }
+
+	bool IsOfTeam(ETeam team) const { return m_eObjectTeam == team; }
 
 protected:
 
 
 	float m_fCollisionRadius;
 
+	ETeam m_eObjectTeam;
 
 
 };

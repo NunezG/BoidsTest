@@ -3,7 +3,6 @@
 #define ATTACKSTATE_H
 
 //#include "SDL.h"
-#include "characterState.h"
 #include "../agent.h"
 
 

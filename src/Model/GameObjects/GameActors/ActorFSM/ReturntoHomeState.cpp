@@ -1,4 +1,4 @@
-#include "Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h"
+#include "Model\GameObjects\GameActors\ActorFSM\ReturnToHomeState.h"
 #include "Model\GameObjects\GameActors\ActorFSM\AttackState.h"
 
 #include "Model\GameObjects\GameActors\ActorFSM\EscapeState.h"
@@ -11,32 +11,32 @@
 #include "Model\game.h"
 
 
-void CFlagSeekState::Init()
+void CReturnToHomeState::Init()
 {
 	
-	printf("CFlagSeekState Init\n");
+	printf("CReturnToHomeState Init\n");
 
 }
 
-void CFlagSeekState::Cleanup()
+void CReturnToHomeState::Cleanup()
 {
 //	SDL_FreeSurface(bg);
 //	SDL_FreeSurface(fader);
 
-	printf("CFlagSeekState Cleanup\n");
+	printf("CReturnToHomeState Cleanup\n");
 }
 
-void CFlagSeekState::Pause()
+void CReturnToHomeState::Pause()
 {
-	//printf("CFlagSeekState Pause\n");
+	//printf("CReturnToHomeState Pause\n");
 }
 
-void CFlagSeekState::Resume()
+void CReturnToHomeState::Resume()
 {
-	printf("CFlagSeekState Resume\n");
+	printf("CReturnToHomeState Resume\n");
 }
 
-void CFlagSeekState::Update()
+void CReturnToHomeState::Update()
 {
 
 	bool enemysurrounding = false;
@@ -45,39 +45,20 @@ void CFlagSeekState::Update()
 
 	CAgent* nearEnemy;
 
-
-	if (m_Owner->enemiesSurrounding() >= 2)
-	{
-		m_Owner->setEnemy(m_Owner->findNearestVisibleEnemy());
-		CEscapeState* state = new CEscapeState(m_Owner);
-		m_Owner->m_brain->PushState(state);
-
-		return;
-	}
-
-
-
 	for (std::list <CAgent*>::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++) {
 		CAgent* _agent = static_cast<CAgent*>((*agent));
 
-		if (_agent->m_active && !_agent->IsOfTeam(m_Owner->GetTeam()))
+		if (_agent->m_active)
 		{
 
-			if (_agent->canDie())
-			{
-				m_Owner->setEnemy(_agent);
-				CAttackState* state = new CAttackState(m_Owner, _agent);
-				m_Owner->m_brain->PushState(state);
-
-			}
-		//	float distance = (m_Owner->getPosition() - _agent->getPosition()).length();
+			float distance = (m_Owner->getPosition() - _agent->getPosition()).length();
 
 		//	float deltaX = (((CGameObject*)m_Owner)->getPosX() - _agent.getPosX());
 		//	float deltaY = (((CGameObject*)m_Owner)->getPosY() - _agent.getPosY());
 
 
 			//double distance = sqrt((deltaX * deltaX) - (deltaY * deltaY));
-		//	Vector2d position = _agent->getPosition();
+			Vector2d position = _agent->getPosition();
 
 /*
 			std::cout << "(OWNERRR  " << distance << std::endl;
@@ -92,27 +73,41 @@ void CFlagSeekState::Update()
 			std::cout << "4  " << (int)_agent->getPosX() << std::endl;
 			std::cout << "5  " << (int)position.m_x << std::endl;
 			*/
-			
+			if (_agent->GetTeam() == m_Owner->GetTeam())
+			{
+	
 
-/*
+				if (distance < 20) {
+				//	printf("C AGENT SURROUNDING\n");
+
+					friendsSurrounding++;
+					//newDirection(m_minDirTick);
+				//	return;
+
+				}
+			}
+			else
+			{
+
+
 
 				if (distance < 20) {
 					
 
 					
-			//		printf("C ENEMY SURROUNDING\n");
+					printf("C ENEMY SURROUNDING\n");
 
 					enemysurrounding = true;
 					nearEnemy = _agent;
 					m_Owner->setEnemy(_agent);
-					//CEscapeState* state = new CEscapeState(m_Owner);
-					//m_Owner->m_brain->PushState(state);
+					CEscapeState* state = new CEscapeState(m_Owner);
+					m_Owner->m_brain->PushState(state);
 
 					//	newDirection(m_minDirTick);
 					return;
 				}
 
-			*/
+			}
 		}
 
 
@@ -131,29 +126,25 @@ void CFlagSeekState::Update()
 			//TEAM HAS FLAG
 			CFlagStand* stand = m_Owner->getFlagStand();
 
-			
-			objecive = stand->getPosition();
-
-		//	if (g_game->stands[0].IsOfTeam(m_Owner->GetTeam()))
-		//		objecive = g_game->stands[0].getPosition();
-
+			objecive = g_game->stands[0].getPosition();
 				//((CGameObject*)m_homeStand)->getPosition();
 
 
 		}
 		else {
 			//
-			if (((m_pTargetFlag->getOwner())->getPosition() - m_Owner->getPosition()).length() < 10)
+			if ((m_pTargetFlag->getOwner())->IsOfTeam(m_Owner->GetTeam()))
 			{
+				//flag lost
 
 				//m_pTargetFlag->getOwner()->LooseFlag();
-				m_pTargetFlag->setOwner(m_Owner);
+				//m_pTargetFlag->setOwner(m_Owner);
 			//	((CGameObject*)m_Owner)->ReceiveFlag(m_pTargetFlag);
 
 
 			}
 
-			 objecive = m_pTargetFlag->getOwner()->getPosition();
+			// objecive = m_pTargetFlag->getOwner()->getPosition();
 
 		}
 
@@ -228,5 +219,4 @@ void CFlagSeekState::Update()
 
 	
 }
-
 

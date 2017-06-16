@@ -1,4 +1,4 @@
-#include "Model\GameObjects\GameActors\Character.h"
+#include "Model\GameObjects\GameActors\CharacterFSM.h"
 
 #include "Model\GameObjects\Flag.h"
 #include "Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h"

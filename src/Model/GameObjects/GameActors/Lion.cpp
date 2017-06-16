@@ -8,10 +8,12 @@ CLion::CLion(CFlagStand* TeamStand, CFlag* enemyFlag) :
 	CAgent(TeamStand, enemyFlag)
 {
 	initialize(TeamStand->getPosition());
+	m_enemiesToDie = 3;
 
-	m_sight = 400.0f;
-	m_walkSpeed = 0.60f;
-	setMaxSpeed(10000.0f);
+	m_respawnSeconds = 4;
+	m_sight = 50.0f;
+	m_attackZone = 10.0f;
+	setMaxSpeed(5.0f);
 
 	//m_sight = 0.25f;
 	//m_walkSpeed = 0.08f;

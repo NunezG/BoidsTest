@@ -27,10 +27,8 @@ public:
 	static CPlayState* Instance() {
 		return &m_PlayState;
 	}
-	void CreateFlag();
 
 	void buildFrameConstant();
-	int buildFramePeriodic();
 
 protected:
 	CPlayState() { }
@@ -44,9 +42,10 @@ private:
 
 	ID2D1SolidColorBrush*	m_pAntelopeFlagColor;
 	ID2D1SolidColorBrush*	m_pLionFlagColor;
-	ID2D1PathGeometry *m_pPathGeometry;
+//	ID2D1PathGeometry *m_pPathGeometry;
 
-	int counter[2];
+
+	float s_speed = 10.f; // initial simulation speed
 
 //	SDL_Surface* bg;
 };

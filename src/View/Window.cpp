@@ -3,9 +3,7 @@
 #include "View\D2DRenderer.h"
 
 HRESULT CITWindow::CreateGameWindow(WNDPROC messageReceiver)
-{
-
-	
+{	
 		// Register the window class.
 		WNDCLASSEX wcex = { sizeof(WNDCLASSEX) };
 		wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -50,11 +48,6 @@ HRESULT CITWindow::CreateGameWindow(WNDPROC messageReceiver)
 		return hr;
 }
 
-
-
-
-
-
 void CITWindow::OnResize(
 	UINT width,
 	UINT height
@@ -71,6 +64,4 @@ void CITWindow::OnResize(
 		// EndDraw.
 		CD2DHelper::m_pRenderTarget->Resize(size);
 	}
-
-
 }

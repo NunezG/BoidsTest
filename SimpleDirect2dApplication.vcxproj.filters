@@ -79,17 +79,8 @@
     <ClCompile Include="src\Model\game.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\ObjectManager.cpp">
-      <Filter>Source Files\Model\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\TeamObject.cpp">
-      <Filter>Source Files\Model\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="src\Model\GameObjects\Flag.cpp">
       <Filter>Source Files\Model\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\Character.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\GameObjects\GameActors\GameObject.cpp">
       <Filter>Source Files\Model\GameObjects\GameActors</Filter>
@@ -133,29 +124,17 @@
     <ClCompile Include="src\Viewmodel\endGameState.cpp">
       <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
-    <ClCompile Include="src\View\gfx.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\chase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PredatorPrey\flee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PredatorPrey\graze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PredatorPrey\ieexec.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\ReturntoHomeState.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClCompile>
-    <ClCompile Include="PredatorPrey\predator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\prey.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PredatorPrey\seesenemy.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Model\GameObjects\GameActors\CharacterFSM.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,12 +156,6 @@
     <ClInclude Include="include\Model\agentbrainlib.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\ObjectManager.h">
-      <Filter>Header Files\Model\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\TeamObject.h">
-      <Filter>Header Files\Model\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="include\Model\GameObjects\Flag.h">
       <Filter>Header Files\Model\GameObjects</Filter>
     </ClInclude>
@@ -190,9 +163,6 @@
       <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
     <ClInclude Include="include\Model\GameObjects\GameActors\Antelope.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\Character.h">
       <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
     <ClInclude Include="include\Model\GameObjects\GameActors\GameObject.h">
@@ -203,12 +173,6 @@
     </ClInclude>
     <ClInclude Include="include\Model\GameObjects\GameActors\StartPosition.h">
       <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\CharacterFSM.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\characterState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\EscapeState.h">
       <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
@@ -246,26 +210,17 @@
     <ClInclude Include="include\Viewmodel\gamestate.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\chase.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PredatorPrey\flee.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="PredatorPrey\graze.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\ieexec.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\ReturnToHomeState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\predator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PredatorPrey\prey.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PredatorPrey\seesenemy.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\Model\GameObjects\GameActors\CharacterFSM.h">
+      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

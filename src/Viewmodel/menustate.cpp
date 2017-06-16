@@ -1,9 +1,9 @@
 
 #include "Viewmodel\menustate.h"
 
-CMenuState CMenuState::m_MenuState;
+CPauseState CPauseState::m_MenuState;
 
-void CMenuState::Init()
+void CPauseState::Init()
 {
 	resourcesCreated = false;
 
@@ -13,28 +13,37 @@ void CMenuState::Init()
 
 //	SDL_FreeSurface(temp);
 
-	printf("CMenuState Init\n");
+	printf("CPauseState Init\n");
 }
 
-void CMenuState::Cleanup()
+void CPauseState::Cleanup()
 {
 //	SDL_FreeSurface(bg);
 
-	printf("CMenuState Cleanup\n");
+	printf("CPauseState Cleanup\n");
 }
 
-void CMenuState::Pause()
+void CPauseState::Pause()
 {
-	printf("CMenuState Pause\n");
+	printf("CPauseState Pause\n");
 }
 
-void CMenuState::Resume()
+void CPauseState::Resume()
 {
-	printf("CMenuState Resume\n");
+	printf("CPauseState Resume\n");
 }
 
-void CMenuState::HandleEvents(UINT message)
+void CPauseState::HandleEvents(UINT message)
 {
+
+	switch (message)
+	{
+	case WM_KEYDOWN:
+		CGameStatesManager::PopState();
+		break;
+
+
+	}
 
 //	SDL_Event event;
 
@@ -55,12 +64,12 @@ void CMenuState::HandleEvents(UINT message)
 //	}
 }
 
-void CMenuState::Update() 
+void CPauseState::Update() 
 {
 
 }
 
-void CMenuState::Draw(ID2D1HwndRenderTarget* renderTarget)
+void CPauseState::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
 //	SDL_BlitSurface(bg, NULL, game->screen, NULL);
 //	SDL_UpdateRect(game->screen, 0, 0, 0, 0);
@@ -68,7 +77,7 @@ void CMenuState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 
 
-void CMenuState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
+void CPauseState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 {
 
 

@@ -26,7 +26,10 @@ public:
 
 	}
 
-
+	EObjectType objectType()
+	{
+		return EObjectType::Stand;
+	}
 private:
 
 

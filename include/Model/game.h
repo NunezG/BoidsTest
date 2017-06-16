@@ -1,20 +1,19 @@
 #ifndef _game_h_
 #define _game_h_
 
+#include <list>
 #include <assert.h>
 #include "virtualtime.h"
 #include "GameObjects\GameActors\StartPosition.h"
 #include "GameObjects\Flag.h"
 
 
-class CWorld;
+//class CWorld;
 class CVirtualTime;
 class CAgent;
 class CGame;
 
 extern CGame *g_game;
-
-
 
 #define M_PIf 3.14159265358979323846f
 
@@ -32,8 +31,6 @@ enum EPeriod {
 	PERIOD_RENDER,
 	PERIOD_NUM // must stay last
 };
-
-
 
 
 class CTimer {
@@ -75,6 +72,11 @@ public:
 
 class CGame {
 protected:
+	// the stack of states
+	const int LIONS_NUMBER = 5;
+	const int ANTELOPES_NUMBER = 30;
+	const int POOL_NUMBER = LIONS_NUMBER + ANTELOPES_NUMBER;
+
 	TRealTime m_lastSec;
 	unsigned int m_lastFramesRendered;
 	unsigned int m_lastFramesBuilt;
@@ -85,26 +87,45 @@ public:
 	float m_framesRenderedPS;
 	CTimer m_periodTimer;
 	CVirtualTime *m_time;
-	CWorld *m_world;
 
-	CGame(int granularity, int preyNum, int predatorNum);
+	CGame();
 	~CGame();
 	void newFrame() { m_time->newFrame(); m_framesRendered++; }
 	void newBuild() { m_framesBuilt++; }
 	TRealTime getTimeElapsedSinceSecond(TRealTime now) const { return now - m_lastSec; }
-	unsigned int getRenderedSinceSecond() const { return m_framesRendered - m_lastFramesRendered; }
 	unsigned int getBuiltSinceSecond() const { return m_framesBuilt - m_lastFramesBuilt; }
+
+	unsigned int getRenderedSinceSecond() const { return m_framesRendered - m_lastFramesRendered; }
 	unsigned int getDesiredFramesDone(TRealTime now, unsigned int fps) const { return (unsigned int)(getTimeElapsedSinceSecond(now) * fps); }
 
-	void renderFrame(); // defined in gfx.cpp
 	int buildFrame();
 	int updateFPS(TRealTime now);
-
-
 
 	void Tick();
 
 	
+	int counter[2];
+
+
+	void Init();
+
+	void Cleanup();
+	void Update();
+
+
+	bool CheckIfDead(CAgent* character);
+
+	int updateAI(TRealTime maxTime);
+
+
+	std::list <CAgent* > m_agents;
+	CFlagStand stands[2];
+	CFlag* m_pFlags[2];
+
+	int registerAgent(ETeam team);
+
+	bool gammeFinished;
+
 };
 
 #endif

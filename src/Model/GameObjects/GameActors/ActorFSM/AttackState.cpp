@@ -4,6 +4,7 @@
 void CAttackState::Init()
 {
 	
+	printf("CAttackState Init\n");
 
 
 }
@@ -28,6 +29,14 @@ void CAttackState::Resume()
 
 void CAttackState::Update()
 {
+
+	if (m_Owner->enemiesSurrounding() >= 2)
+	{		
+		m_Owner->m_brain->PopState();
+
+		return;
+	}
+
 	CAgent *nmy = m_Owner->getEnemy();
 
 //	assert(nmy != NULL);
@@ -43,6 +52,9 @@ void CAttackState::Update()
 	desiredVel = desiredVel + nmy->getVelocity() * timeTaken;
 	}
 	*/
+
+	
+
 	Vector2d steer = desiredVel;
 	steer.stretchTo(10000.0f);
 	m_Owner->setSteer(steer);

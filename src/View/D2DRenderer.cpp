@@ -36,8 +36,8 @@ DemoApp::DemoApp()// :
 //
 // Release resources.
 //
-//DemoApp::~DemoApp()
-//{
+DemoApp::~DemoApp()
+{
     //SafeRelease(&m_pD2DFactory);
    // SafeRelease(&m_pWICFactory);
   //  SafeRelease(&m_pDWriteFactory);
@@ -50,7 +50,7 @@ DemoApp::DemoApp()// :
     SafeRelease(&m_pBitmap);
     SafeRelease(&m_pAnotherBitmap);
 	*/
-//}
+}
 
 
 //

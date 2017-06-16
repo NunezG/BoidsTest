@@ -7,9 +7,12 @@
 CAntelope::CAntelope(CFlagStand* TeamStand, CFlag* enemyFlag) : CAgent(TeamStand, enemyFlag)  {
 	initialize(TeamStand->getPosition());
 
-	m_sight = 400.0f;
-	m_walkSpeed = 0.60f;
-	setMaxSpeed(10000.0f);
+	m_enemiesToDie = 1;
+
+	m_sight = 50.0f;
+	m_attackZone = 20.0f;
+	m_respawnSeconds =1;
+	setMaxSpeed(10.0f);
 	//m_sight = 0.2f;
 	//m_walkSpeed = 0.15f;
 	

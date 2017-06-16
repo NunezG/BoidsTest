@@ -141,16 +141,3 @@ void CGameStatesManager::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarg
 
 }
 
-void CGameStatesManager::buildFrameConstant()
-{
-	// let the state update the game
-	if (states.size() > 0)
-		states.back()->buildFrameConstant();
-}
-
-void CGameStatesManager::buildFramePeriodic()
-{
-	// let the state update the game
-	if (states.size() > 0)
-		states.back()->buildFramePeriodic();
-}

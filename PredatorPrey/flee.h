@@ -3,11 +3,10 @@
 #ifndef _flee_h_
 #define _flee_h_
 
-#include "ieexec.h"
+#include "Model\GameObjects\GameActors\agent.h"
 
-class CAgent;
 
-class Flee : public IEExec {
+class Flee  {
 
 public:
     Flee();

@@ -2,11 +2,11 @@
 #ifndef _graze_h_
 #define _graze_h_
 
-#include "ieexec.h"
 
 class CPrey;
+#include "Model\GameObjects\GameActors\agent.h"
 
-class Graze : public IEExec {
+class Graze  {
 public:
     Graze();
     void init   ( CAgent * owner );

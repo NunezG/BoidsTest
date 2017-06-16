@@ -1,5 +1,5 @@
 #include "Model\GameObjects\GameActors\ActorFSM\EscapeState.h"
-#include "Model\GameObjects/GameActors/Character.h"
+#include "Model\GameObjects/GameActors/CharacterFSM.h"
 
 
 
@@ -33,18 +33,43 @@ void CEscapeState::Resume()
 
 void CEscapeState::Update()
 {
+	if (m_Owner->enemiesSurrounding() < 2)
+	{
+		m_Owner->m_brain->PopState();
+
+		return;
+	}
+
+
 	CAgent *nmy = m_Owner->getEnemy();
-//	assert(nmy != NULL);
-	
-		if (g_game->m_time->tickNow() > m_dirTick) {
-			if (nmy->m_active && m_Owner->canSee(nmy))
-				newDirection(m_minDirTick);
-			else {
-				newDirection(5 * m_minDirTick); // keep running for a while, just in case
-				m_Owner->m_done = true;
-			}
-		}
-	
+
+	//	assert(nmy != NULL);
+	//	nmy->m_marked = true;
+	//	if (!nmy->m_active || !m_Owner->canSee(nmy))  // target got away
+	//		return false;
+
+	Vector2d desiredVel = m_Owner->getPosition() - nmy->getPosition();
+	//intercept
+	/*
+	if (m_owner->getSpeed() > 0.001f) {
+	float timeTaken = desiredVel.length() / m_owner->getSpeed();
+	desiredVel = desiredVel + nmy->getVelocity() * timeTaken;
+	}
+	*/
+
+
+
+	Vector2d borders = m_Owner->getBordersSteer(1);
+	//        borders.normalize();
+
+
+	borders.scale(0.1f);
+
+	Vector2d steer = desiredVel;
+
+	steer.stretchTo(10000.0f);
+
+	m_Owner->setSteer(steer);
 
 
 

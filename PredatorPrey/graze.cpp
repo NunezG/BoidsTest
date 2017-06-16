@@ -9,7 +9,6 @@
 #include <iostream>
 
 #include "graze.h"
-#include "prey.h"
 #include "Model\virtualtime.h"
 
 Graze::Graze() {
@@ -22,19 +21,18 @@ void Graze::init ( CAgent * owner ) {
 }
 
 bool Graze::start () {
-    m_state = Go;
-    m_owner->setMaxSpeed(m_owner->getWalkSpeed());
+//    m_owner->setMaxSpeed(m_owner->getWalkSpeed());
     return false;
 }
 
 void outvec(const std::string &name, const Vector2d &vec) {
-    std::cout << name << ": " << vec.m_x << " " << vec.m_y << std::endl;
+   // std::cout << name << ": " << vec.m_x << " " << vec.m_y << std::endl;
 }
 
 bool Graze::update () {
-    switch ( m_state ) {
-    case Go:
-        Vector2d separation = m_owner->getSeparationSteer(0.1f, 0.6f * M_PIf);
+  //  switch ( m_state ) {
+  //  case Go:
+ /*       Vector2d separation = m_owner->getSeparationSteer(0.1f, 0.6f * M_PIf);
         //separation.normalize();
         Vector2d cohesion = m_owner->getCohesionSteer(0.1f, 0.6f * M_PIf);
         cohesion.normalize();
@@ -52,11 +50,11 @@ bool Graze::update () {
   //      food.scale(1.3f);
         borders.scale(0.5f);
 
-        Vector2d dir = separation + alignment + cohesion + /*food + */borders;
+        Vector2d dir = separation + alignment + cohesion +borders;
         m_owner->setSteer(dir);
-
-        break;
-    }
+*/
+    //    break;
+  //  }
     return true;
 }
 
@@ -65,7 +63,8 @@ bool Graze::finish () {
 }
 
 CAgent * Graze::getOwner () {
-    return m_owner;
+ //   return m_owner;
+	return nullptr;
 }
 
 const char * Graze::getName() {

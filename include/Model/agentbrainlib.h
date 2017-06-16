@@ -3,11 +3,7 @@
 #ifndef _characterbrainlib_h_
 #define _characterbrainlib_h_
 
-#include "seesenemy.h"
-#include "chase.h"
-#include "flee.h"
-#include "graze.h"
-
+#include <cmath>
 
 template <class T> inline T aminmax(T low, T val, T high) {
 	if (val < low)
