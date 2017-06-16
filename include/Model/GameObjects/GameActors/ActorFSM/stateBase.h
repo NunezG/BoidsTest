@@ -22,9 +22,6 @@ public:
 	//virtual void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) = 0;
 	//bool resourcesCreated;
 
-	void ChangeState(CStateBase* state) {
-		//GameManager::ChangeState();
-	}
 
 	CStateBase(CAgent* owner): m_Owner(owner){ }
 

@@ -1,21 +1,21 @@
 
-#ifndef RETURNTOHOME_H
-#define RETURNTOHOME_H
+#ifndef FLAGRETURN_H
+#define FLAGRETURN_H
 
-//#include "SDL.h"
 #include "Model\GameObjects\GameActors\CharacterFSM.h"
 #include "Model\GameObjects\GameActors\StartPosition.h"
 
 #include "Model\GameObjects\Flag.h"
 #include "Model\virtualtime.h"
-class CReturnToHomeState : public CStateBase
+class CFlagReturnState : public CStateBase
 {
 public:
 
-	CReturnToHomeState(CAgent* owner, CFlag* flag, CFlagStand* stand) :
+	CFlagReturnState(CAgent* owner, CFlag* flag, CFlagStand* stand) :
 		CStateBase(owner)
 		, m_pTargetFlag(flag)
 		, m_homeStand(stand)
+
 	{ }
 
 	void Init();
@@ -25,12 +25,6 @@ public:
 	void Resume();
 
 	void Update();
-	//void Draw(ID2D1HwndRenderTarget* renderTarget);
-
-/*	static CFlagSeekState* Instance() {
-		return &m_IdleState;
-	}*/
-
 
 private:
 
@@ -39,7 +33,6 @@ private:
 
 	TVirtTime m_minDirTick;
 	TVirtTime m_dirTick;
-
 };
 
 #endif

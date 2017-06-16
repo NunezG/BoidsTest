@@ -14,13 +14,6 @@ private:
 
 public:
 	CAntelope::CAntelope(CFlagStand* TeamStand, CFlag* enemyFlag);
-	// engine routines
-	int processAgentConstant();
-	int processAgentPeriodic();
-	//void move();
-
-	bool attackCondition();
-	bool retreatCondition();
 
 
 };

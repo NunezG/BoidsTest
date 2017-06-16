@@ -3,16 +3,8 @@
 
 #include "Model/GameObjects/GameActors/GameObject.h"
 
-//#include <vector>
-//#include "introstate.h"
-//#include "menustate.h"
-//#include "playstate.h"
-//#include "../SimpleDirect2dApplication.h"
 class CFlag;
 
-//using namespace std;
-
-//class CGameState;
 
 class CFlagStand : public CGameObject
 {
@@ -26,7 +18,7 @@ public:
 
 	}
 
-	EObjectType objectType()
+	EObjectType objectType() const
 	{
 		return EObjectType::Stand;
 	}

@@ -97,23 +97,7 @@ void CD2DHelper::printText(int x, int y, char *format, ...) {
 	CD2DHelper::outText(x, y, buf);
 }
 
-///////////////////////////////////////////////////////////////////
-// CGame::renderFrame
-// draw the world, draw the agents. also prints some stats
-///////////////////////////////////////////////////////////////////
 void CD2DHelper::DebugFrame() {
-
-	//	CD2DHelper::m_pRenderTarget->BeginDraw();
 	printText(-50, -80, "%.4g fps / %.4g fps", g_game-> m_framesRenderedPS, g_game->m_framesBuiltPS);
-	printText(-50, -60, "Rendered : %.1f fps (load %.0f%%)", g_game->m_framesRenderedPS, 100 * g_game->m_periodTimer.getTimeSpent(PERIOD_RENDER));
-	printText(-50, 0, "Built : %.1f fps (load %.0f%%)", g_game->m_framesBuiltPS, 100 * g_game->m_periodTimer.getTimeSpent(PERIOD_BUILD));
-	//  if (100 * m_periodTimer.getTimeSpent(PERIOD_IDLE) < 10)
-	//    glColor3f(1.0f, 0.2f, 0.2f);
-	printText(-50, 60, "Idle (load %.0f%%)", 100 * g_game->m_periodTimer.getTimeSpent(PERIOD_IDLE));
-	//   glColor3f(0.3f, 0.4f, 0.5f);
-	printText(-50, 120, "desired %d fps / %d bps", s_fps, s_bps);
 	printText(-50, 180, "simulation speed %.2f / time %.3f", g_game->m_time->getSpeed(), g_game->m_time->tickNow());
-
-	printText(10, 240, (char *)(g_game->m_time->getHWCounterPresent() ? "hw counter" : "sw counter"));
-	
 }

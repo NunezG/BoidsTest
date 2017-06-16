@@ -124,17 +124,14 @@
     <ClCompile Include="src\Viewmodel\endGameState.cpp">
       <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
-    <ClCompile Include="PredatorPrey\flee.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PredatorPrey\graze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\ReturntoHomeState.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClCompile>
     <ClCompile Include="src\Model\GameObjects\GameActors\CharacterFSM.cpp">
       <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.cpp">
+      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,9 +186,6 @@
     <ClInclude Include="include\Viewmodel\GameStatesManager.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="include\Viewmodel\GameViewModel.h">
-      <Filter>Header Files\Viewmodel</Filter>
-    </ClInclude>
     <ClInclude Include="include\Viewmodel\introstate.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
@@ -210,17 +204,17 @@
     <ClInclude Include="include\Viewmodel\gamestate.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\flee.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PredatorPrey\graze.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\ReturnToHomeState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
     <ClInclude Include="include\Model\GameObjects\GameActors\CharacterFSM.h">
       <Filter>Header Files\Model\GameObjects\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewmodel\GameViewModel.h">
+      <Filter>Header Files\Viewmodel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.h">
+      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

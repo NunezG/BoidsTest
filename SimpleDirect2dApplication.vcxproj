@@ -202,15 +202,14 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PredatorPrey\flee.cpp" />
     <ClCompile Include="PredatorPrey\graze.cpp" />
     <ClCompile Include="src\GameStart.cpp" />
     <ClCompile Include="src\Model\game.cpp" />
     <ClCompile Include="src\Model\GameObjects\Flag.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\AttackState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\EscapeState.cpp" />
+    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.cpp" />
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\ReturntoHomeState.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\agent.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\Antelope.cpp" />
     <ClCompile Include="src\Model\GameObjects\GameActors\CharacterFSM.cpp" />
@@ -234,8 +233,8 @@
     <ClInclude Include="include\Model\GameObjects\Flag.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\AttackState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\EscapeState.h" />
+    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h" />
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\ReturnToHomeState.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\stateBase.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\agent.h" />
     <ClInclude Include="include\Model\GameObjects\GameActors\Antelope.h" />
@@ -255,7 +254,6 @@
     <ClInclude Include="include\View\D2DHelper.h" />
     <ClInclude Include="include\View\D2DRenderer.h" />
     <ClInclude Include="include\View\Window.h" />
-    <ClInclude Include="PredatorPrey\flee.h" />
     <ClInclude Include="PredatorPrey\graze.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

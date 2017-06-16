@@ -21,7 +21,7 @@ static bool m_fullscreen;
 
 
 int s_fps = 60; // desired initial frame rate
-int s_bps = 60; // desired initial build rate
+int s_bps = 20; // desired initial build rate
 
 static bool m_running;
 

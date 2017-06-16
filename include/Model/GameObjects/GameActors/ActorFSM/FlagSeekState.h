@@ -16,6 +16,7 @@ public:
 		CStateBase(owner)
 		, m_pTargetFlag(flag)
 		, m_homeStand(stand)
+
 	{ }
 
 	void Init();
@@ -25,12 +26,6 @@ public:
 	void Resume();
 
 	void Update();
-	//void Draw(ID2D1HwndRenderTarget* renderTarget);
-
-/*	static CFlagSeekState* Instance() {
-		return &m_IdleState;
-	}*/
-
 
 private:
 
@@ -39,7 +34,6 @@ private:
 
 	TVirtTime m_minDirTick;
 	TVirtTime m_dirTick;
-
 };
 
 #endif

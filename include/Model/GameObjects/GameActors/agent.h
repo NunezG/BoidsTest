@@ -23,13 +23,24 @@ private:
 protected:
 	float m_sight;
 	float m_attackZone;
+	float m_killZone;
 	float m_maxSpeed;
 	float m_respawnSeconds;
-	int m_enemiesToDie;
 
 	CAgent *m_enemy;
 
+	float m_separationRadius;
+	float m_cohesionRadius;
+	float m_alignmentRadius;
+
+	float m_separationForce;
+	float m_cohesionForce;
+	float m_alignmentForce;
+
 public:
+
+	int m_enemiesToDie;
+
 	CAgent(CFlagStand* TeamStand, CFlag* enemyFlag) :
 		CGameObject(TeamStand->getPosition(), TeamStand->GetTeam())
 		, m_brain(new CCharacterFSM())
@@ -37,11 +48,21 @@ public:
 		, m_pFlagStand(TeamStand)
 		//, brain(CBrain())
 		, m_TargetFlag(enemyFlag)
+		, m_separationRadius(0)
+		, m_cohesionRadius(0)
+		, m_alignmentRadius(0)
+		, m_separationForce(0)
+		, m_cohesionForce(0)
+		, m_alignmentForce(0)
 
 	{
 
 	}
 
+	Vector2d getDirection() const {
+		return m_velocity;
+
+	}
 
 	CFlagStand* getFlagStand() const {
 		return m_pFlagStand;
@@ -69,12 +90,6 @@ public:
 	}
 
 
-
-	int processAgentPeriodic() {
-		m_brain->Update();
-		return 0;
-	}
-
 	//virtual void drawAgent() const = 0;
 	void move();
 
@@ -90,8 +105,13 @@ public:
 	Vector2d getBordersSteer(int) const;
 	
 	bool canSee(const CAgent *other) const;
+	bool canAttack(const CAgent *other) const;
 	bool canKill(const CAgent *other) const;
 	int enemiesSurrounding() const;
+	int enemiesAtAttackDistance() const;
+	int enemiesAtKillDistance() const;
+	bool isAtAttackDistance(const CAgent *other) const;
+
 
 	bool isNeighbour(const CAgent *other, float radius, float angle) const;
 	CAgent * getEnemy() const { return m_enemy; }
@@ -101,15 +121,18 @@ public:
 
 	CCharacterFSM* m_brain;
 
-	EObjectType objectType()
+	EObjectType objectType() const
 	{
 		return EObjectType::Agent;
 	}
 
-	CAgent * findNearestVisibleEnemy();
+	CAgent * findNearestVisibleEnemy() const;
 
 	bool canDie() const;
-	int enemiesAtAttackDistance() const;
+
+	Vector2d Seek(Vector2d target);
+	Vector2d Attack(Vector2d target);
+	Vector2d Avoid(Vector2d target);
 
 
 };

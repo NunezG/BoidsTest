@@ -16,3 +16,12 @@ CGameObject* CFlag::getOwner() const
 	return m_currentOwner;
 }
 
+bool CFlag::pointRule()
+{
+
+
+	if ((getOwner()->getPosition() - m_friendlyStand->getPosition()).length() < 50)
+		return true;
+
+	return false;
+}

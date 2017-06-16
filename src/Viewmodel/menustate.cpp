@@ -44,41 +44,42 @@ void CPauseState::HandleEvents(UINT message)
 
 
 	}
-
-//	SDL_Event event;
-
-//	if (SDL_PollEvent(&event)) {
-	//	switch (event.type) {
-	//		case SDL_QUIT:
-	//			game->Quit();
-	//			break;
-
-	//		case SDL_KEYDOWN:
-//				switch (event.key.keysym.sym) {
-	//				case SDLK_ESCAPE:
-//						game->PopState();
-//						break;
-//				}
-//				break;
-//		}
-//	}
 }
 
 void CPauseState::Update() 
 {
+	buildFrameConstant();
+	//renderFrame();
 
+	if (!(CD2DHelper::m_pRenderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
+	{
+		CD2DHelper::m_pRenderTarget->BeginDraw();
+
+		Draw(CD2DHelper::m_pRenderTarget);
+
+		//CD2DHelper::DebugFrame();
+
+		CD2DHelper::m_pRenderTarget->EndDraw();
+	}
 }
 
 void CPauseState::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
-//	SDL_BlitSurface(bg, NULL, game->screen, NULL);
-//	SDL_UpdateRect(game->screen, 0, 0, 0, 0);
+	static const char sc_pause[] = "PAUSE";
+
+	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+//	renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+
+	CD2DHelper::outText(0, -300, sc_pause);
+
 }
 
 
 
 void CPauseState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 {
+	resourcesCreated = true;
 
 
 }

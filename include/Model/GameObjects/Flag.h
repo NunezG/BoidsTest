@@ -29,30 +29,13 @@ public:
 	CFlag(ETeam team, CGameObject* owner, CFlagStand* friendlyStand);
 
 	//bool IsAtenemyHome() const;
-	EObjectType objectType()
-	{
-		return EObjectType::Flag;
-	}
+	EObjectType objectType() const {	return EObjectType::Flag; }
 
 	CGameObject* getOwner() const;
 
-	void setOwner(CGameObject* owner)
-	{
-		
-		//owner->ReceiveFlag(this);
-		m_currentOwner = owner;
-		//pointRule();
-	}
+	void setOwner(CGameObject* owner){ m_currentOwner = owner; }
 
-	bool pointRule()
-	{
-
-		
-		if ((getOwner()->getPosition() - m_friendlyStand->getPosition()).length() < 50)
-			return true;
-
-		return false;
-	}
+	bool pointRule();
 
 
 	CFlagStand* m_friendlyStand;
