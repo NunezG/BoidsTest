@@ -2,44 +2,40 @@
 
 #include "Viewmodel\playstate.h"
 #include "Viewmodel\menustate.h"
-
 #include "Viewmodel\endGameState.h"
-#include <string>
 #include <cmath>
 #include "Model\game.h"
-#include "Model\GameObjects\GameActors\agent.h"
+#include "Model\GameActors\agent.h"
 
-const int LIONS_NUMBER = 10;
-const int ANTELOPES_NUMBER = 30;
+
 
 CPlayState CPlayState::m_PlayState;
 
 void CPlayState::Init()
 {
 	g_game = new CGame(LIONS_NUMBER, ANTELOPES_NUMBER);
-	//g_game->Init();
+
 	g_game->m_time->reset();
+
 	g_game->m_time->setSpeed(s_speed);
 
 	resourcesCreated = false;
 
-	printf("CPlayState Init\n");
 }
 
 void CPlayState::Cleanup()
 {
-	printf("CPlayState Cleanup\n");
 }
 
 void CPlayState::Pause()
 {
-	printf("CPlayState Pause\n");
+	g_game->m_time->setSpeed(0);
+
 }
 
 void CPlayState::Resume()
 {
-	printf("CPlayState Resume\n");
-	g_game->m_time->reset();
+	g_game->m_time->setSpeed(s_speed);
 }
 
 void CPlayState::HandleEvents(UINT message)
@@ -78,7 +74,7 @@ void CPlayState::Update()
 		{
 			CD2DHelper::m_pRenderTarget->BeginDraw();
 
-			Draw(CD2DHelper::m_pRenderTarget);
+			Draw();
 
 			CD2DHelper::DebugFrame();
 
@@ -89,14 +85,14 @@ void CPlayState::Update()
 
 }
 
-void CPlayState::Draw(ID2D1HwndRenderTarget* renderTarget)
+void CPlayState::Draw()
 {
 
-	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	CD2DHelper::m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
-	renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+	CD2DHelper::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
-	D2D1_SIZE_F rtSize = renderTarget->GetSize();
+	D2D1_SIZE_F rtSize = CD2DHelper::m_pRenderTarget->GetSize();
 
 	// Draw a grid background.
 	int width = static_cast<int>(rtSize.width);
@@ -104,7 +100,7 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 	for (int x = 0; x < width; x += 10)
 	{
-		renderTarget->DrawLine(
+		CD2DHelper::m_pRenderTarget->DrawLine(
 			D2D1::Point2F(static_cast<FLOAT>(x), 0.0f),
 			D2D1::Point2F(static_cast<FLOAT>(x), rtSize.height),
 			m_pLightSlateGrayBrush,
@@ -114,7 +110,7 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 	for (int y = 0; y < height; y += 10)
 	{
-		renderTarget->DrawLine(
+		CD2DHelper::m_pRenderTarget->DrawLine(
 			D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
 			D2D1::Point2F(rtSize.width, static_cast<FLOAT>(y)),
 			m_pLightSlateGrayBrush,
@@ -153,14 +149,14 @@ void CPlayState::Draw(ID2D1HwndRenderTarget* renderTarget)
 }
 
 
-void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
+void CPlayState::CreateMaterials()
 {
 	HRESULT hr = S_OK;
 
 
 	// Create a gray brush.
 
-	hr = renderTarget->CreateSolidColorBrush(
+	hr = CD2DHelper::m_pRenderTarget->CreateSolidColorBrush(
 
 		D2D1::ColorF(D2D1::ColorF::Gray),
 
@@ -168,7 +164,7 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 
 	);
 
-	hr = renderTarget->CreateSolidColorBrush(
+	hr = CD2DHelper::m_pRenderTarget->CreateSolidColorBrush(
 
 		D2D1::ColorF(D2D1::ColorF::YellowGreen),
 
@@ -176,7 +172,7 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 
 	);
 
-	hr = renderTarget->CreateSolidColorBrush(
+	hr = CD2DHelper::m_pRenderTarget->CreateSolidColorBrush(
 
 		D2D1::ColorF(D2D1::ColorF::Maroon),
 
@@ -184,7 +180,7 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 
 	);
 
-	hr = renderTarget->CreateSolidColorBrush(
+	hr = CD2DHelper::m_pRenderTarget->CreateSolidColorBrush(
 
 		D2D1::ColorF(D2D1::ColorF::Yellow),
 
@@ -193,7 +189,7 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 	);
 
 
-	hr = renderTarget->CreateSolidColorBrush(
+	hr = CD2DHelper::m_pRenderTarget->CreateSolidColorBrush(
 
 		D2D1::ColorF(D2D1::ColorF::Red),
 
@@ -212,6 +208,6 @@ void CPlayState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 void CPlayState::buildFrameConstant() {
 	for (std::list <CAgent *>::iterator agent = g_game->m_agents.begin(); agent != g_game->m_agents.end(); agent++)
 		if ((*agent)->m_active)
-			(*agent)->processAgentConstant();
+			(*agent)->move();
 }
 

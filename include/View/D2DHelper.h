@@ -1,5 +1,3 @@
-//#include "../gameManager.h"
-
 #ifndef D2DHELPER_H
 #define D2DHELPER_H
 

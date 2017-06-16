@@ -95,10 +95,7 @@
 			<Tool
 				Name="VCAppVerifierTool"
 			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-				CommandLine="copy *.jpg  $(OutDir)"
-			/>
+		
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
@@ -255,10 +252,7 @@
 			<Tool
 				Name="VCAppVerifierTool"
 			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-				CommandLine="copy *.jpg  $(OutDir)"
-			/>
+
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
@@ -352,22 +346,7 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-			<File
-				RelativePath=".\SimpleDirect2dApplication.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\sampleImage.jpg"
-				DeploymentContent="true"
-				FileType="16"
-				>
-			</File>
-		</Filter>
+
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"

@@ -2,13 +2,7 @@
 #ifndef PLAYSTATE_H
 #define PLAYSTATE_H
 
-//#include "SDL.h"
 #include "gamestate.h"
-//#include "menustate.h"
-
-//#include "SDL.h"
-
-//class CIntroState;
 
 class CPlayState : public CGameState
 {
@@ -21,8 +15,8 @@ public:
 
 	void HandleEvents(UINT message);
 	void Update();
-	void Draw(ID2D1HwndRenderTarget* renderTarget);
-	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
+	void Draw();
+	void CreateMaterials();
 
 	static CPlayState* Instance() {
 		return &m_PlayState;
@@ -42,12 +36,8 @@ private:
 
 	ID2D1SolidColorBrush*	m_pAntelopeFlagColor;
 	ID2D1SolidColorBrush*	m_pLionFlagColor;
-//	ID2D1PathGeometry *m_pPathGeometry;
-
 
 	float s_speed = 10.f; // initial simulation speed
-
-//	SDL_Surface* bg;
 };
 
 #endif

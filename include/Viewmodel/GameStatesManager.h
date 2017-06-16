@@ -3,27 +3,17 @@
 #define GAMESTATESMANAGER_H
 
 #include <vector>
-//#include "introstate.h"
-//#include "menustate.h"
-//#include "playstate.h"
-#include "View/D2DHelper.h"
-//#include "FSM\Game\gamestate.h"
-//#include "FSM\Game\playstate.h"
-
-//class CITWindow;
+#include "View/d2dHelper.h"
 
 class CGameState;
 
 using namespace std;
 
-//class CGameState;
-
 class CGameStatesManager
 {
 public:
 
-	static bool Init(const char* title, int width = 640, int height = 480,
-		int bpp = 0, bool fullscreen = false);
+	static bool Init();
 	static void Cleanup();
 
 	static void ChangeState(CGameState* state);
@@ -32,23 +22,18 @@ public:
 
 	static void HandleEvents(UINT message);
 	static void Update();
-	static void Draw(ID2D1HwndRenderTarget* renderTarget);
-	static void CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
+	static void Draw();
+	static void CreateDeviceResources();
 
 	static bool Running() { return m_running; }
 	static void Quit() { m_running = false; }
 
-	//static void RunMessageLoop();
-
-	//SDL_Surface* screen;
-	//static void Tick();
 
 private:
 	// the stack of states
 	static vector<CGameState*> states;
 
 	static bool m_running;
-	//static bool m_fullscreen;
 
 };
 

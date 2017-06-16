@@ -1,7 +1,6 @@
 #ifndef _virtualtime_h_
 #define _virtualtime_h_
 
-
 typedef float TVirtTime;
 typedef double TRealTime;
 

@@ -7,50 +7,7 @@
 
 
 #include "View\D2DRenderer.h"
-
 #include "View\Window.h"
-//#include "GameStatesManager.h"
-
-
-//
-// Initialize members.
-//
-DemoApp::DemoApp()// :
-   // m_hwnd(NULL),
-    //m_pD2DFactory(NULL),
-  //  m_pWICFactory(NULL),
-  //  m_pDWriteFactory(NULL),
-   // m_pRenderTarget(NULL)
-  /*  m_pTextFormat(NULL),
-    m_pPathGeometry(NULL),
-    m_pLinearGradientBrush(NULL),
-    m_pBlackBrush(NULL),
-    m_pGridPatternBitmapBrush(NULL),
-    m_pBitmap(NULL),
-    m_pAnotherBitmap(NULL)
-	*/
-{
-	//ownerWindow = new CITWindow();
-}
-
-//
-// Release resources.
-//
-DemoApp::~DemoApp()
-{
-    //SafeRelease(&m_pD2DFactory);
-   // SafeRelease(&m_pWICFactory);
-  //  SafeRelease(&m_pDWriteFactory);
-  //  SafeRelease(&m_pRenderTarget);
-   /* SafeRelease(&m_pTextFormat);
-    SafeRelease(&m_pPathGeometry);
-    SafeRelease(&m_pLinearGradientBrush);
-    SafeRelease(&m_pBlackBrush);
-    SafeRelease(&m_pGridPatternBitmapBrush);
-    SafeRelease(&m_pBitmap);
-    SafeRelease(&m_pAnotherBitmap);
-	*/
-}
 
 
 //
@@ -58,9 +15,7 @@ DemoApp::~DemoApp()
 // device-independent resources.
 //
 HRESULT DemoApp::Initialize(WNDPROC messageReceiver)
-{
-
-	
+{	
 		HRESULT hr;
 
 		// Initialize device-indpendent resources, such
@@ -77,7 +32,6 @@ HRESULT DemoApp::Initialize(WNDPROC messageReceiver)
 				hr = CreateRenderTarget();
 
 			}
-			//	return CreateGameWindow();
 		}
 
 		return hr;
@@ -141,18 +95,12 @@ HRESULT DemoApp::CreateDeviceIndependentResources()
 		CD2DHelper::m_pTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
 		CD2DHelper::m_pTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-
 	}
 
     return hr;
 }
 
-//
-//  This method creates resources which are bound to a particular
-//  Direct3D device. It's all centralized here, in case the resources
-//  need to be recreated in case of Direct3D device loss (eg. display
-//  change, remoting, removal of video card, etc).
-//
+
 HRESULT DemoApp::CreateRenderTarget()
 {
     HRESULT hr = S_OK;
@@ -177,30 +125,3 @@ HRESULT DemoApp::CreateRenderTarget()
 
     return hr;
 }
-
-
-//
-//  Discard device-specific resources which need to be recreated
-//  when a Direct3D device is lost
-//
-void DemoApp::DiscardDeviceResources()
-{
-    SafeRelease(&CD2DHelper::m_pRenderTarget);
-  /*  SafeRelease(&m_pBitmap);
-    SafeRelease(&m_pBlackBrush);
-    SafeRelease(&m_pLinearGradientBrush);
-    SafeRelease(&m_pAnotherBitmap);
-    SafeRelease(&m_pGridPatternBitmapBrush);
-	*/
-}
-
-
-//
-//  If the application receives a WM_SIZE message, this method
-//  resize the render target appropriately.
-//
-void DemoApp::OnResize(UINT width, UINT height)
-{
-  
-}
-

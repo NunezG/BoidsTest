@@ -1,4 +1,4 @@
-#include "VIewModel\GameStatesManager.h"
+#include "ViewModel\gameStatesManager.h"
 
 ///////////////////////////////////////////////////////////////////
 #include "ViewModel\PlayState.h"
@@ -6,44 +6,16 @@
 
 vector<CGameState*> CGameStatesManager::states;
 bool CGameStatesManager::m_running;
-//bool CGameStatesManager::m_fullscreen;
-//DemoApp CGameStatesManager::myApplication;
 
-bool CGameStatesManager::Init(const char* title, int width, int height,
-	int bpp, bool fullscreen)
+bool CGameStatesManager::Init()
 {
-	int flags = 0;
-	height;
-	// initialize SDL
-	//	SDL_Init(SDL_INIT_VIDEO);
-
-	// set the title bar text
-	//	SDL_WM_SetCaption(title, title);
-
-	//	if ( fullscreen ) {
-	//		flags = SDL_FULLSCREEN;
-	//	}
-
-	// create the screen surface
-	//screen = SDL_SetVideoMode(width, height, bpp, flags);
-
-//	m_fullscreen = fullscreen;
 	m_running = true;
-
-	printf("CGameStatesManager Init\n");
 
 	// load the intro
 	ChangeState(CPlayState::Instance());
 
-
 	return true;
-
-
-	return false;
 }
-
-
-
 
 void CGameStatesManager::Cleanup()
 {
@@ -52,17 +24,6 @@ void CGameStatesManager::Cleanup()
 		states.back()->Cleanup();
 		states.pop_back();
 	}
-
-	// switch back to windowed mode so other 
-	// programs won't get accidentally resized
-	//	if ( m_fullscreen ) {
-	//	screen = SDL_SetVideoMode(640, 480, 0, 0);
-	//}
-
-	printf("CGameStatesManager Cleanup\n");
-
-	// shutdown SDL
-	//SDL_Quit();
 }
 
 void CGameStatesManager::ChangeState(CGameState* state)
@@ -76,7 +37,7 @@ void CGameStatesManager::ChangeState(CGameState* state)
 
 	// store and init the new state
 	states.push_back(state);
-	CreateDeviceResources(CD2DHelper::m_pRenderTarget);
+	CreateDeviceResources();
 	states.back()->Init();
 }
 
@@ -121,23 +82,17 @@ void CGameStatesManager::Update()
 		states.back()->Update();
 }
 
-void CGameStatesManager::Draw(ID2D1HwndRenderTarget* renderTarget)
+void CGameStatesManager::Draw()
 {
-
-
 	// let the state draw the screen
 	if (states.size() > 0)
-		states.back()->Draw(CD2DHelper::m_pRenderTarget);
-
-
-
-	
+		states.back()->Draw();
 }
 
-void CGameStatesManager::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
+void CGameStatesManager::CreateDeviceResources()
 {
 	if (states.size() > 0 && !states.back()->resourcesCreated)
-		states.back()->CreateMaterials(renderTarget);
+		states.back()->CreateMaterials();
 
 }
 

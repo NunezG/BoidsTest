@@ -35,13 +35,8 @@
 #include <memory.h>
 #include <wchar.h>
 #include <math.h>
-//#include <wincodec.h>
 #include <wincodec.h>
 
-
-//#include "D2DRenderer.h"
-//#include "D2DHelper.h"
-//#include "../gameManager.h"
 
 class CGameManager;
 
@@ -53,35 +48,12 @@ public:
 
 	HRESULT CreateGameWindow(WNDPROC messageReceiver);
 
-	
-
-  //  HRESULT Initialize();
-
-	//HRESULT OnRender();
 	HWND m_hwnd;
 
-  /*  HRESULT CreateDeviceIndependentResources();
-    HRESULT CreateDeviceResources();
-
-
-
-    void DiscardDeviceResources();
-
-*/
     void OnResize(
         UINT width,
         UINT height
         );
-
-  
-  
-   
-
-private:
-   // IDWriteFactory *m_pDWriteFactory;
-  //  ID2D1HwndRenderTarget *m_pRenderTarget;
-
-
 
 
 };

@@ -16,13 +16,12 @@ public:
 
 	void HandleEvents(UINT message);
 	void Update();
-	void Draw(ID2D1HwndRenderTarget* renderTarget);
-	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
+	void Draw();
+	void CreateMaterials();
 
 	static CPauseState* Instance() {
 		return &m_MenuState;
 	}
-
 
 	void buildFrameConstant() {}
 	int buildFramePeriodic() { return 0; }
@@ -32,8 +31,6 @@ protected:
 
 private:
 	static CPauseState m_MenuState;
-
-	//SDL_Surface* bg;
 };
 
 #endif

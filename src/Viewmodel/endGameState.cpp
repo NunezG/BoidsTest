@@ -1,40 +1,24 @@
 #include "ViewModel\endGameState.h"
-//#include "playstate.h"
+#include "ViewModel\PlayState.h"
+#include "Model\game.h"
 
 CEndGameState CEndGameState::m_EndGameState;
-
-#include "ViewModel\PlayState.h";
-#include "Model\game.h"
 
 void CEndGameState::Init()
 {
 	resourcesCreated = false;
-	
-
-	printf("CEndGameState Init\n");
-
-
-
-
-
 }
-
 
 void CEndGameState::Cleanup()
 {
-
-
-	printf("CEndGameState Cleanup\n");
 }
 
 void CEndGameState::Pause()
 {
-	printf("CEndGameState Pause\n");
 }
 
 void CEndGameState::Resume()
 {
-	printf("CEndGameState Resume\n");
 }
 
 void CEndGameState::HandleEvents(UINT message)
@@ -44,10 +28,8 @@ void CEndGameState::HandleEvents(UINT message)
 		case WM_KEYDOWN:
 			CGameStatesManager::PopState();
 			CGameStatesManager::PopState();
-			ChangeState(CPlayState::Instance());
-			break;
-
-		
+			CGameStatesManager::ChangeState(CPlayState::Instance());
+			break;	
 	}
 
 }
@@ -60,13 +42,13 @@ void CEndGameState::Update()
 	{
 		CD2DHelper::m_pRenderTarget->BeginDraw();
 
-		Draw(CD2DHelper::m_pRenderTarget);
+		Draw();
 
 		CD2DHelper::m_pRenderTarget->EndDraw();
 	}
 }
 
-void CEndGameState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
+void CEndGameState::CreateMaterials()
 {
 	
 	resourcesCreated = true;
@@ -74,12 +56,11 @@ void CEndGameState::CreateMaterials(ID2D1HwndRenderTarget* renderTarget)
 }
 
 
-void CEndGameState::Draw(ID2D1HwndRenderTarget* renderTarget)
+void CEndGameState::Draw()
 {
+	CD2DHelper::m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
-	renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-
-	renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+	CD2DHelper::m_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
 	static const char* sc_end = "GAME FINISHED";
 	char* sc_winer;

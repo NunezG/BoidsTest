@@ -6,13 +6,6 @@
 #include "View/D2DHelper.h"
 #include "GameStatesManager.h"
 
-enum EGameState
-{
-	Intro,
-	Play,
-	Pause,
-	End
-};
 
 class CGameState
 {
@@ -27,14 +20,9 @@ public:
 	virtual void Update() = 0;
 	virtual void buildFrameConstant() = 0;
 
-	virtual void Draw(ID2D1HwndRenderTarget* renderTarget) = 0;
-	virtual void CreateMaterials(ID2D1HwndRenderTarget* renderTarget) = 0;
+	virtual void Draw() = 0;
+	virtual void CreateMaterials() = 0;
 	bool resourcesCreated;
-
-	void ChangeState(CGameState* state) {
-		CGameStatesManager::ChangeState(state);
-
-	}
 
 protected:
 	CGameState() { }

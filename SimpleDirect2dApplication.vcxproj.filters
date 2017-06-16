@@ -31,46 +31,24 @@
     <Filter Include="Header Files\Viewmodel">
       <UniqueIdentifier>{7171263d-67dc-4bbd-9074-9534d9fbb19f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\GameObjects">
-      <UniqueIdentifier>{6db7d281-9c62-4f81-b6e2-a39e4797fa59}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\GameActors">
+      <UniqueIdentifier>{2ab71cba-1b27-4fb1-ad56-ceb29c137e17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\GameObjects\GameActors">
-      <UniqueIdentifier>{b2510e93-fca3-4270-b568-a42942528815}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\GameActors">
+      <UniqueIdentifier>{7f43c549-a7ae-43bf-a527-501d72bcaae8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\GameObjects\GameActors\ActorFSM">
-      <UniqueIdentifier>{bb3241b2-a18c-40ff-93ff-b95e5a62c07a}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\GameActors\ActorFSM">
+      <UniqueIdentifier>{f5657033-e4af-46bc-8150-613b6d99c9d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\GameObjects">
-      <UniqueIdentifier>{e912c360-a2a7-434f-8d48-755ca84587dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\GameObjects\GameActors">
-      <UniqueIdentifier>{26cfaa73-3769-47e6-9673-845ee31f585f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\GameObjects\GameActors\ActorFSM">
-      <UniqueIdentifier>{0103c044-b680-4857-9811-f977baf72c8c}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\GameActors\ActorFSM">
+      <UniqueIdentifier>{6fd20317-fcd5-483c-8eed-88d5f8baf466}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SimpleDirect2dApplication.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="sampleImage.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\GameStart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\View\D2DHelper.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
     <ClCompile Include="src\View\D2DRenderer.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="src\View\Window.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\virtualtime.cpp">
@@ -78,39 +56,6 @@
     </ClCompile>
     <ClCompile Include="src\Model\game.cpp">
       <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\Flag.cpp">
-      <Filter>Source Files\Model\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\GameObject.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\Lion.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\StartPosition.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\agent.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\Antelope.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\EscapeState.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\AttackState.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Viewmodel\GameStatesManager.cpp">
-      <Filter>Source Files\Viewmodel</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Viewmodel\GameViewModel.cpp">
-      <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
     <ClCompile Include="src\Viewmodel\introstate.cpp">
       <Filter>Source Files\Viewmodel</Filter>
@@ -124,67 +69,55 @@
     <ClCompile Include="src\Viewmodel\endGameState.cpp">
       <Filter>Source Files\Viewmodel</Filter>
     </ClCompile>
-    <ClCompile Include="PredatorPrey\graze.cpp">
+    <ClCompile Include="src\gameStart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\CharacterFSM.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors</Filter>
+    <ClCompile Include="src\View\window.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.cpp">
-      <Filter>Source Files\Model\GameObjects\GameActors\ActorFSM</Filter>
+    <ClCompile Include="src\Viewmodel\gameStatesManager.cpp">
+      <Filter>Source Files\Viewmodel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\ActorFSM\escapeState.cpp">
+      <Filter>Source Files\Model\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\ActorFSM\FlagReturnState.cpp">
+      <Filter>Source Files\Model\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\ActorFSM\FlagSeekState.cpp">
+      <Filter>Source Files\Model\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\ActorFSM\attackState.cpp">
+      <Filter>Source Files\Model\GameActors\ActorFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\antelope.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\characterFSM.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\Flag.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\flagStand.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\gameObject.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\lion.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\GameActors\agent.cpp">
+      <Filter>Source Files\Model\GameActors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\View\D2DHelper.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="include\View\D2DRenderer.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="include\View\Window.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="include\Model\game.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="include\Model\virtualtime.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\agentbrainlib.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\Flag.h">
-      <Filter>Header Files\Model\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\agent.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\Antelope.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\GameObject.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\Lion.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\StartPosition.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\EscapeState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagSeekState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\stateBase.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\AttackState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Viewmodel\GameStatesManager.h">
-      <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
     <ClInclude Include="include\Viewmodel\introstate.h">
       <Filter>Header Files\Viewmodel</Filter>
@@ -198,23 +131,56 @@
     <ClInclude Include="include\Viewmodel\endGameState.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="include\Viewmodel\gameManager.h">
-      <Filter>Header Files\Viewmodel</Filter>
-    </ClInclude>
     <ClInclude Include="include\Viewmodel\gamestate.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="PredatorPrey\graze.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\View\d2dHelper.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\CharacterFSM.h">
-      <Filter>Header Files\Model\GameObjects\GameActors</Filter>
+    <ClInclude Include="include\View\d2dRenderer.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="include\Viewmodel\GameViewModel.h">
+    <ClInclude Include="include\View\window.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewmodel\gameStatesManager.h">
       <Filter>Header Files\Viewmodel</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model\GameObjects\GameActors\ActorFSM\FlagReturnState.h">
-      <Filter>Header Files\Model\GameObjects\GameActors\ActorFSM</Filter>
+    <ClInclude Include="include\Model\GameActors\ActorFSM\flagReturnState.h">
+      <Filter>Header Files\Model\GameActors\ActorFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\ActorFSM\flagSeekState.h">
+      <Filter>Header Files\Model\GameActors\ActorFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\ActorFSM\stateBase.h">
+      <Filter>Header Files\Model\GameActors\ActorFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\ActorFSM\attackState.h">
+      <Filter>Header Files\Model\GameActors\ActorFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\ActorFSM\escapeState.h">
+      <Filter>Header Files\Model\GameActors\ActorFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\antelope.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\characterFSM.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\flag.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\flagStand.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\gameObject.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\lion.h">
+      <Filter>Header Files\Model\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model\GameActors\agent.h">
+      <Filter>Header Files\Model\GameActors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

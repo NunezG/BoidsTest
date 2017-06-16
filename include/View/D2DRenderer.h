@@ -11,41 +11,20 @@
 #ifndef D2DRENDERER_H
 #define D2DRENDERER_H
 
-//#include "Window.h"
 #include "D2DHelper.h"
-//#include "../gameManager.h"
 
-
-//#include <d2d1.h>
-//#include <stdio.h>
 class CITWindow;
 
-/******************************************************************
-*                                                                 *
-*  DemoApp                                                        *
-*                                                                 *
-******************************************************************/
 
 class DemoApp
 {
 public:
-    DemoApp();
-   ~DemoApp();
 
     HRESULT Initialize(WNDPROC messageReceiver);
-
-	HRESULT OnRender();
-
-	void OnResize(
-		UINT width,
-		UINT height
-	);
 
 private:
     HRESULT CreateDeviceIndependentResources();
     HRESULT CreateRenderTarget();
-
-    void DiscardDeviceResources();
 
 	CITWindow* ownerWindow;
   

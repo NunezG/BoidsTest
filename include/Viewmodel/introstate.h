@@ -17,8 +17,8 @@ public:
 
 	void HandleEvents(UINT message);
 	void Update();
-	void Draw(ID2D1HwndRenderTarget* renderTarget);
-	void CreateMaterials(ID2D1HwndRenderTarget* renderTarget);
+	void Draw();
+	void CreateMaterials();
 
 	static CIntroState* Instance() {
 		return &m_IntroState;

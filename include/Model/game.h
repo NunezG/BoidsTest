@@ -4,8 +4,8 @@
 #include <list>
 #include <assert.h>
 #include "virtualtime.h"
-#include "GameObjects\GameActors\StartPosition.h"
-#include "GameObjects\Flag.h"
+#include "GameActors\flagStand.h"
+#include "GameActors\flag.h"
 
 //class CWorld;
 class CVirtualTime;
@@ -21,7 +21,10 @@ extern int rand(int max);
 
 extern int s_fps; // desired frame rate
 extern int s_bps; // desired build rate
+
 const int WIN_CONDITION = 5;
+const int LIONS_NUMBER = 25;
+const int ANTELOPES_NUMBER = 40;
 
 class CGame {
 protected:
@@ -35,7 +38,6 @@ protected:
 public:
 	float m_framesBuiltPS;
 	float m_framesRenderedPS;
-	//CTimer m_periodTimer;
 	CVirtualTime *m_time;
 
 	CGame(int lions, int antelopes);
@@ -48,25 +50,11 @@ public:
 	unsigned int getRenderedSinceSecond() const { return m_framesRendered - m_lastFramesRendered; }
 	unsigned int getDesiredFramesDone(TRealTime now, unsigned int fps) const { return (unsigned int)(getTimeElapsedSinceSecond(now) * fps); }
 
-	//int buildFrame();
 	int updateFPS(TRealTime now);
 
 	void Tick();
-
 	
 	int counter[2];
-
-
-	//void Init();
-
-//	void Cleanup();
-//	void Update();
-
-
-	bool CheckIfDead(CAgent* character);
-
-//	int updateAI(TRealTime maxTime);
-
 
 	std::list <CAgent* > m_agents;
 	CFlagStand stands[2];
@@ -75,7 +63,6 @@ public:
 	int registerAgent(ETeam team);
 
 	bool gammeFinished;
-
 
 };
 
